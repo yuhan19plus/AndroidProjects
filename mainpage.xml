@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainPageActivity"
+        android:orientation="vertical"
+        android:background="@drawable/nomal">
+        <!--상단-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/yuhan19logo"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="130dp"
+                />
+
+            <Button
+                android:id="@+id/login"
+                android:text="로그인"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="15dp"/>
+
+
+        </LinearLayout>
+    <!--중단-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            >
+
+            <View
+                android:id="@+id/View01"
+                android:layout_width="350dp"
+                android:layout_height="550dp"
+                android:layout_marginStart="23dp"
+                android:layout_gravity="bottom"
+                android:background="#990000"
+                android:visibility="invisible"/>
+
+            <View
+                android:id="@+id/View02"
+                android:layout_width="350dp"
+                android:layout_height="550dp"
+                android:layout_marginStart="23dp"
+                android:layout_gravity="bottom"
+                android:background="#00ffdd"
+                android:visibility="invisible"/>
+
+            <View
+                android:id="@+id/View03"
+                android:layout_width="350dp"
+                android:layout_height="550dp"
+                android:layout_marginStart="23dp"
+                android:layout_gravity="bottom"
+                android:background="#00ffbc"
+                android:visibility="invisible"/>
+
+            <View
+                android:id="@+id/View04"
+                android:layout_width="350dp"
+                android:layout_height="550dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="25dp"
+                android:background="#000bcc"
+                android:visibility="invisible" />
+
+        </FrameLayout>
+    <!--하단-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/firstBtn"
+                android:text="1"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/secondBtn"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:onClick="onClick"
+                android:text="2" />
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/thirdBtn"
+                android:text="3"
+                android:onClick="onClick"/>
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/fourthBtn"
+                android:text="4"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/fifthBtn"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:onClick="onClick"
+                android:text="5" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
