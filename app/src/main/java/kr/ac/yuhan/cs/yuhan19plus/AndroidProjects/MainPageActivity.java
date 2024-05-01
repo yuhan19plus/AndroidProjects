@@ -1,4 +1,4 @@
-package kr.ac.yuhan.or.mainpage;
+package kr.ac.yuhan.cs.yuhan19plus.AndroidProjects;
 
 import android.os.Bundle;
 import android.view.View;
