@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/todoData"
+    >
+    <com.google.android.flexbox.FlexboxLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:justifyContent="space_evenly"
+        app:alignItems="center"
+        >
+        <TextView
+            android:id="@+id/tododate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/todoDate"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/mainText"
+            android:fontFamily="@font/nanumgothicregular" />
+        <TextView
+            android:id="@+id/adminId"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/IdTextView"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/mainText"
+            android:fontFamily="@font/nanumgothicregular" />
+        <TextView
+            android:id="@+id/todoContent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/todoContent"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/mainText"
+            android:fontFamily="@font/nanumgothicregular" />
+        <ImageView
+            android:id="@+id/outBtn"
+            android:layout_width="17dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/outBtn"
+            android:src="@drawable/delete" />
+    </com.google.android.flexbox.FlexboxLayout>
+</LinearLayout>

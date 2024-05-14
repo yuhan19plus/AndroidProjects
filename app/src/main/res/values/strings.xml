@@ -1,3 +1,116 @@
 <resources>
-    <string name="app_name">AndroidProjects</string>
+    <string name="app_name">QrSystem</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_id">Admin ID</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="main_text">Yuhan19+</string>
+
+    <string name="outBtn">삭제 버튼</string>
+
+    <string name="searchMemberIdHint">회원 ID를 입력 하세요</string>
+
+    <!-- todo_list.xml -->
+    <string name="IdTextView">Id</string>
+    <string name="todoContent">todoContent</string>
+    <string name="todoDate">todoDate</string>
+
+    <!-- admin_list.xml -->
+    <string name="admin_list_item_adminNum">AdminNum</string>
+    <string name="admin_list_item_adminId">AdminId</string>
+    <string name="admin_list_item_adminPosition">AdminPosition</string>
+
+
+    <!-- Setting.xml -->
+    <string name="setting_adminId">관리자 Id</string>
+    <string name="setting_adminAdd">관리자 추가</string>
+    <string name="setting_adminExit">관리자 모드 종료</string>
+
+    <!-- Page Title -->
+    <string name="login_title">Yuhan 19+ Admin</string>
+
+    <!-- 관리자 목록 페이지 -->
+    <string name="adminList_title">관리자 목록</string>
+    <string name="searchAdminIdHint">관리자 ID를 입력 하세요</string>
+    <string name="admin_page_editTextSearchAdminField">editTextSearchAdminField</string>
+
+    <!-- 관리자 일정 페이지  -->
+    <string name="adminSchedule_title">관리자 일정</string>
+
+    <!-- 회원 탈퇴 요청 페이지 -->
+    <string name="memberOutList_title">회원 탈퇴 요청 목록</string>
+    <string name="member_list_item_memberJoinDate">member_list_item_memberJoinDate</string>
+
+    <!-- 모드 -->
+    <string name="dark_mode">Dark</string>
+    <string name="light_mode">Light</string>
+
+    <!-- 메뉴 -->
+    <string name="home">관리자</string>
+    <string name="member">회원관리</string>
+    <string name="payment">결제내역</string>
+    <string name="product_management">상품관리</string>
+    <string name="product_register">상품등록</string>
+
+    <!-- Home 메뉴 -->
+    <string name="adminListMenu">관리자\n목록</string>
+    <string name="adminScheduleMenu">관리자\n일정</string>
+    <string name="adminMenu">팀장</string>
+    <string name="adminLoginMenu">로그인</string>
+    <string name="memberOutMenu">탈퇴요청목록</string>
+    <string name="admin_list_ImageView">admin_list_ImageView</string>
+    <string name="admin_schedule_ImageView">admin_schedule_ImageView</string>
+    <string name="admin_call_ImageView">admin_call_ImageView</string>
+    <string name="admin_login_ImageView">admin_login_ImageView</string>
+    <string name="memberOut_ImageView">memberOut_ImageView</string>
+
+    <!-- Member 메뉴 -->
+    <string name="search">검색</string>
+
+    <!-- ProductData Management Menu -->
+    <string name="productSearchIdHint">상품명을 입력하세요</string>
+
+    <!-- 결제 내역 메뉴-->
+
+    <!-- 상품등록 메뉴 -->
+    <string name="product_image">상품 이미지</string>
+    <string name="product_name">상품명</string>
+    <string name="product_category">카테고리</string>
+
+    <!--  여기서 카테고리내용 바꾸면 한번에 다 바뀜  -->
+    <string name="product_categoryDefault">카테고리 분류 필요</string>
+    <string name="product_category1">문구류</string>
+    <string name="product_category2">생필품</string>
+    <string name="product_category3">주방 도구</string>
+    <string name="product_count">상품 재고</string>
+    <string name="product_price">상품 가격</string>
+    <string name="create_QR">QR 생성</string>
+    <string name="product_register_btn">상품 등록</string>
+
+    <!-- Admin Form -->
+    <string name="admin_form_title">관리자 등록</string>
+    <string name="admin_form_editTextIdField">Admin Id</string>
+    <string name="admin_form_editTextPwField">Admin Pw</string>
+    <string name="admin_form_editTextPositionField">Admin Position</string>
+    <string name="admin_form_adminAddBtn">Admin Register</string>
+
+    <!-- member_list.xml -->
+    <string name="member_list_item_memberNum">memberNum</string>
+    <string name="member_list_item_memberId">memberId</string>
+    <string name="member_list_item_memberPoint">memberPoint</string>
+    <string name="member_list_item_memberOut_ImageView">memberOut</string>
+
+    <!-- product_list_item.xml -->
+    <string name="productUpdateBtn">productUpdateBtn</string>
+    <string name="productDeleteBtn">productDeleteBtn</string>
+
+    <!-- 상품 수정 페이지 -->
+    <string name="productUpdate_title">상품수정</string>
+    <string name="product_update">Update</string>
 </resources>

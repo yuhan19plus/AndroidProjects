@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/memberItem"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@android:id/list">
+        <com.google.android.flexbox.FlexboxLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:justifyContent="space_around"
+            app:alignItems="center"
+            >
+            <TextView
+                android:id="@+id/number"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/member_list_item_memberNum"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textColor="@color/mainText"
+                android:fontFamily="@font/nanumgothicregular" />
+            <TextView
+                android:id="@+id/memberId"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/member_list_item_memberId"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textColor="@color/mainText"
+                android:fontFamily="@font/nanumgothicregular" />
+            <TextView
+                android:id="@+id/memberPoint"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/member_list_item_memberPoint"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/mainText"
+                android:fontFamily="@font/nanumgothicregular" />
+            <ImageView
+                android:id="@+id/outBtn"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/member_list_item_memberOut_ImageView"
+                android:src="@drawable/memberout" />
+        </com.google.android.flexbox.FlexboxLayout>
+    </LinearLayout>
+</LinearLayout>
