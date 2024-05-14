@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/editTextTodoField"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/todoDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textSize="24sp"
+        android:hint="2000-04-29" />
+    <EditText
+        android:id="@+id/todoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textSize="24sp"
+        android:hint="할 일을 입력하세요" />
+</LinearLayout>

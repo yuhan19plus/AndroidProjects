@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "kr.ac.yuhan.cs.yuhan19plus.AndroidProjects"
+    namespace = "kr.ac.yuhan.cs.yuhan19plus"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "kr.ac.yuhan.cs.yuhan19plus.AndroidProjects"
+        applicationId = "kr.ac.yuhan.cs.yuhan19plus"
         minSdk = 33
         targetSdk = 34
         versionCode = 1
@@ -45,4 +45,13 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // 임성준
+    implementation("com.github.fornewid:neumorphism:0.3.2") // 뉴모피즘 추가
+    implementation("com.google.android.flexbox:flexbox:3.0.0") // flexbox
+
+    // 오자현
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")// QR 스캔 라이브러리
+    implementation("com.github.bumptech.glide:glide:4.13.2"); // Glide 라이브러리 추가
+    annotationProcessor("com.github.bumptech.glide:compiler:4.13.2");
 }

@@ -1,21 +1,37 @@
-package kr.ac.yuhan.cs.yuhan19plus.AndroidProjects;
+package kr.ac.yuhan.cs.yuhan19plus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainPageActivity extends AppCompatActivity implements Button.OnClickListener{
+import kr.ac.yuhan.cs.yuhan19plus.admin.AdminMainActivity;
+public class MainActivity extends AppCompatActivity implements Button.OnClickListener{
     private View firstView;
     private View secondView;
     private View thirdView;
     private View fourthView;
+    private ImageView setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mainpage);
+        setContentView(R.layout.activity_main_page);
+
+        // id값 찾기
+        setting = findViewById(R.id.setting);
+
+        // 관리자 모드 접속
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AdminMainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         init();
     }

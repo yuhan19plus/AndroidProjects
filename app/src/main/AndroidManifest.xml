@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +16,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProjects"
         tools:targetApi="31">
+
         <activity
-            android:name=".MainPageActivity"
+            android:name=".admin.AdminMainActivity"
+            android:exported="true"
+            android:label="AdminMainActivity" />
+        <activity
+            android:name=".admin.AdminSettingActivity"
+            android:exported="true"
+            android:label="SettingActivity" />
+        <activity
+            android:name=".admin.AdminActivity"
+            android:exported="true"
+            android:label="AdminActivity" />
+        <activity
+            android:name=".admin.AdminScheduleActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:label="AdminScheduleActivity" />
+        <activity
+            android:name=".admin.AdminLoginActivity"
+            android:exported="true"
+            android:label="LoginActivity" />
+        <activity
+            android:name=".admin.AdminFormActivity"
+            android:exported="true"
+            android:label="AdminFormActivity" />
+        <activity
+            android:name=".admin.AdminProductEditActivity"
+            android:exported="true"
+            android:label="ProductEditActivity" />
+        <activity
+            android:name=".admin.AdminCreateQR"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
