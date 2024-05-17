@@ -757,22 +757,37 @@ public class AdminMainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    //오자현 추가부분
+
+    // 자동으로 새로고침을 하게 만들어주는 메서드 (made by 오자현)
     private void startAutoRefresh() {
+        // Runnable 인터페이스를 구현한 익명 클래스 객체를 생성합니다.
+        // Runnable은 실행할 작업을 정의하는 인터페이스로, run() 메서드를 구현해야 합니다.
         runnable = new Runnable() {
             @Override
             public void run() {
+                // Firestore에서 데이터를 로드하는 메서드를 호출합니다.
                 loadItemsFromFireStore();
-                handler.postDelayed(this, 5000);  // 5초 후에 다시 실행하도록 스케줄링, 일시정지 여부와 상관없이 스케줄 유지
+
+                // 5초 후에 이 Runnable 객체를 다시 실행하도록 스케줄링합니다.
+                // Handler는 다른 스레드에서 실행된 작업을 메인 스레드에서 처리하거나,
+                // 일정 시간 후에 코드를 실행할 때 사용됩니다.
+                // postDelayed(this, 5000)은 5초 후에 현재 Runnable 객체의 run() 메서드를 다시 실행합니다.
+                handler.postDelayed(this, 5000);
             }
         };
+        // 처음에 5초 후에 이 Runnable 객체를 실행하도록 스케줄링합니다.
+        // 이 줄은 startAutoRefresh() 메서드가 처음 호출될 때 실행됩니다.
         handler.postDelayed(runnable, 5000);  // 처음 시작
     }
 
+
+    // 파이어베이스에서 데이터를 읽어오는 메서드 (오자현)
     void loadItemsFromFireStore() {
+        // Firestore 데이터베이스 인스턴스를 가져옵니다.
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Task<QuerySnapshot> query;
 
+        // 검색 텍스트가 비어있지 않으면, 해당 상품 이름으로 필터링된 쿼리를 실행합니다.
         if (!currentSearchText.isEmpty()) {
             // 검색 텍스트가 있을 경우, 해당 상품 이름으로 필터링된 쿼리 실행
             query = db.collection("products")
@@ -783,12 +798,16 @@ public class AdminMainActivity extends AppCompatActivity {
             query = db.collection("products").get();
         }
 
+        // 쿼리가 완료된 후 실행될 리스너를 추가합니다.
         query.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    productDataList.clear(); // 기존의 리스트를 클리어
+                    // 기존의 제품 리스트를 클리어합니다.
+                    productDataList.clear();
+                    // 쿼리 결과를 반복하여 각 문서를 처리합니다
                     for (QueryDocumentSnapshot document : task.getResult()) {
+                        // 각 필드를 가져와서 변수에 저장합니다.
                         int code = document.getLong("productCode").intValue();
                         String productName = document.getString("productName");
                         String category = document.getString("category");
@@ -796,57 +815,67 @@ public class AdminMainActivity extends AppCompatActivity {
                         int price = document.getLong("price").intValue();
                         int stock = document.getLong("stock").intValue();
 
+                        // 이미지 URL이 null이거나 비어있으면 기본 이미지 URL을 사용합니다.
                         if (imageUrl == null || imageUrl.isEmpty()) {
                             imageUrl = "R.drawable.default_image"; // 기본 이미지 URL 사용
                         }
 
+                        // 로드된 이미지 URL을 로그에 출력합니다.
                         Log.d("DatabaseViewActivity", "Loaded imageUrl: " + imageUrl);
+                        // 새로운 제품 데이터를 리스트에 추가합니다.
                         productDataList.add(new ProductData(code, productName, category, imageUrl, price, stock)); // 리스트에 제품 추가
                     }
-
+                    // 어댑터에 데이터 변경을 알립니다.
                     adapter2.notifyDataSetChanged(); // 데이터 변경을 어댑터에 알림
                 } else {
+                    // 쿼리 실행 중 오류가 발생하면 로그에 출력합니다.
                     Log.e("DatabaseViewActivity", "Error getting documents: ", task.getException());
                 }
             }
         });
     }
 
+    // 파이어베이스에 데이터를 저장하는 메서드 (오자현)
     private void uploadFileAndSaveProductInfo() {
         Log.d("UploadFile", "uploadFileAndSaveProductInfo started");
+
+        // 입력 필드에서 값을 가져와서 문자열 변수에 저장합니다.
         String name = editTextFieldProductName.getText().toString().trim();
         String priceStr = editTextFieldProductPrice.getText().toString().trim();
         String stockStr = editTextFieldProductStock.getText().toString().trim();
         String category = productCategory;
 
+        // 필수 입력 필드가 비어있는지 확인하고, 비어있으면 경고 메시지를 표시하고 메서드를 종료합니다.
         if (name.isEmpty() || priceStr.isEmpty() || stockStr.isEmpty() || productFileUri == null || category.isEmpty()) {
             Toast.makeText(this, "모든 필드를 채워주세요", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        // 문자열로 된 가격과 재고 수량을 정수로 변환합니다.
         int price = Integer.parseInt(priceStr);
         int stock = Integer.parseInt(stockStr);
 
+        // FirebaseStorage 인스턴스를 가져옵니다.
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
+        // 파일을 저장할 경로를 설정합니다.
         StorageReference fileRef = storageRef.child("files/" + System.currentTimeMillis());
 
+        // 파일 업로드 작업을 시작합니다.
         UploadTask uploadTask = fileRef.putFile(productFileUri);
         uploadTask.addOnSuccessListener(taskSnapshot -> taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
             Log.d("UploadFile", "파이어베이스업로드리스너 진입");
             String fileUrl = uri.toString();
 
             // Firestore에서 productCounter 문서를 업데이트하고 새 productCode를 가져온다
-            // Firestore에서 counters 컬렉션을 만들고  productCounter 문서를 직접 생성한다
-            // lastProductCode 필드에 초기값(예: 0)을 설정. 데이터 타입은 number 이 문서가 없으면 프로그램이 진행 안됨
-            // 만약에 상품 컬렉션을 지웠으면 이거도 관리해서 0으로 만들것(수동임)
+            // 중요! lastProductCode 필드에 초기값(0)을 설정. 데이터 타입은 number 이 문서가 없으면 프로그램이 진행 안됨 중요!
+            // 중요! 만약에 상품 컬렉션을 지웠으면 이거도 관리해서 0으로 만들것(수동이라 반드시 해야함 ) 중요!
             DocumentReference counterRef = productDBFireStore.collection("counters").document("productCounter");
             productDBFireStore.runTransaction(transaction -> {
                 DocumentSnapshot counterSnapshot = transaction.get(counterRef);
                 Long lastProductCode = counterSnapshot.getLong("lastProductCode");
                 if (lastProductCode == null) lastProductCode = 0L; // 초기값 설정
                 Long newProductCode = lastProductCode + 1;
-                transaction.update(counterRef, "lastProductCode", newProductCode);
+                transaction.update(counterRef, "lastProductCode", newProductCode);// 새로운 productCode 사용
 
                 // 상품 정보와 파일 URL을 Firestore에 저장합니다.
                 Map<String, Object> product = new HashMap<>();
@@ -857,48 +886,69 @@ public class AdminMainActivity extends AppCompatActivity {
                 product.put("category", category);
                 product.put("productCode", newProductCode); // 새로운 productCode 사용
 
+                // Firestore에 새로운 상품 정보를 추가합니다.
                 productDBFireStore.collection("products").add(product).addOnSuccessListener(documentReference -> {
+                    // 성공적으로 저장되면 사용자에게 알림을 표시하고, 액티비티를 종료합니다.
                     Toast.makeText(AdminMainActivity.this, "상품 정보와 파일 URL 파이어베이스에 저장 성공", Toast.LENGTH_SHORT).show();
                     finishActivityWithResult();
                 }).addOnFailureListener(e -> {
+                    // 저장 실패 시 사용자에게 오류 메시지를 표시합니다.
                     Toast.makeText(AdminMainActivity.this, "파이어베이스 저장 실패: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
 
                 return null;
             }).addOnFailureListener(e -> {
+                // 상품 코드 업데이트 실패 시 사용자에게 오류 메시지를 표시합니다.
                 Toast.makeText(AdminMainActivity.this, "상품 코드 업데이트 실패: " + e.getMessage(), Toast.LENGTH_LONG).show();
             });
         })).addOnFailureListener(e -> {
+            // 파일 업로드 실패 시 사용자에게 오류 메시지를 표시합니다.
             Toast.makeText(AdminMainActivity.this, "파일 업로드 실패: " + e.getMessage(), Toast.LENGTH_LONG).show();
         });
     }
 
-    // 파이어베이스에 업로드 후처리를 위한 메서드(여기선 홈으로 보내고 내용을 초기화함)
+    // 파이어베이스에 업로드 후처리를 위한 메서드(여기선 홈으로 보내고 내용을 초기화함) (오자현)
     private void finishActivityWithResult() {
+        // vFlipper의 첫 번째 화면을 표시합니다.
         vFlipper.setDisplayedChild(0);
+        // imageViewProduct를 기본 이미지로 초기화합니다.
         imageViewProduct.setImageResource(android.R.drawable.ic_menu_camera);
+        // 제품 이름 입력 필드를 비웁니다.
         editTextFieldProductName.setText("");
+        // 제품 가격 입력 필드를 비웁니다.
         editTextFieldProductPrice.setText("");
+        // 제품 재고 입력 필드를 비웁니다.
         editTextFieldProductStock.setText("");
+        // 카테고리 라디오 버튼을 첫 번째 버튼으로 초기화합니다.
         radioGroup.check(R.id.categoryRadioBtn1);
     }
 
+    // 파일 관리자를 여는 메서드 (오자현)
     private void openFileManager() {
+        // Intent.ACTION_OPEN_DOCUMENT 액션을 사용하여 파일을 열기 위한 인텐트를 생성합니다.
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        // CATEGORY_OPENABLE 카테고리를 추가하여 파일을 열 수 있는 앱만 표시되도록 합니다.
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*"); // 모든 유형의 파일을 허용
+        // 모든 유형의 파일을 허용합니다.
+        intent.setType("*/*");
+        // 인텐트를 시작하여 파일 선택 화면을 엽니다.
         startActivityForResult(intent, PICK_FILE_REQUEST);
-        // 모든 유형의 파일을 허용 하지만 가져올 수 있는건 이미지 파일뿐
+        // 모든 유형의 파일을 허용하지만, 실제로 선택할 수 있는 파일은 이미지 파일뿐입니다.
     }
 
+    // 결과를 반환하는 메서드 (오자현)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // 파일 선택 요청인지 확인하고, 결과가 성공적이며, 인텐트 데이터가 null이 아닌지 확인합니다.
         if (requestCode == PICK_FILE_REQUEST && resultCode == RESULT_OK && data != null) {
+            // 선택한 파일의 URI를 가져옵니다.
             Uri selectedFileUri = data.getData();
+            // productFileUri 변수에 선택한 파일의 URI를 저장합니다.
             productFileUri = data.getData();
-            // ImageView에 이미지 로드
+            // 선택한 파일의 URI를 ImageView에 로드하여 이미지를 표시합니다.
             imageViewProduct.setImageURI(selectedFileUri);
         }
     }
+
 }
