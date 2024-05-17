@@ -75,7 +75,7 @@
                     app:flexWrap="wrap">
                     <soup.neumorphism.NeumorphCardView
                         style="@style/Widget.Neumorph.CardView"
-                        android:id="@+id/adminBtn"
+                        android:id="@+id/adminListBtnCardView"
                         android:layout_width="120dp"
                         android:layout_height="120dp">
                         <LinearLayout
@@ -84,7 +84,7 @@
                             android:orientation="vertical"
                             android:padding="15dp">
                             <ImageView
-                                android:id="@+id/adminList"
+                                android:id="@+id/adminListImage"
                                 android:layout_gravity="center"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
@@ -102,7 +102,7 @@
                     </soup.neumorphism.NeumorphCardView>
                     <soup.neumorphism.NeumorphCardView
                         style="@style/Widget.Neumorph.CardView"
-                        android:id="@+id/adminScheduleBtn"
+                        android:id="@+id/adminScheduleBtnCardView"
                         android:layout_width="120dp"
                         android:layout_height="120dp">
                         <LinearLayout
@@ -111,7 +111,7 @@
                             android:orientation="vertical"
                             android:padding="15dp">
                             <ImageView
-                                android:id="@+id/adminSchedule"
+                                android:id="@+id/adminScheduleImage"
                                 android:contentDescription="@string/admin_schedule_ImageView"
                                 android:layout_gravity="center"
                                 android:layout_width="35dp"
@@ -130,7 +130,7 @@
 
                     <soup.neumorphism.NeumorphCardView
                         style="@style/Widget.Neumorph.CardView"
-                        android:id="@+id/callBtn"
+                        android:id="@+id/adminCallBtnCardView"
                         android:layout_width="120dp"
                         android:layout_height="120dp">
                         <LinearLayout
@@ -139,7 +139,7 @@
                             android:orientation="vertical"
                             android:padding="15dp">
                             <ImageView
-                                android:id="@+id/call"
+                                android:id="@+id/adminCallImage"
                                 android:contentDescription="@string/admin_call_ImageView"
                                 android:layout_gravity="center"
                                 android:layout_width="35dp"
@@ -159,7 +159,7 @@
 
                     <soup.neumorphism.NeumorphCardView
                         style="@style/Widget.Neumorph.CardView"
-                        android:id="@+id/login"
+                        android:id="@+id/adminLoginBtnCardView"
                         android:layout_width="120dp"
                         android:layout_height="120dp">
                         <LinearLayout
@@ -168,7 +168,7 @@
                             android:orientation="vertical"
                             android:padding="15dp">
                             <ImageView
-                                android:id="@+id/adminLogin"
+                                android:id="@+id/adminLoginImage"
                                 android:contentDescription="@string/admin_login_ImageView"
                                 android:layout_gravity="center"
                                 android:layout_width="35dp"
@@ -206,7 +206,7 @@
                     android:orientation="horizontal">
                     <soup.neumorphism.NeumorphCardView
                         style="@style/Widget.Neumorph.CardView"
-                        android:id="@+id/input_searchId"
+                        android:id="@+id/input_searchIdCardView"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="6"
@@ -267,14 +267,14 @@
                     android:orientation="horizontal">
                     <soup.neumorphism.NeumorphCardView
                         style="@style/Widget.Neumorph.CardView"
-                        android:id="@+id/input_searchIdProduct"
+                        android:id="@+id/input_searchProductIdCardView"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="6"
                         android:padding="15dp"
                         app:neumorph_shapeType="pressed">
                         <EditText
-                            android:id="@+id/productSearchEditText"
+                            android:id="@+id/editTextFieldSearchProductId"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
@@ -327,7 +327,7 @@
                         android:orientation="horizontal">
                         <soup.neumorphism.NeumorphCardView
                             style="@style/Widget.Neumorph.CardView"
-                            android:id="@+id/input_searchIdPay"
+                            android:id="@+id/input_searchPayIdCardView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="6"
@@ -391,7 +391,7 @@
                         android:orientation="vertical">
                         <soup.neumorphism.NeumorphCardView
                             style="@style/Widget.Neumorph.CardView"
-                            android:id="@+id/input_productImage"
+                            android:id="@+id/input_productImageCardView"
                             android:layout_width="match_parent"
                             android:layout_height="250dp"
                             android:padding="20dp"
@@ -405,13 +405,13 @@
                         </soup.neumorphism.NeumorphCardView>
                         <soup.neumorphism.NeumorphCardView
                             style="@style/Widget.Neumorph.CardView"
-                            android:id="@+id/input_productName"
+                            android:id="@+id/input_productNameCardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="20dp"
                             app:neumorph_shapeType="pressed">
                             <EditText
-                                android:id="@+id/editProductName"
+                                android:id="@+id/editTextFieldProductName"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:hint="@string/product_name"
@@ -421,13 +421,13 @@
                         </soup.neumorphism.NeumorphCardView>
                         <soup.neumorphism.NeumorphCardView
                             style="@style/Widget.Neumorph.CardView"
-                            android:id="@+id/input_productQuantity"
+                            android:id="@+id/input_productStockCardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="20dp"
                             app:neumorph_shapeType="pressed">
                             <EditText
-                                android:id="@+id/editProductStock"
+                                android:id="@+id/editTextFieldProductStock"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:inputType="number"
@@ -437,7 +437,7 @@
                         </soup.neumorphism.NeumorphCardView>
                         <soup.neumorphism.NeumorphCardView
                             style="@style/Widget.Neumorph.CardView"
-                            android:id="@+id/input_productCategory"
+                            android:id="@+id/input_productCategoryCardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="20dp"
@@ -470,13 +470,13 @@
                         </soup.neumorphism.NeumorphCardView>
                         <soup.neumorphism.NeumorphCardView
                             style="@style/Widget.Neumorph.CardView"
-                            android:id="@+id/input_productPrice"
+                            android:id="@+id/input_productPriceCardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="20dp"
                             app:neumorph_shapeType="pressed">
                             <EditText
-                                android:id="@+id/editProductPrice"
+                                android:id="@+id/editTextFieldProductPrice"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:inputType="number"

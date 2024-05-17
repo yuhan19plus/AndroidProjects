@@ -60,81 +60,93 @@ public class AdminMainActivity extends AppCompatActivity {
     // 다크/라이트 모드 초기값
     public int mode = 0;
 
-    // MainActivity CardView
-    private NeumorphCardView mainCardView;
-    private NeumorphCardView footer_menu;
+    // Product Firebase
+    private FirebaseFirestore productDBFireStore;
+    private Uri productFileUri = null;
 
-    // Footer Bar Menu
-    private NeumorphImageView homeBtn;
-    private NeumorphImageView memberBtn;
-    private NeumorphImageView productBtn;
-    private NeumorphImageView payHistoryBtn;
-    private NeumorphImageView productPushBtn;
+    private static final int PICK_FILE_REQUEST = 2; // 이미지 파일 선택을 위한 요청 코드
 
-    // Member Menu
-    private NeumorphCardView input_searchId;
-    private NeumorphButton memberSearchBtn;
-    private NeumorphCardView memberListCardView;
-    private ListView memberListView;
-
-    // Product Menu
-    private NeumorphCardView input_searchIdProduct;
-    private NeumorphButton productSearchBtn;
-    private NeumorphCardView productListCardView;
-    private EditText productSearchEditText;
-    private String currentSearchText = ""; // 현재 검색 텍스트 저장
-
-    // HOME Menu
-    private NeumorphCardView adminBtn;
-    private NeumorphCardView adminScheduleBtn;
-    private NeumorphCardView callBtn;
-    private NeumorphCardView login;
-
-    // HOME Menu Image
-    private ImageView adminSchedule;
-    private ImageView adminList;
-    private ImageView adminLogin;
-    private ImageView call;
-
-    // PaymentList Menu
-    private NeumorphButton paySearchBtn;
-    private NeumorphCardView payListCardView;
-    private NeumorphCardView input_searchIdPay;
-
-    // ProductRegister Menu
-    private NeumorphCardView input_productImage;
-    private NeumorphCardView input_productName;
-    private NeumorphCardView input_productQuantity;
-    private NeumorphCardView input_productCategory;
-    private NeumorphCardView input_productPrice;
-    private RadioButton categoryRadioBtn1;
-    private RadioButton categoryRadioBtn2;
-    private RadioButton categoryRadioBtn3;
-    private NeumorphButton createQRBtn;
-    private NeumorphButton createProductBtn;
-
-    // Header ButtonImage
-    private NeumorphImageView admin_setting;
-    private NeumorphImageView changeMode;
-
+    // ViewFlipper
     private ViewFlipper vFlipper;
 
-    // Basic BackgroundColor
+    // Basic Colors
     private int backgroundColor;
     private int mainBackgroundColor = Color.rgb(236, 240, 243);
     private final int darkModeBackgroundColor = Color.rgb(97, 97, 97);
     private final int btnColor = Color.rgb(0, 174, 142);
     private final int radioButtonTextColor = Color.rgb(0, 105, 97);
 
-    // 오자현 추가 부분
-    private FirebaseFirestore dbFireStore;
-    private ImageView imageViewProduct;
-    private Uri fileuri = null;
-    private static final int PICK_FILE_REQUEST = 2; // 파일 선택을 위한 요청 코드
-    private EditText editProductName, editProductPrice, editProductStock;
-    private String ProductCategory;
-    private RadioGroup radioGroup;
+    // Header ButtonImage
+    private NeumorphImageView admin_setting, changeMode;
+
+    // MainActivity CardView
+    private NeumorphCardView mainCardView, footer_menu;
+
+    // Footer Bar Menu
+    private NeumorphImageView
+            homeBtn,
+            memberBtn,
+            productBtn,
+            payHistoryBtn,
+            productPushBtn;
+
+    // MemberManagement Page Menu
+    private NeumorphCardView
+            memberListCardView,
+            input_searchIdCardView;
+    private NeumorphButton memberSearchBtn;
+    private ListView memberListView;
+
+    // ProductManagement Page Menu
     private ListView productListView;
+    private NeumorphCardView
+            input_searchProductIdCardView,
+            productListCardView;
+    private ImageView imageViewProduct;
+    private NeumorphButton productSearchBtn;
+    private EditText editTextFieldSearchProductId;
+    private String currentSearchText = ""; // 검색 창 초기값 설정
+
+    // HOMEManagement Page Menu
+    private NeumorphCardView
+            adminListBtnCardView,
+            adminScheduleBtnCardView,
+            adminCallBtnCardView,
+            adminLoginBtnCardView;
+    private ImageView
+            adminListImage,
+            adminScheduleImage,
+            adminCallImage,
+            adminLoginImage;
+
+    // PaymentList Page Menu
+    private NeumorphButton paySearchBtn;
+    private NeumorphCardView
+            payListCardView,
+            input_searchPayIdCardView;
+
+    // ProductRegister Page Menu
+    private NeumorphCardView
+            input_productImageCardView,
+            input_productNameCardView,
+            input_productStockCardView,
+            input_productCategoryCardView,
+            input_productPriceCardView;
+    private EditText
+            editTextFieldProductName,
+            editTextFieldProductPrice,
+            editTextFieldProductStock;
+    private RadioGroup radioGroup;
+    private RadioButton
+            categoryRadioBtn1,
+            categoryRadioBtn2,
+            categoryRadioBtn3;
+    private NeumorphButton
+            createQRBtn,
+            createProductBtn;
+
+    // 오자현 추가 부분
+    private String productCategory;
     private ProductAdapter adapter2;
     private Handler handler = new Handler();
     private Runnable runnable;
@@ -164,8 +176,8 @@ public class AdminMainActivity extends AppCompatActivity {
         memberListView.setAdapter(adapter);
 
         // 카테고리를 클릭하지 않고 넘기는 경우 기본값으로 지정
-        if(ProductCategory == null){
-            ProductCategory = product_categoryDefault;
+        if(productCategory == null){
+            productCategory = product_categoryDefault;
         }
 
         adapter2 = new ProductAdapter(this, productDataList);
@@ -173,11 +185,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
         startAutoRefresh();
         loadItemsFromFireStore();
-
-        editProductName = findViewById(R.id.editProductName);
-        editProductPrice = findViewById(R.id.editProductPrice);
-        editProductStock = findViewById(R.id.editProductStock);
-        dbFireStore = FirebaseFirestore.getInstance();
+        productDBFireStore = FirebaseFirestore.getInstance();
 
         // ViewFlipper Setting
         vFlipper = findViewById(R.id.viewFlipper1);
@@ -196,45 +204,48 @@ public class AdminMainActivity extends AppCompatActivity {
         admin_setting = findViewById(R.id.admin_setting);
         changeMode = findViewById(R.id.darkMode);
 
+        // Admin MainPage CardView Id
+        adminListBtnCardView = findViewById(R.id.adminListBtnCardView);
+        adminScheduleBtnCardView = findViewById(R.id.adminScheduleBtnCardView);
+        adminCallBtnCardView = findViewById(R.id.adminCallBtnCardView);
+        adminLoginBtnCardView = findViewById(R.id.adminLoginBtnCardView);
+
         // Admin MainPage ImageView Id
-        adminList = findViewById(R.id.adminList);
-        call = findViewById(R.id.call);
-        adminLogin = findViewById(R.id.adminLogin);
-        adminSchedule = findViewById(R.id.adminSchedule);
+        adminListImage = findViewById(R.id.adminListImage);
+        adminScheduleImage = findViewById(R.id.adminScheduleImage);
+        adminCallImage = findViewById(R.id.adminCallImage);
+        adminLoginImage = findViewById(R.id.adminLoginImage);
 
         // MainActivity CardView & Footer Id
         mainCardView = findViewById(R.id.mainCardView);
         footer_menu = findViewById(R.id.footer_menu);
 
-        // MainActivity Home Menu CardView Id
-        login = findViewById(R.id.login);
-        adminBtn = findViewById(R.id.adminBtn);
-        adminScheduleBtn = findViewById(R.id.adminScheduleBtn);
-        callBtn = findViewById(R.id.callBtn);
-
         // Member Management Page Id
-        input_searchId = findViewById(R.id.input_searchId);
+        input_searchIdCardView = findViewById(R.id.input_searchIdCardView);
         memberSearchBtn = findViewById(R.id.memberSearchBtn);
         memberListCardView = findViewById(R.id.memberListCardView);
 
         // Product Management Page Id
-        input_searchIdProduct = findViewById(R.id.input_searchIdProduct);
+        input_searchProductIdCardView = findViewById(R.id.input_searchProductIdCardView);
         productSearchBtn = findViewById(R.id.productSearchBtn);
         productListCardView = findViewById(R.id.productListCardView);
         imageViewProduct = findViewById(R.id.imageViewProduct);
-        productSearchEditText = findViewById(R.id.productSearchEditText);
+        editTextFieldSearchProductId = findViewById(R.id.editTextFieldSearchProductId);
 
         // Payment List Page Id
         paySearchBtn = findViewById(R.id.paySearchBtn);
         payListCardView = findViewById(R.id.payListCardView);
-        input_searchIdPay =findViewById(R.id.input_searchIdPay);
+        input_searchPayIdCardView =findViewById(R.id.input_searchPayIdCardView);
 
         // ProductData Register Page Id
-        input_productImage = findViewById(R.id.input_productImage);
-        input_productName = findViewById(R.id.input_productName);
-        input_productQuantity = findViewById(R.id.input_productQuantity);
-        input_productCategory = findViewById(R.id.input_productCategory);
-        input_productPrice = findViewById(R.id.input_productPrice);
+        input_productImageCardView = findViewById(R.id.input_productImageCardView);
+        input_productNameCardView = findViewById(R.id.input_productNameCardView);
+        input_productStockCardView = findViewById(R.id.input_productStockCardView);
+        input_productCategoryCardView = findViewById(R.id.input_productCategoryCardView);
+        input_productPriceCardView = findViewById(R.id.input_productPriceCardView);
+        editTextFieldProductName = findViewById(R.id.editTextFieldProductName);
+        editTextFieldProductPrice = findViewById(R.id.editTextFieldProductPrice);
+        editTextFieldProductStock = findViewById(R.id.editTextFieldProductStock);
         categoryRadioBtn1 = findViewById(R.id.categoryRadioBtn1);
         categoryRadioBtn2 = findViewById(R.id.categoryRadioBtn2);
         categoryRadioBtn3 = findViewById(R.id.categoryRadioBtn3);
@@ -302,33 +313,33 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setDarkShadowCardView(footer_menu);
 
                     // MemberManagement Page CardView
-                    ChangeMode.setDarkShadowCardView(input_searchId);
+                    ChangeMode.setDarkShadowCardView(input_searchIdCardView);
                     ChangeMode.setDarkShadowCardView(memberSearchBtn);
                     ChangeMode.setDarkShadowCardView(memberListCardView);
 
                     // 상품 관리 페이지 CardView
-                    ChangeMode.setDarkShadowCardView(input_searchIdProduct);
+                    ChangeMode.setDarkShadowCardView(input_searchProductIdCardView);
                     ChangeMode.setDarkShadowCardView(productSearchBtn);
                     ChangeMode.setDarkShadowCardView(productListCardView);
 
                     // AdminMain Page CardView
-                    ChangeMode.setDarkShadowCardView(adminBtn);
-                    ChangeMode.setDarkShadowCardView(adminScheduleBtn);
-                    ChangeMode.setDarkShadowCardView(callBtn);
-                    ChangeMode.setDarkShadowCardView(login);
+                    ChangeMode.setDarkShadowCardView(adminListBtnCardView);
+                    ChangeMode.setDarkShadowCardView(adminScheduleBtnCardView);
+                    ChangeMode.setDarkShadowCardView(adminCallBtnCardView);
+                    ChangeMode.setDarkShadowCardView(adminLoginBtnCardView);
 
                     // PaymentList Page CardView
                     ChangeMode.setColorFilterLight(paySearchBtn);
                     ChangeMode.setDarkShadowCardView(paySearchBtn);
                     ChangeMode.setDarkShadowCardView(payListCardView);
-                    ChangeMode.setDarkShadowCardView(input_searchIdPay);
+                    ChangeMode.setDarkShadowCardView(input_searchPayIdCardView);
 
                     // ProductRegister Page CardView
-                    ChangeMode.setDarkShadowCardView(input_productImage);
-                    ChangeMode.setDarkShadowCardView(input_productName);
-                    ChangeMode.setDarkShadowCardView(input_productQuantity);
-                    ChangeMode.setDarkShadowCardView(input_productCategory);
-                    ChangeMode.setDarkShadowCardView(input_productPrice);
+                    ChangeMode.setDarkShadowCardView(input_productImageCardView);
+                    ChangeMode.setDarkShadowCardView(input_productNameCardView);
+                    ChangeMode.setDarkShadowCardView(input_productStockCardView);
+                    ChangeMode.setDarkShadowCardView(input_productCategoryCardView);
+                    ChangeMode.setDarkShadowCardView(input_productPriceCardView);
                     ChangeMode.setColorFilterDark(categoryRadioBtn1);
                     ChangeMode.setColorFilterDark(categoryRadioBtn2);
                     ChangeMode.setColorFilterDark(categoryRadioBtn3);
@@ -336,10 +347,10 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setDarkShadowCardView(createProductBtn);
 
                     // Change ImageView Color
-                    ChangeMode.setColorFilterDark(adminList);
-                    ChangeMode.setColorFilterDark(call);
-                    ChangeMode.setColorFilterDark(adminLogin);
-                    ChangeMode.setColorFilterDark(adminSchedule);
+                    ChangeMode.setColorFilterDark(adminListImage);
+                    ChangeMode.setColorFilterDark(adminScheduleImage);
+                    ChangeMode.setColorFilterDark(adminCallImage);
+                    ChangeMode.setColorFilterDark(adminLoginImage);
 
                     // Footer Menu
                     ChangeMode.setColorFilterDark(memberBtn);
@@ -376,33 +387,33 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setLightShadowCardView(mainCardView);
 
                     // MemberManagement Page CardView
-                    ChangeMode.setLightShadowCardView(input_searchId);
+                    ChangeMode.setLightShadowCardView(input_searchIdCardView);
                     ChangeMode.setLightShadowCardView(memberSearchBtn);
                     ChangeMode.setLightShadowCardView(memberListCardView);
 
                     // 상품 관리 페이지 CardView
-                    ChangeMode.setLightShadowCardView(input_searchIdProduct);
+                    ChangeMode.setLightShadowCardView(input_searchProductIdCardView);
                     ChangeMode.setLightShadowCardView(productSearchBtn);
                     ChangeMode.setLightShadowCardView(productListCardView);
 
                     // AdminMain Page CardView
-                    ChangeMode.setLightShadowCardView(adminBtn);
-                    ChangeMode.setLightShadowCardView(adminScheduleBtn);
-                    ChangeMode.setLightShadowCardView(callBtn);
-                    ChangeMode.setLightShadowCardView(login);
+                    ChangeMode.setLightShadowCardView(adminListBtnCardView);
+                    ChangeMode.setLightShadowCardView(adminScheduleBtnCardView);
+                    ChangeMode.setLightShadowCardView(adminCallBtnCardView);
+                    ChangeMode.setLightShadowCardView(adminLoginBtnCardView);
 
                     // PaymentList Page CardView
                     ChangeMode.setColorFilterLight(paySearchBtn);
                     ChangeMode.setLightShadowCardView(paySearchBtn);
                     ChangeMode.setLightShadowCardView(payListCardView);
-                    ChangeMode.setLightShadowCardView(input_searchIdPay);
+                    ChangeMode.setLightShadowCardView(input_searchPayIdCardView);
 
                     // ProductRegister Page CardView
-                    ChangeMode.setLightShadowCardView(input_productImage);
-                    ChangeMode.setLightShadowCardView(input_productName);
-                    ChangeMode.setLightShadowCardView(input_productQuantity);
-                    ChangeMode.setLightShadowCardView(input_productPrice);
-                    ChangeMode.setLightShadowCardView(input_productCategory);
+                    ChangeMode.setLightShadowCardView(input_productImageCardView);
+                    ChangeMode.setLightShadowCardView(input_productNameCardView);
+                    ChangeMode.setLightShadowCardView(input_productStockCardView);
+                    ChangeMode.setLightShadowCardView(input_productCategoryCardView);
+                    ChangeMode.setLightShadowCardView(input_productPriceCardView);
                     ChangeMode.setColorFilterLight(categoryRadioBtn1);
                     ChangeMode.setColorFilterLight(categoryRadioBtn2);
                     ChangeMode.setColorFilterLight(categoryRadioBtn3);
@@ -410,10 +421,10 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setLightShadowCardView(createProductBtn);
 
                     // Change ImageView Color
-                    ChangeMode.setColorFilterLight(adminList);
-                    ChangeMode.setColorFilterLight(call);
-                    ChangeMode.setColorFilterLight(adminLogin);
-                    ChangeMode.setColorFilterLight(adminSchedule);
+                    ChangeMode.setColorFilterLight(adminListImage);
+                    ChangeMode.setColorFilterLight(adminScheduleImage);
+                    ChangeMode.setColorFilterLight(adminCallImage);
+                    ChangeMode.setColorFilterLight(adminLoginImage);
 
                     // Footer Menu
                     ChangeMode.setLightShadowCardView(memberBtn);
@@ -444,15 +455,15 @@ public class AdminMainActivity extends AppCompatActivity {
         });
 
         // AdminBtn onClickListener
-        adminBtn.setOnClickListener(new View.OnClickListener() {
+        adminListBtnCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Change ShapeType to 'pressed' when clicked
-                adminBtn.setShapeType(1);
+                adminListBtnCardView.setShapeType(1);
                 // After clicked, it changes back to 'flat'
                 v.postDelayed(new Runnable() {
                     @Override
-                    public void run() {adminBtn.setShapeType(0);}
+                    public void run() {adminListBtnCardView.setShapeType(0);}
                 }, 200);
                 // Move to AdminList Page & transfer main page background color
                 Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
@@ -463,15 +474,15 @@ public class AdminMainActivity extends AppCompatActivity {
         });
 
         // AdminScheduleBtn onClickListener
-        adminScheduleBtn.setOnClickListener(new View.OnClickListener() {
+        adminScheduleBtnCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Change ShapeType to 'pressed' when clicked
-                adminScheduleBtn.setShapeType(1);
+                adminScheduleBtnCardView.setShapeType(1);
                 // After clicked, it changes back to 'flat'
                 v.postDelayed(new Runnable() {
                     @Override
-                    public void run() {adminScheduleBtn.setShapeType(0);}
+                    public void run() {adminScheduleBtnCardView.setShapeType(0);}
                 }, 200);
                 // Move to AdminSchedule Page & transfer main page background color
                 Intent intent = new Intent(getApplicationContext(), AdminScheduleActivity.class);
@@ -482,15 +493,15 @@ public class AdminMainActivity extends AppCompatActivity {
         });
 
         // CallBtn onClickListener
-        callBtn.setOnClickListener(new View.OnClickListener() {
+        adminCallBtnCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Change ShapeType to 'pressed' when clicked
-                callBtn.setShapeType(1);
+                adminCallBtnCardView.setShapeType(1);
                 // After clicked, it changes back to 'flat'
                 v.postDelayed(new Runnable() {
                     @Override
-                    public void run() {callBtn.setShapeType(0);}
+                    public void run() {adminCallBtnCardView.setShapeType(0);}
                 }, 200);
 
                 // Move to Dial
@@ -500,15 +511,15 @@ public class AdminMainActivity extends AppCompatActivity {
         });
 
         // LoginBtn onClickListener
-        login.setOnClickListener(new View.OnClickListener() {
+        adminLoginBtnCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Change ShapeType to 'pressed' when clicked
-                login.setShapeType(1);
+                adminLoginBtnCardView.setShapeType(1);
                 // After clicked, it changes back to 'flat'
                 v.postDelayed(new Runnable() {
                     @Override
-                    public void run() {login.setShapeType(0);}
+                    public void run() {adminLoginBtnCardView.setShapeType(0);}
                 }, 200);
                 // Move to Login Page & transfer main page background color
                 Intent intent = new Intent(getApplicationContext(), AdminLoginActivity.class);
@@ -584,8 +595,8 @@ public class AdminMainActivity extends AppCompatActivity {
         productSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchText = productSearchEditText.getText().toString();
-                productSearchEditText.setText("");
+                String searchText = editTextFieldSearchProductId.getText().toString();
+                editTextFieldSearchProductId.setText("");
                 currentSearchText = searchText; // 현재 검색 텍스트 업데이트
                 loadItemsFromFireStore(); // 필터링된 상품 새로고침
                 currentSearchText="";
@@ -637,11 +648,11 @@ public class AdminMainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.categoryRadioBtn1) {
-                    ProductCategory = categoryStr1;
+                    productCategory = categoryStr1;
                 } else if (checkedId == R.id.categoryRadioBtn2) {
-                    ProductCategory = categoryStr2;
+                    productCategory = categoryStr2;
                 } else if (checkedId == R.id.categoryRadioBtn3) {
-                    ProductCategory = categoryStr3;
+                    productCategory = categoryStr3;
                 }
             }
         });
@@ -803,12 +814,12 @@ public class AdminMainActivity extends AppCompatActivity {
 
     private void uploadFileAndSaveProductInfo() {
         Log.d("UploadFile", "uploadFileAndSaveProductInfo started");
-        String name = editProductName.getText().toString().trim();
-        String priceStr = editProductPrice.getText().toString().trim();
-        String stockStr = editProductStock.getText().toString().trim();
-        String category = ProductCategory;
+        String name = editTextFieldProductName.getText().toString().trim();
+        String priceStr = editTextFieldProductPrice.getText().toString().trim();
+        String stockStr = editTextFieldProductStock.getText().toString().trim();
+        String category = productCategory;
 
-        if (name.isEmpty() || priceStr.isEmpty() || stockStr.isEmpty() || fileuri == null || category.isEmpty()) {
+        if (name.isEmpty() || priceStr.isEmpty() || stockStr.isEmpty() || productFileUri == null || category.isEmpty()) {
             Toast.makeText(this, "모든 필드를 채워주세요", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -820,7 +831,7 @@ public class AdminMainActivity extends AppCompatActivity {
         StorageReference storageRef = storage.getReference();
         StorageReference fileRef = storageRef.child("files/" + System.currentTimeMillis());
 
-        UploadTask uploadTask = fileRef.putFile(fileuri);
+        UploadTask uploadTask = fileRef.putFile(productFileUri);
         uploadTask.addOnSuccessListener(taskSnapshot -> taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
             Log.d("UploadFile", "파이어베이스업로드리스너 진입");
             String fileUrl = uri.toString();
@@ -829,8 +840,8 @@ public class AdminMainActivity extends AppCompatActivity {
             // Firestore에서 counters 컬렉션을 만들고  productCounter 문서를 직접 생성한다
             // lastProductCode 필드에 초기값(예: 0)을 설정. 데이터 타입은 number 이 문서가 없으면 프로그램이 진행 안됨
             // 만약에 상품 컬렉션을 지웠으면 이거도 관리해서 0으로 만들것(수동임)
-            DocumentReference counterRef = dbFireStore.collection("counters").document("productCounter");
-            dbFireStore.runTransaction(transaction -> {
+            DocumentReference counterRef = productDBFireStore.collection("counters").document("productCounter");
+            productDBFireStore.runTransaction(transaction -> {
                 DocumentSnapshot counterSnapshot = transaction.get(counterRef);
                 Long lastProductCode = counterSnapshot.getLong("lastProductCode");
                 if (lastProductCode == null) lastProductCode = 0L; // 초기값 설정
@@ -846,7 +857,7 @@ public class AdminMainActivity extends AppCompatActivity {
                 product.put("category", category);
                 product.put("productCode", newProductCode); // 새로운 productCode 사용
 
-                dbFireStore.collection("products").add(product).addOnSuccessListener(documentReference -> {
+                productDBFireStore.collection("products").add(product).addOnSuccessListener(documentReference -> {
                     Toast.makeText(AdminMainActivity.this, "상품 정보와 파일 URL 파이어베이스에 저장 성공", Toast.LENGTH_SHORT).show();
                     finishActivityWithResult();
                 }).addOnFailureListener(e -> {
@@ -866,9 +877,9 @@ public class AdminMainActivity extends AppCompatActivity {
     private void finishActivityWithResult() {
         vFlipper.setDisplayedChild(0);
         imageViewProduct.setImageResource(android.R.drawable.ic_menu_camera);
-        editProductName.setText("");
-        editProductPrice.setText("");
-        editProductStock.setText("");
+        editTextFieldProductName.setText("");
+        editTextFieldProductPrice.setText("");
+        editTextFieldProductStock.setText("");
         radioGroup.check(R.id.categoryRadioBtn1);
     }
 
@@ -877,6 +888,7 @@ public class AdminMainActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*"); // 모든 유형의 파일을 허용
         startActivityForResult(intent, PICK_FILE_REQUEST);
+        // 모든 유형의 파일을 허용 하지만 가져올 수 있는건 이미지 파일뿐
     }
 
     @Override
@@ -884,7 +896,7 @@ public class AdminMainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_FILE_REQUEST && resultCode == RESULT_OK && data != null) {
             Uri selectedFileUri = data.getData();
-            fileuri = data.getData();
+            productFileUri = data.getData();
             // ImageView에 이미지 로드
             imageViewProduct.setImageURI(selectedFileUri);
         }
