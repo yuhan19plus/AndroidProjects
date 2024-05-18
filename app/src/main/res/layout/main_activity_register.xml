@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EAEAEA">
+    <ScrollView
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+<ImageView
+    android:id="@+id/Close_Register_Btn"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:layout_gravity="right"
+    android:src="@drawable/main_x"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textColor="@color/yuhan"
+        android:text="회원 가입"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="-5dp"
+                android:layout_marginStart="5dp"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                android:text="아이디"/>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:orientation="horizontal">
+          <EditText
+              android:id="@+id/Register_Id"
+              android:layout_width="300dp"
+              android:layout_height="50dp"
+              android:layout_marginTop="10dp"
+              android:background="@drawable/edittext_border"
+              android:textColor="@color/yuhan"
+              android:hint="아이디를 입력해주세요"/>
+          <android.widget.Button
+              android:id="@+id/Register_Id_Check"
+              android:layout_width="105dp"
+              android:layout_marginTop="10dp"
+              android:layout_height="50dp"
+              android:background="@drawable/button_background"
+              android:textColor="@color/white"
+              android:text="중복 확인"
+              />
+      </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:text="비밀번호"/>
+            <EditText
+                android:id="@+id/Register_Pwd"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_border"
+                android:textColor="@color/yuhan"
+                android:hint="비밀번호를 입력해주세요"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:text="비밀번호 재입력"/>
+            <EditText
+                android:id="@+id/Register_Pwd_Re"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_border"
+                android:textColor="@color/yuhan"
+                android:hint="비밀번호를 입력해주세요"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:text="이름"/>
+            <EditText
+                android:id="@+id/Register_name"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_border"
+                android:textColor="@color/yuhan"
+                android:hint="사용하실 이름을 입력해주세요"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

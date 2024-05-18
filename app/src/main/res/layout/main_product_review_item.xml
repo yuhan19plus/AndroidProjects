@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textViewMemberId"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="Member ID"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/star" />
+    <TextView
+        android:id="@+id/textViewRatingScore"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@color/black"
+        android:layout_marginStart="15dp"
+        android:gravity="center"
+        android:text="Rating Score"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewCreationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="Creation Date"
+        android:textStyle="bold" />
+
+</LinearLayout>

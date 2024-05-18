@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main_StoreLocationActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_store_location"
+        android:gravity="center"
+        android:text="스토어위치"
+        android:textColor="#fff"
+        android:textSize="30pt"
+        android:textStyle="bold" />
+</FrameLayout>

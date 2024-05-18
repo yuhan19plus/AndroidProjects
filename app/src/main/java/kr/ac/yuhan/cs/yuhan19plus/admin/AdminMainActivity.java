@@ -860,13 +860,16 @@ public class AdminMainActivity extends AppCompatActivity {
         // 파일을 저장할 경로를 설정합니다.
         StorageReference fileRef = storageRef.child("files/" + System.currentTimeMillis());
 
+
         // 파일 업로드 작업을 시작합니다.
+
         UploadTask uploadTask = fileRef.putFile(productFileUri);
         uploadTask.addOnSuccessListener(taskSnapshot -> taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
             Log.d("UploadFile", "파이어베이스업로드리스너 진입");
             String fileUrl = uri.toString();
 
             // Firestore에서 productCounter 문서를 업데이트하고 새 productCode를 가져온다
+
             // 중요! lastProductCode 필드에 초기값(0)을 설정. 데이터 타입은 number 이 문서가 없으면 프로그램이 진행 안됨 중요!
             // 중요! 만약에 상품 컬렉션을 지웠으면 이거도 관리해서 0으로 만들것(수동이라 반드시 해야함 ) 중요!
             DocumentReference counterRef = productDBFireStore.collection("counters").document("productCounter");

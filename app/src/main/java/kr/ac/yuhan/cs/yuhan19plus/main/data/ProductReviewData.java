@@ -1,0 +1,57 @@
+package kr.ac.yuhan.cs.yuhan19plus.main.data;
+
+public class ProductReviewData {
+    private String memberId;
+    private int ratingScore;
+    private Long productCode;
+    private String creationDate;
+    private String reviewContent;
+
+    public ProductReviewData(String memberId, int ratingScore, String creationDate, String reviewContent, Long productCode) {
+        this.memberId = memberId;
+        this.ratingScore = ratingScore;
+        this.creationDate = creationDate;
+        this.reviewContent = reviewContent;
+        this.productCode = productCode;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public Long getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(Long productCode) {
+        this.productCode = productCode;
+    }
+
+    public int getRatingScore() {
+        return ratingScore;
+    }
+
+    public void setRatingScore(int ratingScore) {
+        this.ratingScore = ratingScore;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getReviewContent() {
+        return reviewContent;
+    }
+
+    public void setReviewContent(String reviewContent) {
+        this.reviewContent = reviewContent;
+    }
+}

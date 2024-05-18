@@ -12,6 +12,13 @@
     <string name="login_failed">"Login failed"</string>
     <string name="main_text">Yuhan19+</string>
 
+    <!-- 상품리뷰 -->
+    <string name="productReview_title">상품리뷰</string>
+    <string name="productReview_starMessage">상품에 대한 소중한 별점 부탁드립니다.</string>
+    <string name="productReview_contentMessage">간단한 후기를 남겨주세요.</string>
+    <string name="productReview_btn">리뷰작성</string>
+    <!-- // 상품리뷰 -->
+
     <string name="outBtn">삭제 버튼</string>
 
     <string name="searchMemberIdHint">회원 ID를 입력 하세요</string>
