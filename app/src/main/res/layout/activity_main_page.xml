@@ -1,139 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity"
+    android:background="@drawable/main_background2"
+    android:orientation="vertical">
 
+    <!--상단-->
     <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:orientation="vertical"
-        android:background="@drawable/nomal">
-        <!--상단-->
-        <LinearLayout
+        android:layout_height="55dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/main_topbackground"
+        android:orientation="horizontal">
+        <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            app:alignItems="center"
+            app:justifyContent="space_between">
             <ImageView
                 android:id="@+id/setting"
-                app:neumorph_shapeType="flat"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:padding="25dp"
                 android:src="@drawable/setting" />
 
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/yuhan19logo"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="130dp"
-                />
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:text="YUHAN19+"/>
 
-            <Button
-                android:id="@+id/login"
+            <ImageView
+                android:id="@+id/loginBtn"
                 android:text="로그인"
                 android:layout_width="80dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="15dp"/>
+                android:onClick="set_login"
+                android:src="@drawable/main_login" />
+        </com.google.android.flexbox.FlexboxLayout>
+    </LinearLayout>
 
-
-        </LinearLayout>
     <!--중단-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="7"
+        >
+        <!--광고 배너-->
         <FrameLayout
+            android:id="@+id/login_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="7"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp" />
 
-            <View
-                android:id="@+id/View01"
-                android:layout_width="350dp"
-                android:layout_height="550dp"
-                android:layout_marginStart="23dp"
-                android:layout_gravity="bottom"
-                android:background="#990000"
-                android:visibility="invisible"/>
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewPager"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="290dp"
+            />
 
-            <View
-                android:id="@+id/View02"
-                android:layout_width="350dp"
-                android:layout_height="550dp"
-                android:layout_marginStart="23dp"
-                android:layout_gravity="bottom"
-                android:background="#00ffdd"
-                android:visibility="invisible"/>
+        <!--상품 칸-->
+        <GridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="320dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:background="@drawable/main_glass"
+            android:numColumns="3"/>
 
-            <View
-                android:id="@+id/View03"
-                android:layout_width="350dp"
-                android:layout_height="550dp"
-                android:layout_marginStart="23dp"
-                android:layout_gravity="bottom"
-                android:background="#00ffbc"
-                android:visibility="invisible"/>
-
-            <View
-                android:id="@+id/View04"
-                android:layout_width="350dp"
-                android:layout_height="550dp"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="25dp"
-                android:background="#000bcc"
-                android:visibility="invisible" />
+        <FrameLayout
+            android:id="@+id/main_View"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp">
 
         </FrameLayout>
+
+    </RelativeLayout>
     <!--하단-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="center"
-            >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/main_lowbarbackground"
+        android:gravity="center"
+        >
 
-            <Button
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:id="@+id/firstBtn"
-                android:text="1"
-                android:onClick="onClick"/>
+        <ImageView
+            android:id="@+id/store_location_Btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/main_store_location" />
 
-            <Button
-                android:id="@+id/secondBtn"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:onClick="onClick"
-                android:text="2" />
+        <ImageView
+            android:id="@+id/product_Btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/main_item" />
 
-            <Button
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:id="@+id/thirdBtn"
-                android:text="3"
-                android:onClick="onClick"/>
-            <Button
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:id="@+id/fourthBtn"
-                android:text="4"
-                android:onClick="onClick"/>
+        <ImageView
+            android:id="@+id/home_Btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/main_home" />
 
-            <Button
-                android:id="@+id/fifthBtn"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:onClick="onClick"
-                android:text="5" />
+        <ImageView
+            android:id="@+id/payment_Btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/main_payment"
+            />
 
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/mypage_Btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/main_mypage" />
 
     </LinearLayout>
+
+</LinearLayout>
 
 

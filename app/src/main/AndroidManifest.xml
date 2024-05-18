@@ -59,6 +59,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".main.MainProductDetail" android:label="MainProductDetail" />
+        <activity android:name=".main.MainProductActivity" android:label="MainProductActivity" />
+        <activity android:name=".main.MainProductReview" android:label="MainProductReview" />
+        <activity android:name=".main.MainRegisterActivity" android:label="MainRegisterActivity" />
+        <activity android:name=".main.MainStoreLocationActivity" android:label="MainStoreLocationActivity" />
+        <activity android:name=".main.MainMyPageActivity" android:label="MainMyPageActivity" />
+        <activity android:name=".main.MainPaymentActivity" android:label="MainPaymentActivity" />
     </application>
 
 </manifest>

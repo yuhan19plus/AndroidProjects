@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp">
+            <ImageView
+                android:id="@+id/Back_ListView_Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="뒤로"
+                android:src="@drawable/back" />
+            <ImageView
+                android:id="@+id/Item_Image_Detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Product Image"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/Item_Category_Detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="15dp"
+                    android:textColor="#aaa"
+                    android:text="카테고리"/>
+                <TextView
+                    android:id="@+id/Item_Name_Detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"
+                    android:text="Product Name"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Item_Price_Detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:text="Product Price"
+                android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal" >
+
+                <ImageView
+                    android:id="@+id/Item_Average_Detail"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/star"/>
+                <TextView
+                    android:id="@+id/productAverage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="4.5"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+                <Button
+                    android:id="@+id/productReviewBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="리뷰등록" />
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/reviewListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+</LinearLayout>
