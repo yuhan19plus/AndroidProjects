@@ -1,7 +1,5 @@
 package kr.ac.yuhan.cs.yuhan19plus.main.adapter;
 
-import android.app.ListFragment;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -11,20 +9,29 @@ import kr.ac.yuhan.cs.yuhan19plus.main.MainProductPageList;
 
 public class MainProductPageAdapter extends FragmentStateAdapter {
 
-    public MainProductPageAdapter (FragmentActivity fa) {
-        super(fa);
+    private static final int NUM_PAGES = 3;
+
+    public MainProductPageAdapter(@NonNull FragmentActivity fragmentActivity) {
+        super(fragmentActivity);
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        // 인덱스에 따라 새로운 프래그먼트 생성
-        return MainProductPageList.newInstance(position);
+        switch (position) {
+            case 0:
+                return MainProductPageList.newInstance("생필품");
+            case 1:
+                return MainProductPageList.newInstance("문구류");
+            case 2:
+                return MainProductPageList.newInstance("주방용품");
+            default:
+                return MainProductPageList.newInstance("생필품");
+        }
     }
 
     @Override
     public int getItemCount() {
-        // 총 프래그먼트 수
-        return 3;
+        return NUM_PAGES;
     }
 }

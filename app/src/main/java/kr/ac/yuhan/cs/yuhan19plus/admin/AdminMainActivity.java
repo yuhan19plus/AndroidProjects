@@ -781,7 +781,7 @@ public class AdminMainActivity extends AppCompatActivity {
     }
 
 
-    // 파이어베이스에서 데이터를 읽어오는 메서드 (오자현)
+    // 파이어베이스에서 상품명으로 검색하고 데이터를 읽어오는 메서드 (오자현)
     void loadItemsFromFireStore() {
         // Firestore 데이터베이스 인스턴스를 가져옵니다.
         FirebaseFirestore db = FirebaseFirestore.getInstance();

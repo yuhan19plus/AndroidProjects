@@ -2,6 +2,7 @@ package kr.ac.yuhan.cs.yuhan19plus.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +28,15 @@ import kr.ac.yuhan.cs.yuhan19plus.main.data.MainProductData;
 
 public class MainProductPageList extends Fragment {
 
-    //프래그먼트 인스턴스 상수 정의 --> 값 저장
-    private static final String ARG_SECTION_NUMBER = "section_number";
+    private List<MainProductData> products = new ArrayList<>();
+    private MainProductCustomAdapter adapter;
+    private static final String ARG_CATEGORY = "category";
+    private String category;
 
-    // 새로운 인스턴스를 생성하기 위한 메서드
-    public static MainProductPageList newInstance(int index) {
+    public static MainProductPageList newInstance(String category) {
         MainProductPageList fragment = new MainProductPageList();
         Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
+        bundle.putString(ARG_CATEGORY, category);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -39,18 +47,20 @@ public class MainProductPageList extends Fragment {
         // 레이아웃 설정
         View rootView = inflater.inflate(R.layout.main_activity_product_list, container, false);
 
+        // 인수로 받은 카테고리 설정
+        if (getArguments() != null) {
+            category = getArguments().getString(ARG_CATEGORY);
+        }
+
         // ListView 객체 가져오기
         ListView listView = rootView.findViewById(R.id.listView);
 
-        // 데이터 생성 --> 추후 데이터베이스 연결시 변경해야 할 부분
-        List<MainProductData> products = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            products.add(new MainProductData(R.drawable.main_home, "상품 " + (i + 1),(i + 1) * 1000+"원", (long) i + 1));
-        }
-
-        // 커스텀 어댑터 생성 및 설정
-        MainProductCustomAdapter adapter = new MainProductCustomAdapter (getActivity(), products);
+        // 어댑터 생성 및 설정
+        adapter = new MainProductCustomAdapter(getActivity(), products);
         listView.setAdapter(adapter);
+
+        // 데이터 생성
+        loadItemsFromFireStore(category);
 
         // ListView 아이템 클릭 시 상세페이지 이동
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,7 +72,7 @@ public class MainProductPageList extends Fragment {
                 // 인텐트 생성 및 데이터 전달
                 Intent intent = new Intent(getActivity(), MainProductDetail.class);
                 intent.putExtra("productImage", clickedItem.getImageResource());
-                intent.putExtra("productName", clickedItem.getName().toString());
+                intent.putExtra("productName", clickedItem.getName());
                 intent.putExtra("productPrice", clickedItem.getPrice());
                 intent.putExtra("productCode", clickedItem.getProductCode());
                 startActivity(intent);
@@ -72,4 +82,40 @@ public class MainProductPageList extends Fragment {
         return rootView;
     }
 
+    void loadItemsFromFireStore(String category) {
+        Log.d("MainProductPageList", "Loading items from Firestore...");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Task<QuerySnapshot> query = db.collection("products").whereEqualTo("category", category).get();
+
+        query.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    Log.d("MainProductPageList", "Successfully queried Firestore.");
+                    products.clear();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        try {
+                            int productCode = document.getLong("productCode").intValue();
+                            String productName = document.getString("productName");
+                            String imageUrl = document.getString("imageUrl");
+                            int productPrice = document.getLong("price").intValue();
+
+                            if (imageUrl == null || imageUrl.isEmpty()) {
+                                imageUrl = "R.drawable.default_image"; // 기본 이미지 URL 사용
+                            }
+
+                            Log.d("MainProductPageList", "Loaded product: " + productName + ", imageUrl: " + imageUrl);
+                            products.add(new MainProductData(imageUrl, productName, productPrice, productCode));
+                        } catch (Exception e) {
+                            Log.e("MainProductPageList", "Error parsing document: ", e);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                    Log.d("MainProductPageList", "Adapter notified of data change.");
+                } else {
+                    Log.e("MainProductPageList", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
 }

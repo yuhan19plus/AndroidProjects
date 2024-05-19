@@ -1,12 +1,15 @@
 package kr.ac.yuhan.cs.yuhan19plus.main.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -18,7 +21,7 @@ public class MainProductCustomAdapter extends BaseAdapter {
     private List<MainProductData> products;
     private LayoutInflater inflater;
 
-    public MainProductCustomAdapter (Context context, List<MainProductData> products) {
+    public MainProductCustomAdapter(Context context, List<MainProductData> products) {
         this.context = context;
         this.products = products;
         this.inflater = LayoutInflater.from(context);
@@ -50,7 +53,15 @@ public class MainProductCustomAdapter extends BaseAdapter {
 
         // 이미지 설정
         ImageView imageView = convertView.findViewById(R.id.item_image);
-        imageView.setImageResource(product.getImageResource());
+        try {
+            Glide.with(context)
+                    .load(product.getImageResource())
+                    .placeholder(R.drawable.default_image)
+                    .error(R.drawable.default_image) // 기본 이미지 설정
+                    .into(imageView);
+        } catch (Exception e) {
+            Log.e("MainProductCustomAdapter", "Error loading image: ", e);
+        }
 
         // 상품명 설정
         TextView nameView = convertView.findViewById(R.id.item_name);
@@ -58,7 +69,7 @@ public class MainProductCustomAdapter extends BaseAdapter {
 
         // 가격 설정
         TextView priceView = convertView.findViewById(R.id.item_price);
-        priceView.setText(product.getPrice());
+        priceView.setText(String.valueOf(product.getPrice())); // 가격을 문자열로 변환하여 설정
 
         return convertView;
     }
