@@ -19,7 +19,6 @@
                 android:contentDescription="Product Image"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,14 +31,14 @@
                     android:textSize="20sp"
                     android:layout_marginEnd="15dp"
                     android:textColor="#aaa"
-                    android:text="카테고리"/>
+                    android:hint="카테고리"/>
                 <TextView
                     android:id="@+id/Item_Name_Detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
                     android:textColor="@color/black"
-                    android:text="Product Name"/>
+                    android:hint="Product Name"/>
             </LinearLayout>
 
             <TextView
@@ -49,7 +48,7 @@
                 android:textSize="20sp"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
-                android:text="Product Price"
+                android:hint="Product Price"
                 android:layout_gravity="center"/>
             <LinearLayout
                 android:layout_width="match_parent"

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -37,7 +38,7 @@ public class MainProductDetail extends AppCompatActivity {
     private TextView productAverage;
     private String currentMemberId;
     private FirebaseFirestore db;
-    private Long productCode;
+    private int productCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,26 +65,34 @@ public class MainProductDetail extends AppCompatActivity {
 
         // 이미지, 상품명, 가격 객체 가져오기
         ImageView productImageView = findViewById(R.id.Item_Image_Detail);
+        TextView productCategoryTextView = findViewById(R.id.Item_Category_Detail);
         TextView productNameTextView = findViewById(R.id.Item_Name_Detail);
         TextView productPriceTextView = findViewById(R.id.Item_Price_Detail);
         productAverage = findViewById(R.id.productAverage); // 상품 평점
 
         // 인텐트에서 데이터 가져오기
-        int productImage = getIntent().getIntExtra("productImage", -1);
+        String productImage = getIntent().getStringExtra("productImage");
+        String productCategory = getIntent().getStringExtra("productCategory");
         String productName = getIntent().getStringExtra("productName");
-        String productPrice = getIntent().getStringExtra("productPrice");
-        productCode = getIntent().getLongExtra("productCode", 1);
-        Log.d("productCode", productCode + "");
+        int productPrice = getIntent().getIntExtra("productPrice", 0);
+        productCode = getIntent().getIntExtra("productCode", 1);
+        Log.d("productDetailCode", productCode + " " + productCategory + " " + productImage + " " + productPrice);
 
         // 각 객체에 데이터 설정
-        if (productImage != -1) {
-            productImageView.setImageResource(productImage);
+        if (productImage != null) {
+            Glide.with(this)
+                    .load(productImage)
+                    .placeholder(R.drawable.default_image)
+                    .error(R.drawable.default_image) // 기본 이미지 설정
+                    .into(productImageView);
         }
         if (productName != null) {
             productNameTextView.setText(productName);
         }
-        if (productPrice != null) {
-            productPriceTextView.setText(productPrice);
+        // int 타입은 null 값을 가질 수 없으므로 null 체크가 필요하지 않습니다.// int 타입을 String으로 변환하여 설정
+        productPriceTextView.setText(String.valueOf(productPrice));
+        if (productCategory != null) {
+            productCategoryTextView.setText(productCategory);
         }
 
         productReviewBtn.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +116,7 @@ public class MainProductDetail extends AppCompatActivity {
         super.onResume();
         loadProductReviews();
     }
+
     private void loadProductReviews() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference productReviewsRef = db.collection("product_review");
