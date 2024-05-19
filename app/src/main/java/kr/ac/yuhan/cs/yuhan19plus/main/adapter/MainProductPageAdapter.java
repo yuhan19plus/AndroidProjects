@@ -29,7 +29,7 @@ public class MainProductPageAdapter extends FragmentStateAdapter {
                 return MainProductPageList.newInstance("생필품");
         }
     }
-
+//1
     @Override
     public int getItemCount() {
         return NUM_PAGES;
