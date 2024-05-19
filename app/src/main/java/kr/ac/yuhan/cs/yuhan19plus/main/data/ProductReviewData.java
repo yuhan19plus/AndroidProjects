@@ -3,11 +3,11 @@ package kr.ac.yuhan.cs.yuhan19plus.main.data;
 public class ProductReviewData {
     private String memberId;
     private int ratingScore;
-    private Long productCode;
+    private int productCode;
     private String creationDate;
     private String reviewContent;
 
-    public ProductReviewData(String memberId, int ratingScore, String creationDate, String reviewContent, Long productCode) {
+    public ProductReviewData(String memberId, int ratingScore, String creationDate, String reviewContent, int productCode) {
         this.memberId = memberId;
         this.ratingScore = ratingScore;
         this.creationDate = creationDate;
@@ -23,11 +23,11 @@ public class ProductReviewData {
         this.memberId = memberId;
     }
 
-    public Long getProductCode() {
+    public int getProductCode() {
         return productCode;
     }
 
-    public void setProductCode(Long productCode) {
+    public void setProductCode(int productCode) {
         this.productCode = productCode;
     }
 

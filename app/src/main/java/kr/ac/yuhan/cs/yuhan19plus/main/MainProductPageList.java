@@ -73,6 +73,7 @@ public class MainProductPageList extends Fragment {
                 Intent intent = new Intent(getActivity(), MainProductDetail.class);
                 intent.putExtra("productImage", clickedItem.getImageResource());
                 intent.putExtra("productName", clickedItem.getName());
+                intent.putExtra("productCategory", clickedItem.getCategory());
                 intent.putExtra("productPrice", clickedItem.getPrice());
                 intent.putExtra("productCode", clickedItem.getProductCode());
                 startActivity(intent);
@@ -98,6 +99,7 @@ public class MainProductPageList extends Fragment {
                             int productCode = document.getLong("productCode").intValue();
                             String productName = document.getString("productName");
                             String imageUrl = document.getString("imageUrl");
+                            String category = document.getString("category");
                             int productPrice = document.getLong("price").intValue();
 
                             if (imageUrl == null || imageUrl.isEmpty()) {
@@ -105,7 +107,7 @@ public class MainProductPageList extends Fragment {
                             }
 
                             Log.d("MainProductPageList", "Loaded product: " + productName + ", imageUrl: " + imageUrl);
-                            products.add(new MainProductData(imageUrl, productName, productPrice, productCode));
+                            products.add(new MainProductData(imageUrl, productName, productPrice, productCode, category));
                         } catch (Exception e) {
                             Log.e("MainProductPageList", "Error parsing document: ", e);
                         }
