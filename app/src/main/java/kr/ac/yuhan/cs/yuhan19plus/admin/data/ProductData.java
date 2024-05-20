@@ -26,7 +26,7 @@ public class ProductData {
         // Firestore 역직렬화를 위해 필요 파이어베이스에서 읽은 정보를 임시로 담아두는 역할을 함
     }
 
-    @PropertyName("productCode")
+    // Setter 메서드
     public void setProductCode(int productCode) {
         this.productCode = productCode;
     }
@@ -39,6 +39,7 @@ public class ProductData {
         this.productImage = productImage;
     }
 
+
     public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
     }
@@ -47,11 +48,14 @@ public class ProductData {
         this.productStock = productStock;
     }
 
-    public void setProductCategory(String productCategory) {this.productCategory = productCategory;}
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
+    }
 
-    // 게터 메서드
-    @PropertyName("productCode")
-    public int getProductCode() { return productCode; }
+    // Getter 메서드
+    public int getProductCode() {
+        return productCode;
+    }
 
     public String getProductName() {
         return productName;
@@ -59,7 +63,7 @@ public class ProductData {
 
     public String getProductImage() {
         return productImage;
-    } // 메서드 이름 변경
+    }
 
     public int getProductPrice() {
         return productPrice;
@@ -68,7 +72,7 @@ public class ProductData {
     public int getProductStock() {
         return productStock;
     }
-    @PropertyName("category") // Firestore 필드 이름과 일치하도록 설정
+
     public String getProductCategory() {
         return productCategory;
     }

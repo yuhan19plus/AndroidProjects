@@ -54,14 +54,17 @@
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
+<!--        스캔으로 앱열때 필요함        -->
+                <data android:scheme="yuhan19plusqrapp" />
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".main.MainProductActivity"
+            android:exported="false"
+            android:label="MainProductActivity" />
         <activity android:name=".main.MainProductDetail" android:label="MainProductDetail" />
-        <activity android:name=".main.MainProductActivity" android:label="MainProductActivity" />
+        <activity android:name=".main.MainActivityProductScan" android:label="MainActivityProductScan" />
         <activity android:name=".main.MainProductReview" android:label="MainProductReview" />
         <activity android:name=".main.MainRegisterActivity" android:label="MainRegisterActivity" />
         <activity android:name=".main.MainStoreLocationActivity" android:label="MainStoreLocationActivity" />

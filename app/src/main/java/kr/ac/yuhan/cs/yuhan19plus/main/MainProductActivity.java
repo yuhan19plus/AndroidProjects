@@ -41,13 +41,13 @@ public class MainProductActivity extends AppCompatActivity {
                     // 각 탭의 이름 설정
                     switch (position) {
                         case 0:
-                            tab.setText("생필품");
-                            break;
-                        case 1:
                             tab.setText("문구류");
                             break;
+                        case 1:
+                            tab.setText("생필품");
+                            break;
                         case 2:
-                            tab.setText("주방용품");
+                            tab.setText("주방 도구");
                             break;
                     }
                 }

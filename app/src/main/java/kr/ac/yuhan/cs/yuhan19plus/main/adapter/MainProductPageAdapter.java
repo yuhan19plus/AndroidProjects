@@ -15,21 +15,22 @@ public class MainProductPageAdapter extends FragmentStateAdapter {
         super(fragmentActivity);
     }
 
+    // 여기 데이터가 중요함 저기서 순서랑 이름을 잘못 입력하면 상품카테고리별로 보는 곳에서 꼬임
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return MainProductPageList.newInstance("생필품");
-            case 1:
                 return MainProductPageList.newInstance("문구류");
+            case 1:
+                return MainProductPageList.newInstance("생필품");
             case 2:
-                return MainProductPageList.newInstance("주방용품");
+                return MainProductPageList.newInstance("주방 도구");
             default:
                 return MainProductPageList.newInstance("생필품");
         }
     }
-//1
+
     @Override
     public int getItemCount() {
         return NUM_PAGES;

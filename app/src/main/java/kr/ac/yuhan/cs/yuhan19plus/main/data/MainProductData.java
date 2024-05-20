@@ -1,30 +1,30 @@
 package kr.ac.yuhan.cs.yuhan19plus.main.data;
 
 public class MainProductData {
-    private String  imageResource;
-    private String name;
-    private String category;
-    private int price;
+    private String  productImage;
+    private String productName;
+    private String productCategory;
+    private int productPrice;
     private int productCode;
 
-    public MainProductData(String  imageResource, String name, int price, int productCode, String category) {
-        this.imageResource = imageResource;
-        this.name = name;
-        this.price = price;
+    public MainProductData(String  productImage, String productName, int productPrice, int productCode, String productCategory) {
+        this.productImage = productImage;
+        this.productName = productName;
+        this.productPrice = productPrice;
         this.productCode = productCode;
-        this.category = category;
+        this.productCategory = productCategory;
     }
 
-    public String  getImageResource() {return imageResource;}
-    public String  getCategory() {return category;}
+    public String  getImageResource() {return productImage;}
+    public String  getCategory() {return productCategory;}
     public int getProductCode() {return productCode;}
 
     public String getName() {
-        return name;
+        return productName;
     }
 
     public int getPrice() {
-        return price;
+        return productPrice;
     }
 }
 
