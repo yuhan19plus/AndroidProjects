@@ -42,7 +42,6 @@
     <!-- Setting.xml -->
     <string name="setting_adminId">관리자 Id</string>
     <string name="setting_adminAdd">관리자 추가</string>
-    <string name="setting_adminExit">관리자 모드 종료</string>
 
     <!-- Page Title -->
     <string name="login_title">Yuhan 19+ Admin</string>
@@ -75,11 +74,12 @@
     <string name="adminScheduleMenu">관리자\n일정</string>
     <string name="adminMenu">팀장</string>
     <string name="adminLoginMenu">로그인</string>
-    <string name="memberOutMenu">탈퇴요청목록</string>
+    <string name="setting_adminExit">관리자\n모드 종료</string>
     <string name="admin_list_ImageView">admin_list_ImageView</string>
     <string name="admin_schedule_ImageView">admin_schedule_ImageView</string>
     <string name="admin_call_ImageView">admin_call_ImageView</string>
     <string name="admin_login_ImageView">admin_login_ImageView</string>
+    <string name="admin_exit_ImageView">admin_exit_ImageView</string>
     <string name="memberOut_ImageView">memberOut_ImageView</string>
 
     <!-- Member 메뉴 -->

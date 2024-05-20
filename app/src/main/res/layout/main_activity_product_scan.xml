@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".main.MainActivityProductScan">
 
     <!-- QR 카메라 미리보기 영역  height가 0만아니면 됨 단 wrap_content하는 순간 전체로잡힌다.-->
@@ -41,13 +42,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="금액"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:gravity="center"/>
 
             <Button
                 android:id="@+id/paybutton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="결재하기"
+                android:text="결제"
                 android:layout_weight="0.2"/>
         </LinearLayout>
     </LinearLayout>

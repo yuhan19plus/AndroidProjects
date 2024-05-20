@@ -51,6 +51,7 @@ dependencies {
     // 임성준
     implementation("com.github.fornewid:neumorphism:0.3.2") // 뉴모피즘 추가
     implementation("com.google.android.flexbox:flexbox:3.0.0") // flexbox
+    implementation("com.google.android.gms:play-services-location:21.0.1") // 위치정보 관련 라이브러리
 
     // 오자현
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")// QR 스캔 라이브러리

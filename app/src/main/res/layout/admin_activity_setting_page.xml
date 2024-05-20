@@ -44,20 +44,4 @@
             android:textSize="35sp"
             android:gravity="center_vertical"/>
     </soup.neumorphism.NeumorphCardView>
-    <soup.neumorphism.NeumorphCardView
-        style="@style/Widget.Neumorph.CardView"
-        android:id="@+id/adminExitCardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
-        <TextView
-            android:id="@+id/adminExit"
-            android:padding="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="@string/setting_adminExit"
-            android:textColor="@color/mainText"
-            android:textSize="35sp"
-            android:gravity="center_vertical"/>
-</soup.neumorphism.NeumorphCardView>
 </LinearLayout>

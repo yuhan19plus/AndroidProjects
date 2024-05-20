@@ -1,70 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="130dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="8dp">
-
-    <ImageView
-        android:id="@+id/scan_imageViewProduct"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="8dp"/>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginEnd="8dp">
-
-        <TextView
-            android:id="@+id/scan_textViewProductName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="상품명"
-            android:textSize="18sp"/>
-        <TextView
-            android:id="@+id/scan_textViewCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카테고리"
-            android:textSize="18sp"/>
-
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:alignItems="center"
+        app:justifyContent="space_between">
+        <ImageView
+            android:id="@+id/scan_imageViewProduct"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/scan_textViewProductName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="상품명"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/scan_textViewCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:text="카테고리"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/scan_textViewPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="가격"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
 
-            <TextView
-                android:id="@+id/scan_textViewPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="가격"
-                android:textSize="16sp"
-                android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/scan_stockAdd"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:src="@drawable/plus"/>
 
-            <Button
-                android:id="@+id/scan_stockMinus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="빼기"/>
-
-            <TextView
-                android:id="@+id/scan_textViewStock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="갯수"
-                android:textSize="16sp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"/>
-
-            <Button
-                android:id="@+id/scan_stockAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="추가"
-                android:layout_weight="0"/>
+                <TextView
+                    android:id="@+id/scan_textViewStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="갯수"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"/>
+                <ImageView
+                    android:id="@+id/scan_stockMinus"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:src="@drawable/minus"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

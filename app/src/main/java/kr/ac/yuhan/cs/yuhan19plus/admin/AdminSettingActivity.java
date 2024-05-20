@@ -39,7 +39,6 @@ public class AdminSettingActivity extends AppCompatActivity {
         // Setting CardViews
         NeumorphCardView adminIDCardView = (NeumorphCardView) findViewById(R.id.adminIDCardView);
         NeumorphCardView addAdminCardView = (NeumorphCardView) findViewById(R.id.addAdminCardView);
-        NeumorphCardView adminExitCardView = (NeumorphCardView) findViewById(R.id.adminExitCardView);
 
         backBtn = (NeumorphImageView) findViewById(R.id.backBtn);
 
@@ -54,7 +53,6 @@ public class AdminSettingActivity extends AppCompatActivity {
             // Setting Page CardView content
             ChangeMode.setDarkShadowCardView(adminIDCardView);
             ChangeMode.setDarkShadowCardView(addAdminCardView);
-            ChangeMode.setDarkShadowCardView(adminExitCardView);
         }
 
         // AdminIDCardView onClickListener
@@ -87,14 +85,6 @@ public class AdminSettingActivity extends AppCompatActivity {
                 intent.putExtra("background_color", backgroundColor);
                 intent.putExtra("mode", modeValue);
                 startActivity(intent);
-            }
-        });
-
-        // AdminExitCardView onClickListener
-        adminExitCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(AdminSettingActivity.this, "adminExitCardView가 클릭되었습니다!", Toast.LENGTH_SHORT).show();
             }
         });
 

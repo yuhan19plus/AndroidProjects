@@ -146,7 +146,7 @@ public class MainScanAdpter extends ArrayAdapter<ProductData> {
         TextView textViewPrice;
         TextView textViewStock;
         TextView textViewCategory;
-        Button buttonAdd;
-        Button buttonMinus;
+        ImageView buttonAdd;
+        ImageView buttonMinus;
     }
 }

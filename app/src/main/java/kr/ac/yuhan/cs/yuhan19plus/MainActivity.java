@@ -1,13 +1,19 @@
 package kr.ac.yuhan.cs.yuhan19plus;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,8 +62,42 @@ public class MainActivity extends AppCompatActivity {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
-                startActivity(intent);
+                // AlertDialog Builder 생성
+
+                // LayoutInflater를 사용하여 custom_dialog.xml을 인플레이트함
+                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+                View view = inflater.inflate(R.layout.main_dialog_admin_code, null);
+
+                // EditText 가져오기
+                final EditText editText = view.findViewById(R.id.editText);
+
+                // AlertDialog.Builder 생성 및 설정
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("관리자 모드");
+                builder.setView(view);
+                builder.setPositiveButton("접속", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String enteredValue = editText.getText().toString();
+                        if ("201907012".equals(enteredValue)) {
+                            Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // 유효하지 않은 값 처리
+                            Toast.makeText(MainActivity.this, "코드가 일치 하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                // Negative 버튼 설정
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                // 다이얼로그 표시
+                builder.show();
             }
         });
 
