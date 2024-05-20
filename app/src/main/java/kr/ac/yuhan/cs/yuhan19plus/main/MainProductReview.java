@@ -32,7 +32,7 @@ public class MainProductReview extends AppCompatActivity {
     private TextView ratingTextView;
     private Button submitReviewButton;
     private ImageView backBtn;
-    private Long productCode2;
+    private int productCode2;
     private String currentMemberId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class MainProductReview extends AppCompatActivity {
 //        ratingTextView = findViewById(R.id.ratingTextView);
         submitReviewButton = findViewById(R.id.submitReviewButton);
         Intent intent = getIntent();
-        productCode2 = intent.getLongExtra("productCode", 1);
+        productCode2 = intent.getIntExtra("productCode", 1);
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -98,7 +98,7 @@ public class MainProductReview extends AppCompatActivity {
                         Toast.makeText(MainProductReview.this, "Please provide a rating and review content", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Long productCode = productCode2;
+                    int productCode = productCode2;
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                     String formattedDate = sdf.format(new Date());
 

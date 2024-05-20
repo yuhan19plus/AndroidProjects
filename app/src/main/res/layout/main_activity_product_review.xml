@@ -8,7 +8,7 @@
     android:background="@color/productReview_background"
     android:padding="30dp"
     android:gravity="center"
-    tools:context=".MainProductReview">
+    tools:context=".main.MainProductReview">
 
     <ImageView
         android:id="@+id/backBtn"
