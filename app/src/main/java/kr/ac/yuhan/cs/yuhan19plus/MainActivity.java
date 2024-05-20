@@ -23,6 +23,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import kr.ac.yuhan.cs.yuhan19plus.admin.AdminMainActivity;
+import kr.ac.yuhan.cs.yuhan19plus.main.MainActivityProductScan;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainLoginActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainMyPageActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainPaymentActivity;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainPaymentActivity.class);
+                Intent intent = new Intent(MainActivity.this, MainActivityProductScan.class);
                 startActivity(intent);
             }
         });

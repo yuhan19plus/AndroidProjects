@@ -90,7 +90,7 @@ public class ProductAdapter extends ArrayAdapter<ProductData> {
             }
         }
 
-        // 수정 버튼 클릭 리스너 설정
+        // 수정 버튼 클릭 리스너 설정()
         holder.productUpdateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +104,7 @@ public class ProductAdapter extends ArrayAdapter<ProductData> {
                 intent.putExtra("productImage", productData.getProductImage());
                 intent.putExtra("productPrice", productData.getProductPrice());
                 intent.putExtra("productStock", productData.getProductStock());
-                intent.putExtra("category", productData.getProductCategory());
+                intent.putExtra("productCategory", productData.getProductCategory());
                 getContext().startActivity(intent);
             }
         });

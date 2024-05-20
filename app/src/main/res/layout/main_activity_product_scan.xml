@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".main.MainActivityProductScan">
+
+    <!-- QR 카메라 미리보기 영역  height가 0만아니면 됨 단 wrap_content하는 순간 전체로잡힌다.-->
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/decorated_bar_code_view"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_weight="1" />
+
+    <!-- 스캔된 데이터를 보여줄 영역 -->
+    <LinearLayout
+        android:id="@+id/scanned_data_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/scannedlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Scanned Items"
+            android:layout_weight="10"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/itemtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="금액"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/paybutton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="결재하기"
+                android:layout_weight="0.2"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
