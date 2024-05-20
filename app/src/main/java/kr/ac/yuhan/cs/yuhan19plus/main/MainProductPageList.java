@@ -30,7 +30,7 @@ public class MainProductPageList extends Fragment {
 
     private List<MainProductData> products = new ArrayList<>();
     private MainProductCustomAdapter adapter;
-    private static final String ARG_CATEGORY = "category";
+    private static final String ARG_CATEGORY = "productCategory";
     private String category;
 
     public static MainProductPageList newInstance(String category) {
@@ -50,6 +50,7 @@ public class MainProductPageList extends Fragment {
         // 인수로 받은 카테고리 설정
         if (getArguments() != null) {
             category = getArguments().getString(ARG_CATEGORY);
+            Log.d("CATEGORY",category);
         }
 
         // ListView 객체 가져오기
@@ -84,29 +85,31 @@ public class MainProductPageList extends Fragment {
     }
 
     void loadItemsFromFireStore(String category) {
-        Log.d("MainProductPageList", "Loading items from Firestore...");
+        Log.d("MainProductPageList", "로딩중");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Task<QuerySnapshot> query = db.collection("products").whereEqualTo("category", category).get();
+        Task<QuerySnapshot> query = db.collection("products").whereEqualTo("productCategory", category).get();
 
         query.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    Log.d("MainProductPageList", "Successfully queried Firestore.");
+                    Log.d("MainProductPageList", "접속성공");
                     products.clear();
                     for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("MainProductPageList", "포문진입");
                         try {
+                            Log.d("MainProductPageList", "트라이진입");
                             int productCode = document.getLong("productCode").intValue();
                             String productName = document.getString("productName");
-                            String imageUrl = document.getString("imageUrl");
-                            String category = document.getString("category");
-                            int productPrice = document.getLong("price").intValue();
+                            String imageUrl = document.getString("productImage");
+                            String category = document.getString("productCategory");
+                            int productPrice = document.getLong("productPrice").intValue();
 
                             if (imageUrl == null || imageUrl.isEmpty()) {
                                 imageUrl = "R.drawable.default_image"; // 기본 이미지 URL 사용
                             }
 
-                            Log.d("MainProductPageList", "Loaded product: " + productName + ", imageUrl: " + imageUrl);
+                            Log.d("MainProductPageList", "불려온 상품정보: " + productName + ", imageUrl: " + imageUrl);
                             products.add(new MainProductData(imageUrl, productName, productPrice, productCode, category));
                         } catch (Exception e) {
                             Log.e("MainProductPageList", "Error parsing document: ", e);

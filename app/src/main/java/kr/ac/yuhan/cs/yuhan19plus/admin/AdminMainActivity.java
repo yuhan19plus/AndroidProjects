@@ -810,10 +810,10 @@ public class AdminMainActivity extends AppCompatActivity {
                         // 각 필드를 가져와서 변수에 저장합니다.
                         int code = document.getLong("productCode").intValue();
                         String productName = document.getString("productName");
-                        String category = document.getString("category");
-                        String imageUrl = document.getString("imageUrl");
-                        int price = document.getLong("price").intValue();
-                        int stock = document.getLong("stock").intValue();
+                        String category = document.getString("productCategory");
+                        String imageUrl = document.getString("productImage");
+                        int price = document.getLong("productPrice").intValue();
+                        int stock = document.getLong("productStock").intValue();
 
                         // 이미지 URL이 null이거나 비어있으면 기본 이미지 URL을 사용합니다.
                         if (imageUrl == null || imageUrl.isEmpty()) {
@@ -883,10 +883,10 @@ public class AdminMainActivity extends AppCompatActivity {
                 // 상품 정보와 파일 URL을 Firestore에 저장합니다.
                 Map<String, Object> product = new HashMap<>();
                 product.put("productName", name);
-                product.put("imageUrl", fileUrl);
-                product.put("price", price);
-                product.put("stock", stock);
-                product.put("category", category);
+                product.put("productImage", fileUrl);
+                product.put("productPrice", price);
+                product.put("productStock", stock);
+                product.put("productCategory", category);
                 product.put("productCode", newProductCode); // 새로운 productCode 사용
 
                 // Firestore에 새로운 상품 정보를 추가합니다.

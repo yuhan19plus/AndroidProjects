@@ -75,7 +75,7 @@ public class AdminProductEditActivity extends AppCompatActivity {
         String productImage = intent.getStringExtra("productImage");
         int productPrice = intent.getIntExtra("productPrice", 0); // 기본값을 설정
         int productStock = intent.getIntExtra("productStock", 0);
-        String category = intent.getStringExtra("category");
+        String category = intent.getStringExtra("productCategory");
 
         // UI 컴포넌트 초기화
         NeumorphCardView productEditCardView = findViewById(R.id.productEditCardView);
@@ -237,9 +237,9 @@ public class AdminProductEditActivity extends AppCompatActivity {
         // 업데이트할 제품 정보를 맵에 저장합니다.
         Map<String, Object> productUpdate = new HashMap<>();
         productUpdate.put("productName", updatedName); // 상품명 업데이트
-        productUpdate.put("price", updatedPrice); // 가격 업데이트
-        productUpdate.put("stock", updatedStock); // 재고 업데이트
-        productUpdate.put("category", updatedCategory); // 카테고리 업데이트 추가
+        productUpdate.put("productPrice", updatedPrice); // 가격 업데이트
+        productUpdate.put("productStock", updatedStock); // 재고 업데이트
+        productUpdate.put("productCategory", updatedCategory); // 카테고리 업데이트 추가
 
         // 파일이 선택되었는지 확인합니다.
         if (fileUri != null) {
@@ -252,7 +252,7 @@ public class AdminProductEditActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             // 파일 URL을 productUpdate 맵에 추가하고 문서를 업데이트
-                            productUpdate.put("imageUrl", uri.toString());
+                            productUpdate.put("productImage", uri.toString());
                             // Firestore 문서를 업데이트합니다.
                             updateDocument(documentId, productUpdate);
                         }
