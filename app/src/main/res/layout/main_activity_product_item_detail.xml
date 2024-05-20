@@ -14,8 +14,8 @@
                 android:src="@drawable/back" />
             <ImageView
                 android:id="@+id/Item_Image_Detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
                 android:contentDescription="Product Image"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"/>

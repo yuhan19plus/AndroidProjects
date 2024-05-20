@@ -4,14 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main_StoreLocationActivity">
-    <TextView
+    tools:context=".main.MainStoreLocationActivity">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/main_store_location"
-        android:gravity="center"
-        android:text="스토어위치"
-        android:textColor="#fff"
-        android:textSize="30pt"
-        android:textStyle="bold" />
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/webView_title"
+            android:textStyle="bold"
+            android:textSize="52dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+    <!-- 웹뷰 include -->
+    <include
+        android:id="@+id/content_layout"
+        layout="@layout/main_kakao_webview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </FrameLayout>

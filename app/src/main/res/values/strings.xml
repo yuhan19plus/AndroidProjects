@@ -19,6 +19,11 @@
     <string name="productReview_btn">리뷰작성</string>
     <!-- // 상품리뷰 -->
 
+    <!-- 매장위치 -->
+    <string name="webView_title">매장위치</string>
+    <!-- // 매장위치 -->
+
+
     <string name="outBtn">삭제 버튼</string>
 
     <string name="searchMemberIdHint">회원 ID를 입력 하세요</string>

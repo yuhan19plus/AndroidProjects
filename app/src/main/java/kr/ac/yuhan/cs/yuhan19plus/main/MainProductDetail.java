@@ -100,6 +100,7 @@ public class MainProductDetail extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainProductDetail.this, MainProductReview.class);
                 intent.putExtra("productCode", productCode);
+                Log.d("pro", productCode+"");
                 startActivity(intent);
             }
         });
