@@ -112,12 +112,14 @@ public class AdminMainActivity extends AppCompatActivity {
             adminListBtnCardView,
             adminScheduleBtnCardView,
             adminCallBtnCardView,
-            adminLoginBtnCardView;
+            adminLoginBtnCardView,
+            adminExitCardView;
     private ImageView
             adminListImage,
             adminScheduleImage,
             adminCallImage,
-            adminLoginImage;
+            adminLoginImage,
+            adminExitImage;
 
     // PaymentList Page Menu
     private NeumorphButton paySearchBtn;
@@ -209,12 +211,14 @@ public class AdminMainActivity extends AppCompatActivity {
         adminScheduleBtnCardView = findViewById(R.id.adminScheduleBtnCardView);
         adminCallBtnCardView = findViewById(R.id.adminCallBtnCardView);
         adminLoginBtnCardView = findViewById(R.id.adminLoginBtnCardView);
+        adminExitCardView = findViewById(R.id.adminExitCardView);
 
         // Admin MainPage ImageView Id
         adminListImage = findViewById(R.id.adminListImage);
         adminScheduleImage = findViewById(R.id.adminScheduleImage);
         adminCallImage = findViewById(R.id.adminCallImage);
         adminLoginImage = findViewById(R.id.adminLoginImage);
+        adminExitImage = findViewById(R.id.adminExitImage);
 
         // MainActivity CardView & Footer Id
         mainCardView = findViewById(R.id.mainCardView);
@@ -327,6 +331,7 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setDarkShadowCardView(adminScheduleBtnCardView);
                     ChangeMode.setDarkShadowCardView(adminCallBtnCardView);
                     ChangeMode.setDarkShadowCardView(adminLoginBtnCardView);
+                    ChangeMode.setDarkShadowCardView(adminExitCardView);
 
                     // PaymentList Page CardView
                     ChangeMode.setColorFilterLight(paySearchBtn);
@@ -351,6 +356,7 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setColorFilterDark(adminScheduleImage);
                     ChangeMode.setColorFilterDark(adminCallImage);
                     ChangeMode.setColorFilterDark(adminLoginImage);
+                    ChangeMode.setColorFilterDark(adminExitImage);
 
                     // Footer Menu
                     ChangeMode.setColorFilterDark(memberBtn);
@@ -401,6 +407,7 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setLightShadowCardView(adminScheduleBtnCardView);
                     ChangeMode.setLightShadowCardView(adminCallBtnCardView);
                     ChangeMode.setLightShadowCardView(adminLoginBtnCardView);
+                    ChangeMode.setLightShadowCardView(adminExitCardView);
 
                     // PaymentList Page CardView
                     ChangeMode.setColorFilterLight(paySearchBtn);
@@ -425,6 +432,7 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setColorFilterLight(adminScheduleImage);
                     ChangeMode.setColorFilterLight(adminCallImage);
                     ChangeMode.setColorFilterLight(adminLoginImage);
+                    ChangeMode.setColorFilterLight(adminExitImage);
 
                     // Footer Menu
                     ChangeMode.setLightShadowCardView(memberBtn);
@@ -526,6 +534,34 @@ public class AdminMainActivity extends AppCompatActivity {
                 intent.putExtra("background_color", backgroundColor);
                 intent.putExtra("mode", mode);
                 startActivity(intent);
+            }
+        });
+
+        // AdminExitBtn onClickListener
+        adminExitCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toast.makeText(AdminSettingActivity.this, "adminExitCardView가 클릭되었습니다!", Toast.LENGTH_SHORT).show();
+                // AlertDialog를 통해 사용자에게 종료 여부를 물음
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminMainActivity.this);
+                builder.setMessage("정말 종료 하시겠습니까?");
+                builder.setPositiveButton("종료", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 사용자가 종료를 선택한 경우 액티비티 종료
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 사용자가 취소를 선택한 경우 아무 동작도 하지 않음
+                        dialog.dismiss();
+                    }
+                });
+                // AlertDialog 표시
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 

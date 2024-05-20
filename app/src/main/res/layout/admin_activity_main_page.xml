@@ -185,6 +185,34 @@
                                 android:fontFamily="@font/nanumgothicregular"/>
                         </LinearLayout>
                     </soup.neumorphism.NeumorphCardView>
+                    <soup.neumorphism.NeumorphCardView
+                        style="@style/Widget.Neumorph.CardView"
+                        android:id="@+id/adminExitCardView"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="15dp">
+                            <ImageView
+                                android:id="@+id/adminExitImage"
+                                android:contentDescription="@string/admin_exit_ImageView"
+                                android:layout_gravity="center"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:src="@drawable/admin_exit" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/setting_adminExit"
+                                android:layout_gravity="center"
+                                android:textColor="@color/mainText"
+                                android:gravity="center"
+                                android:fontFamily="@font/nanumgothicregular" />
+
+                        </LinearLayout>
+                    </soup.neumorphism.NeumorphCardView>
                 </com.google.android.flexbox.FlexboxLayout>
             </LinearLayout>
             <!-- 회원 관리 -->
