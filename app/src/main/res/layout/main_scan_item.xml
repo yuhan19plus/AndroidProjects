@@ -27,7 +27,8 @@
                     android:id="@+id/scan_textViewProductName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="상품명"
+                    android:text="@string/product_name"
+                    android:fontFamily="@font/font"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
                 <TextView
@@ -35,7 +36,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:text="카테고리"
+                    android:text="@string/category"
+                    android:fontFamily="@font/font"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
             </LinearLayout>
@@ -48,8 +50,9 @@
                     android:id="@+id/scan_textViewPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="가격"
+                    android:text="@string/price"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/font"
                     android:textSize="16sp"
                     android:layout_weight="1"/>
 
@@ -64,9 +67,10 @@
                     android:id="@+id/scan_textViewStock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="갯수"
+                    android:text="@string/number"
                     android:textColor="@color/black"
                     android:textSize="16sp"
+                    android:fontFamily="@font/font"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"/>
                 <ImageView

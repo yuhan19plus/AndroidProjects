@@ -1,6 +1,11 @@
 package kr.ac.yuhan.cs.yuhan19plus.main;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -38,18 +43,26 @@ public class MainProductActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> {
+                    SpannableString spannableString;
                     // 각 탭의 이름 설정
                     switch (position) {
                         case 0:
-                            tab.setText("문구류");
+                            spannableString = new SpannableString("생필품");
                             break;
                         case 1:
-                            tab.setText("생필품");
+                            spannableString = new SpannableString("문구류");
                             break;
                         case 2:
-                            tab.setText("주방 도구");
+                            spannableString = new SpannableString("주방용품");
+                            break;
+                        default:
+                            spannableString = new SpannableString("");  // 기본값 설정
                             break;
                     }
+                    spannableString.setSpan(new ForegroundColorSpan(Color.WHITE), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spannableString.setSpan(new RelativeSizeSpan(1.5f), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                    tab.setText(spannableString);
                 }
         ).attach();
     }

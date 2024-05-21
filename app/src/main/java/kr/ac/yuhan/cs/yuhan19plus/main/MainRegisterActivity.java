@@ -26,6 +26,6 @@ public class MainRegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        //석재애몽 도와줘요-->>>>>>>>>>>>>>>>>> 회원가입 페이지 main_activity_register.xml 참조
     }
 }

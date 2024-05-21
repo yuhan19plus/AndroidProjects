@@ -1,25 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/main_background2">
 
     <ImageView
         android:id="@+id/Close_Product_Btn"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_gravity="right"
-        android:src="@drawable/main_x"/>
-
+        android:src="@drawable/back"/>
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:justifyContent="space_between">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:fontFamily="@font/font"
+            android:hint="@string/main_serch"
+            android:background="@drawable/main_glass1"/>
+    </com.google.android.flexbox.FlexboxLayout>
     <!-- TabLayout 추가 -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:justifyContent="space_between">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/glass2"/>
+    </com.google.android.flexbox.FlexboxLayout>
     <!-- ViewPager2 추가 -->
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+    <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        app:justifyContent="space_between">
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

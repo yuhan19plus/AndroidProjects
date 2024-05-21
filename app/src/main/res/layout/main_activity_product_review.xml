@@ -15,7 +15,6 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_gravity="start"
-        android:text="뒤로"
         android:layout_marginBottom="30dp"
         android:src="@drawable/back" />
 
@@ -31,12 +30,14 @@
             android:text="@string/productReview_title"
             android:layout_weight="1"
             android:gravity="center"
+            android:fontFamily="@font/font"
             android:textSize="42sp"
             android:textStyle="bold"
             android:textColor="@color/black" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/font"
             android:text="@string/productReview_starMessage"
             android:layout_weight="1"
             android:textColor="@color/black"
@@ -65,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
+            android:fontFamily="@font/font"
             android:hint="@string/productReview_contentMessage"
             android:background="@color/white"
             android:textColor="@color/black"
@@ -74,6 +76,7 @@
             android:id="@+id/submitReviewButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/font"
             android:text="@string/productReview_btn"
             android:textColor="@color/black"
             android:layout_marginTop="16dp"/>

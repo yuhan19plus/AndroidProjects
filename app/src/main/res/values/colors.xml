@@ -7,6 +7,8 @@
     <color name="textViewBottom">#f58220</color>
     <color name="btn">#6E7F8D</color>
     <color name="yuhan">#00AE8E</color>
+    <color name="yuhan_dark">#006961</color>
+
     <color name="productReview_background">#f4ff81</color>
     <style name="CalendarDateText">
         <item name="android:textColor">#000000</item> <!-- 원하는 색상으로 변경 -->

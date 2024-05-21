@@ -2,21 +2,21 @@ package kr.ac.yuhan.cs.yuhan19plus;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -32,9 +32,9 @@ import kr.ac.yuhan.cs.yuhan19plus.admin.AdminMainActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainActivityProductScan;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainLoginActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainMyPageActivity;
-import kr.ac.yuhan.cs.yuhan19plus.main.MainPaymentActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainProductActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainStoreLocationActivity;
+import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MainPopularProductPagerAdapter;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -141,6 +141,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ViewPager2 viewPager2 = findViewById(R.id.Product_viewPager);
+
+        //더미 상품 데이터 생성
+        List<MainPopularProductPagerAdapter.Product> products = new ArrayList<>();
+        products.add(new MainPopularProductPagerAdapter.Product(R.drawable.image01, "Product 1", "$10.00"));
+        products.add(new MainPopularProductPagerAdapter.Product(R.drawable.image02, "Product 2", "$20.00"));
+        products.add(new MainPopularProductPagerAdapter.Product(R.drawable.image03, "Product 3", "$30.00"));
+
+        // 어댑터 생성 및 뷰페이저에 설정
+        MainPopularProductPagerAdapter adapter = new MainPopularProductPagerAdapter(products);
+        viewPager2.setAdapter(adapter);
+
         //광고 배너 부분
         viewPager = findViewById(R.id.viewPager);
 
@@ -151,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
         imageList.add(R.drawable.image03);
 
         // ViewPager2 어댑터 설정
-        ImagePagerAdapter adapter = new ImagePagerAdapter(imageList);
-        viewPager.setAdapter(adapter);
+        ImagePagerAdapter adapter1 = new ImagePagerAdapter(imageList);
+        viewPager.setAdapter(adapter1);
 
         // 페이지 자동 넘김 설정
         timer = new Timer();
@@ -180,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
     public void set_login(View v) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
-        ft.replace(R.id.main_View, new MainLoginActivity(), "one");
+        ft.replace(R.id.login_view, new MainLoginActivity(), "one");
         ft.commitAllowingStateLoss();
     }
 
