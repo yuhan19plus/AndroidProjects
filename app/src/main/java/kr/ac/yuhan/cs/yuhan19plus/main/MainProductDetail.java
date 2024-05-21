@@ -33,12 +33,12 @@ import kr.ac.yuhan.cs.yuhan19plus.main.adapter.ProductReviewAdapter;
 import kr.ac.yuhan.cs.yuhan19plus.main.data.ProductReviewData;
 
 public class MainProductDetail extends AppCompatActivity {
-    private ProductReviewAdapter adapter;
-    private ArrayList<ProductReviewData> reviewList;
-    private TextView productAverage;
-    private String currentMemberId;
-    private FirebaseFirestore db;
-    private int productCode;
+    private ProductReviewAdapter adapter; // 리뷰 어댑터
+    private ArrayList<ProductReviewData> reviewList; // 리뷰 리스트
+    private TextView productAverage; // 평균 평점 텍스트뷰
+    private String currentMemberId; // 현재 사용자 ID
+    private FirebaseFirestore db; // Firestore 인스턴스
+    private int productCode; // 상품 코드
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,12 +89,13 @@ public class MainProductDetail extends AppCompatActivity {
         if (productName != null) {
             productNameTextView.setText(productName);
         }
-        // int 타입은 null 값을 가질 수 없으므로 null 체크가 필요하지 않습니다.// int 타입을 String으로 변환하여 설정
+        // int 타입은 null 값을 가질 수 없으므로 null 체크가 필요하지 않습니다. // int 타입을 String으로 변환하여 설정
         productPriceTextView.setText(String.valueOf(productPrice));
         if (productCategory != null) {
             productCategoryTextView.setText(productCategory);
         }
 
+        // 리뷰 작성 버튼 클릭 리스너 설정
         productReviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +119,7 @@ public class MainProductDetail extends AppCompatActivity {
         loadProductReviews();
     }
 
+    // Firestore에서 리뷰 로드
     private void loadProductReviews() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference productReviewsRef = db.collection("product_review");
@@ -176,6 +178,7 @@ public class MainProductDetail extends AppCompatActivity {
                 });
     }
 
+    // 평균 평점 업데이트
     private void updateProductAverage(int totalRatingScore, int reviewCount) {
         if (reviewCount == 0) {
             productAverage.setText("0");
@@ -185,6 +188,7 @@ public class MainProductDetail extends AppCompatActivity {
         }
     }
 
+    // 리뷰 상세보기 다이얼로그 표시
     private void showReviewDetailsDialog(ProductReviewData reviewData) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("상품리뷰");
@@ -200,10 +204,10 @@ public class MainProductDetail extends AppCompatActivity {
 
         builder.setMessage(Html.fromHtml(message, Html.FROM_HTML_MODE_LEGACY));
 
-
         currentMemberId = "exampleMemberId"; // 예시, 실제로는 현재 로그인된 사용자 ID를 가져와야 함
 //        currentMemberId = "MemberId"; // 예시, 실제로는 현재 로그인된 사용자 ID를 가져와야 함
 
+        // 현재 사용자가 작성한 리뷰일 경우 삭제 버튼 추가
         if (reviewData.getMemberId().equals(currentMemberId)) {
             builder.setNegativeButton("삭제", (dialog, which) -> {
                 deleteReview(reviewData);
@@ -216,6 +220,7 @@ public class MainProductDetail extends AppCompatActivity {
         dialog.show();
     }
 
+    // 리뷰 삭제
     private void deleteReview(ProductReviewData reviewData) {
         db.collection("product_review")
                 .whereEqualTo("productCode", reviewData.getProductCode())

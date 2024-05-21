@@ -21,10 +21,10 @@ public class AdminFormActivity extends AppCompatActivity {
         setContentView(R.layout.admin_activity_admin_form_page);
         LinearLayout adminFormPage = findViewById(R.id.adminFormPage);
 
-        // Receives current mode value
+        // 현재 색상 모드값 가져오기
         int modeValue = getIntent().getIntExtra("mode", 1);
 
-        // Receives background color value passed from MainActivity
+        // MainActivity 색상 값 가져오기
         int backgroundColor = getIntent().getIntExtra("background_color", Color.rgb(236, 240, 243));
 
         // Setting BackgroundColor
@@ -42,7 +42,7 @@ public class AdminFormActivity extends AppCompatActivity {
         backBtn = (NeumorphImageView) findViewById(R.id.backBtn);
 
         if(modeValue == 1) {
-            // DarkMode
+            // DarkMode 적용
             ChangeMode.applySubTheme(adminFormPage, modeValue);
 
             // AdminForm Page Btn
@@ -57,18 +57,18 @@ public class AdminFormActivity extends AppCompatActivity {
             ChangeMode.setDarkShadowCardView(adminAddBtn);
         }
         else {
-            // LightMode
+            // LightMode 적용
             adminAddBtn.setBackgroundColor(Color.rgb(0, 174, 142));
             ChangeMode.setLightShadowCardView(adminAddBtn);
         }
 
-        // BackBtn onClickListener
+        // 뒤로가기
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Change ShapeType to 'pressed' when clicked
+                // 클릭되면 'pressed'으로 바꾸기
                 backBtn.setShapeType(1);
-                // After clicked, it changes back to 'flat'
+                // 클릭 이후 'flat'으로 바꾸기
                 v.postDelayed(new Runnable() {
                     @Override
                     public void run() {

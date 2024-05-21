@@ -71,10 +71,10 @@ public class AdminMainActivity extends AppCompatActivity {
 
     // Basic Colors
     private int backgroundColor;
-    private int mainBackgroundColor = Color.rgb(236, 240, 243);
-    private final int darkModeBackgroundColor = Color.rgb(97, 97, 97);
-    private final int btnColor = Color.rgb(0, 174, 142);
-    private final int radioButtonTextColor = Color.rgb(0, 105, 97);
+    private int mainBackgroundColor = Color.rgb(236, 240, 243); // 기본 main 배경색
+    private final int darkModeBackgroundColor = Color.rgb(97, 97, 97); // 다크모드 main 배경색
+    private final int btnColor = Color.rgb(0, 174, 142); // 기본 버튼 색
+    private final int radioButtonTextColor = Color.rgb(0, 105, 97); // radio버튼 text색
 
     // Header ButtonImage
     private NeumorphImageView admin_setting, changeMode;
@@ -149,7 +149,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
     // 오자현 추가 부분
     private String productCategory;
-    private ProductAdapter adapter2;
+    private ProductAdapter productAdapter;
     private Handler handler = new Handler();
     private Runnable runnable;
     private ArrayList<ProductData> productDataList = new ArrayList<>(); // 상품 정보를 담을 리스트
@@ -159,7 +159,7 @@ public class AdminMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_activity_main_page);
 
-        // Create Fake Data
+        // 테스트 데이터 생성
         ArrayList<MemberData> fakeDataList = createFakeData();
 
         String product_categoryDefault = getString(R.string.product_categoryDefault); // 카테고리 기본값 (성준 추가 부분)
@@ -167,35 +167,34 @@ public class AdminMainActivity extends AppCompatActivity {
         String categoryStr2 = getString(R.string.product_category2);
         String categoryStr3 = getString(R.string.product_category3);
 
-        // Member Listview Setting
+        // 리스트 뷰 셋팅
         memberListView = findViewById(R.id.memberListView);
-
-        // ProductList Listview Setting
         productListView = findViewById(R.id.productListView);
 
-        // MemberAdapter Setting
-        MemberAdapter adapter = new MemberAdapter(this, fakeDataList);
-        memberListView.setAdapter(adapter);
+        // MemberAdapter 설정
+        MemberAdapter memberAdapter = new MemberAdapter(this, fakeDataList);
+        memberListView.setAdapter(memberAdapter);
 
         // 카테고리를 클릭하지 않고 넘기는 경우 기본값으로 지정
         if(productCategory == null){
             productCategory = product_categoryDefault;
         }
 
-        adapter2 = new ProductAdapter(this, productDataList);
-        productListView.setAdapter(adapter2); // 리스트 뷰에 어댑터 설정
+        // ProductAdapter 설정
+        productAdapter = new ProductAdapter(this, productDataList);
+        productListView.setAdapter(productAdapter); // 리스트 뷰에 어댑터 설정
 
-        startAutoRefresh();
-        loadItemsFromFireStore();
+        startAutoRefresh(); // 상품데이터 새로고침
+        loadItemsFromFireStore(); // 파이어베이스에서 상품명으로 검색하고 데이터를 읽어오는 메서드 호출
         productDBFireStore = FirebaseFirestore.getInstance();
 
-        // ViewFlipper Setting
+        // ViewFlipper 설정
         vFlipper = findViewById(R.id.viewFlipper1);
 
-        // Main Layout Setting
+        // Main Layout 설정
         LinearLayout main = findViewById(R.id.main);
 
-        // Basic Background Color Setting
+        // Basic Background Color 설정
         backgroundColor = mainBackgroundColor;
         main.setBackgroundColor(backgroundColor);
 
@@ -294,7 +293,7 @@ public class AdminMainActivity extends AppCompatActivity {
             }
         });
 
-        // ChangeModeBtn onClickListener
+        // Dark/Light 모드 적용 리스너
         changeMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -862,7 +861,7 @@ public class AdminMainActivity extends AppCompatActivity {
                         productDataList.add(new ProductData(code, productName, category, imageUrl, price, stock)); // 리스트에 제품 추가
                     }
                     // 어댑터에 데이터 변경을 알립니다.
-                    adapter2.notifyDataSetChanged(); // 데이터 변경을 어댑터에 알림
+                    productAdapter.notifyDataSetChanged(); // 데이터 변경을 어댑터에 알림
                 } else {
                     // 쿼리 실행 중 오류가 발생하면 로그에 출력합니다.
                     Log.e("DatabaseViewActivity", "Error getting documents: ", task.getException());
@@ -989,5 +988,28 @@ public class AdminMainActivity extends AppCompatActivity {
             imageViewProduct.setImageURI(selectedFileUri);
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        // AlertDialog를 통해 사용자에게 종료 여부를 물음
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("정말 종료 하시겠습니까?");
+        builder.setPositiveButton("종료", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // 사용자가 종료를 선택한 경우 액티비티 종료
+                // 상위 클래스의 구현도 호출
+                finish();
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // 사용자가 취소를 선택한 경우 아무 동작도 하지 않음
+                dialog.dismiss();
+            }
+        });
+        // AlertDialog 표시
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

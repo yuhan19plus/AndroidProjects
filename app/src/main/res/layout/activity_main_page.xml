@@ -29,7 +29,6 @@
                 android:layout_height="70dp"
                 android:padding="25dp"
                 android:src="@drawable/setting" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -37,7 +36,6 @@
                 android:textStyle="bold"
                 android:textSize="30dp"
                 android:text="YUHAN19+"/>
-
             <ImageView
                 android:id="@+id/loginBtn"
                 android:text="로그인"
