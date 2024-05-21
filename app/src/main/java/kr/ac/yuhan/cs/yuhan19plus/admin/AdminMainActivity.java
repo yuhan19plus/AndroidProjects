@@ -104,7 +104,7 @@ public class AdminMainActivity extends AppCompatActivity {
             productListCardView;
     private ImageView imageViewProduct;
     private NeumorphButton productSearchBtn;
-    private EditText editTextFieldSearchProductId;
+    private EditText editTextFieldSearchProductName;
     private String currentSearchText = ""; // 검색 창 초기값 설정
 
     // HOMEManagement Page Menu
@@ -233,7 +233,7 @@ public class AdminMainActivity extends AppCompatActivity {
         productSearchBtn = findViewById(R.id.productSearchBtn);
         productListCardView = findViewById(R.id.productListCardView);
         imageViewProduct = findViewById(R.id.imageViewProduct);
-        editTextFieldSearchProductId = findViewById(R.id.editTextFieldSearchProductId);
+        editTextFieldSearchProductName = findViewById(R.id.editTextFieldSearchProductName);
 
         // Payment List Page Id
         paySearchBtn = findViewById(R.id.paySearchBtn);
@@ -630,8 +630,8 @@ public class AdminMainActivity extends AppCompatActivity {
         productSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchText = editTextFieldSearchProductId.getText().toString();
-                editTextFieldSearchProductId.setText("");
+                String searchText = editTextFieldSearchProductName.getText().toString();
+                editTextFieldSearchProductName.setText("");
                 currentSearchText = searchText; // 현재 검색 텍스트 업데이트
                 loadItemsFromFireStore(); // 필터링된 상품 새로고침
                 currentSearchText="";
