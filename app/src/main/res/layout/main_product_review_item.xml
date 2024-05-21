@@ -15,7 +15,8 @@
             android:layout_height="match_parent"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="Member ID"
+            android:fontFamily="@font/font"
+            android:text="@string/user_num"
             android:textStyle="bold" />
         <LinearLayout
             android:layout_width="wrap_content"
@@ -32,7 +33,8 @@
                 android:textColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:gravity="center"
-                android:text="Rating Score"
+                android:fontFamily="@font/font"
+                android:text="@string/score"
                 android:textStyle="bold" />
         </LinearLayout>
         <TextView
@@ -41,7 +43,8 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/black"
-            android:text="Creation Date"
+            android:fontFamily="@font/font"
+            android:text="@string/creation_date"
             android:textStyle="bold" />
     </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

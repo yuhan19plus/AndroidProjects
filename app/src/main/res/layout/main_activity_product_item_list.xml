@@ -22,7 +22,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="상품명"
+            android:fontFamily="@font/font"
+            android:text="@string/product_name"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -30,7 +31,7 @@
             android:id="@+id/item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:fontFamily="@font/font"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -44,7 +45,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="가격"
+            android:fontFamily="@font/font"
+            android:text="@string/product_price"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -52,7 +54,7 @@
             android:id="@+id/item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:fontFamily="@font/font"
             android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>

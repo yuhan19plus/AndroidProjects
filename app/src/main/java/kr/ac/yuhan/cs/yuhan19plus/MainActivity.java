@@ -1,27 +1,30 @@
 package kr.ac.yuhan.cs.yuhan19plus;
+
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,172 +32,150 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import kr.ac.yuhan.cs.yuhan19plus.admin.AdminMainActivity;
+import kr.ac.yuhan.cs.yuhan19plus.admin.adapter.ProductAdapter;
+import kr.ac.yuhan.cs.yuhan19plus.admin.data.ProductData;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainActivityProductScan;
-import kr.ac.yuhan.cs.yuhan19plus.main.MainLoginActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainMyPageActivity;
-import kr.ac.yuhan.cs.yuhan19plus.main.MainPaymentActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainProductActivity;
+import kr.ac.yuhan.cs.yuhan19plus.main.MainProductDetail;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainStoreLocationActivity;
+import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MainPopularProductPagerAdapter;
+import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MainProductCustomAdapter;
+import kr.ac.yuhan.cs.yuhan19plus.main.data.MainProductData;
 
-
+/**
+ * 메인 액티비티 클래스로, UI 컴포넌트 초기화 및 상호작용 관리를 담당합니다.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ImageView setting;
-
-    //뷰페이저2
-    private ViewPager2 viewPager;
-
-    //광고 이미지 리스트
+    private ViewPager2 viewPager, product_viewPager;
     private List<Integer> imageList;
-
-    //광고 페이지를 임시 저장하는 부분
     private int currentPage = 0;
-
-    //타이머
     private Timer timer;
+    private Button mainProductSearchBtn;
+    private EditText mainEditTextFieldSearchProductName;
+    private ArrayList<MainProductData> productDataList = new ArrayList<>(); // 상품 정보를 담을 리스트
 
+
+    /**
+     * 액티비티를 초기화하고 사용자 인터페이스를 설정합니다.
+     *
+     * @param savedInstanceState 액티비티가 이전에 종료된 후 다시 초기화되는 경우,
+     *                           이번들에 가장 최근에 제공된 데이터가 포함됩니다.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
+        initializeViews();
+        setupViewListeners();
+        setupViewPager();
+    }
+
+    /**
+     * ID를 통해 뷰를 찾아 초기화합니다.
+     */
+    private void initializeViews() {
+        mainEditTextFieldSearchProductName = findViewById(R.id.mainEditTextFieldSearchProductName);
+        mainProductSearchBtn = findViewById(R.id.mainProductSearchBtn);
         setting = findViewById(R.id.setting);
-        setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // AlertDialog Builder 생성
-
-                // LayoutInflater를 사용하여 custom_dialog.xml을 인플레이트함
-                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-                View view = inflater.inflate(R.layout.main_dialog_admin_code, null);
-
-                // EditText 가져오기
-                final EditText editText = view.findViewById(R.id.editText);
-
-                // AlertDialog.Builder 생성 및 설정
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("관리자 모드");
-                builder.setView(view);
-                builder.setPositiveButton("접속", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String enteredValue = editText.getText().toString();
-                        if ("201907012".equals(enteredValue)) {
-                            Intent intent = new Intent(MainActivity.this, AdminMainActivity.class);
-                            startActivity(intent);
-                        } else {
-                            // 유효하지 않은 값 처리
-                            Toast.makeText(MainActivity.this, "코드가 일치 하지 않습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                // Negative 버튼 설정
-                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                // 다이얼로그 표시
-                builder.show();
-            }
-        });
-
-        //매장 위치 이동 부분
-        ImageView map = findViewById(R.id.store_location_Btn);
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainStoreLocationActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //상품 페이지 이동 부분
-        ImageView product = findViewById(R.id.product_Btn);
-        product.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainProductActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //결제(QR) 페이지 이동 부분
-        ImageView payment = findViewById(R.id.payment_Btn);
-        payment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivityProductScan.class);
-                startActivity(intent);
-            }
-        });
-
-        //나의 정보 이동 부분
-        ImageView mypage = findViewById(R.id.mypage_Btn);
-        mypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainMyPageActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //광고 배너 부분
         viewPager = findViewById(R.id.viewPager);
+        product_viewPager = findViewById(R.id.Product_viewPager);
+        loadItemsFromFireStoreToProductViewPager();
+        mainProductSearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadItemsFromFireStore();
+            }
+        });
+    }
 
-        // 광고 이미지 데이터 추후 데이터 베이스 추가 시 수정 가능
+    /**
+     * 버튼 및 이미지 뷰와 같은 다양한 UI 컴포넌트에 대한 리스너를 설정합니다.
+     */
+    private void setupViewListeners() {
+        setting.setOnClickListener(v -> showAdminDialog());
+        findViewById(R.id.store_location_Btn).setOnClickListener(v -> launchActivity(MainStoreLocationActivity.class));
+        findViewById(R.id.product_Btn).setOnClickListener(v -> launchActivity(MainProductActivity.class));
+        findViewById(R.id.payment_Btn).setOnClickListener(v -> launchActivity(MainActivityProductScan.class));
+        findViewById(R.id.mypage_Btn).setOnClickListener(v -> launchActivity(MainMyPageActivity.class));
+    }
+
+    /**
+     * 뷰페이저를 설정하고 이미지 리스트를 초기화합니다.
+     */
+    private void setupViewPager() {
         imageList = new ArrayList<>();
         imageList.add(R.drawable.image01);
         imageList.add(R.drawable.image02);
         imageList.add(R.drawable.image03);
 
-        // ViewPager2 어댑터 설정
         ImagePagerAdapter adapter = new ImagePagerAdapter(imageList);
         viewPager.setAdapter(adapter);
-
-        // 페이지 자동 넘김 설정
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new AutoPagerTask(), 0, 7000); // 5초마다 실행
+        setupAutoPageTimer();
     }
 
-    // 타이머 클래스 부분
+    /**
+     * 관리자 모드 대화 상자를 표시합니다.
+     */
+    private void showAdminDialog() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.main_dialog_admin_code, null);
+        final EditText editText = view.findViewById(R.id.editText);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("관리자 모드")
+                .setView(view)
+                .setPositiveButton("접속", (dialog, which) -> {
+                    String enteredValue = editText.getText().toString();
+                    if ("201907012".equals(enteredValue)) {
+                        launchActivity(AdminMainActivity.class);
+                    } else {
+                        Toast.makeText(MainActivity.this, "코드가 일치 하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("취소", (dialog, which) -> dialog.cancel())
+                .show();
+    }
+
+    /**
+     * 자동 페이지 타이머를 설정합니다. 7초마다 페이지를 자동으로 넘깁니다.
+     */
+    private void setupAutoPageTimer() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new AutoPagerTask(), 0, 7000);
+    }
+
+    /**
+     * 지정된 액티비티를 시작합니다.
+     *
+     * @param cls 시작할 액티비티의 클래스 객체
+     */
+    private void launchActivity(Class<?> cls) {
+        Intent intent = new Intent(MainActivity.this, cls);
+        startActivity(intent);
+    }
+
+    /**
+     * 자동으로 페이지를 넘기는 타이머 작업을 정의합니다.
+     */
     class AutoPagerTask extends TimerTask {
         @Override
         public void run() {
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    //광고 페이지 안에 이미지 리스트 저장
-                    if (currentPage == imageList.size()) {
-                        currentPage = 0;
-                    }
-                    viewPager.setCurrentItem(currentPage++, true);
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (currentPage == imageList.size()) {
+                    currentPage = 0;
                 }
+                viewPager.setCurrentItem(currentPage++, true);
             });
         }
     }
 
-    //로그인 페이지 활성화
-    public void set_login(View v) {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction ft = manager.beginTransaction();
-        ft.replace(R.id.main_View, new MainLoginActivity(), "one");
-        ft.commitAllowingStateLoss();
-    }
-
-    public void set_home(View v) {
-        FragmentManager manager = getSupportFragmentManager();
-        Fragment fragment = manager.findFragmentByTag("one"); // "one" 태그로 등록된 프래그먼트를 찾습니다.
-        if (fragment != null) {
-            FragmentTransaction ft = manager.beginTransaction();
-            ft.remove(fragment); // 프래그먼트를 제거합니다.
-            ft.commit();
-        }
-    }
-
-    //광고 이미지 어댑터 부분
+    /**
+     * 이미지 뷰페이저 어댑터를 정의합니다. 이미지 자원을 받아 화면에 표시합니다.
+     */
     class ImagePagerAdapter extends RecyclerView.Adapter<ImageViewHolder> {
 
         private List<Integer> imageList;
@@ -221,9 +202,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //광고 이미지 붙잡아 두는 부분
-    class ImageViewHolder extends RecyclerView.ViewHolder {
 
+    /**
+     * 뷰홀더 클래스로, 이미지 뷰에 이미지를 바인딩합니다.
+     */
+    class ImageViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
 
         ImageViewHolder(@NonNull View itemView) {
@@ -235,5 +218,126 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageResource(imageResourceId);
         }
     }
-}
 
+    // 파이어베이스에서 상품명으로 검색하고 데이터를 읽어오는 메서드 (오자현)
+    void loadItemsFromFireStore() {
+        // Firestore 데이터베이스 인스턴스를 가져옵니다.
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Task<QuerySnapshot> query;
+
+        // 검색 텍스트가 비어있지 않으면, 해당 상품 이름으로 필터링된 쿼리를 실행합니다.
+        if (mainEditTextFieldSearchProductName != null) {
+            // 검색 텍스트가 있을 경우, 해당 상품 이름으로 필터링된 쿼리 실행
+            String text = mainEditTextFieldSearchProductName.getText().toString();
+            query = db.collection("products")
+                    .whereEqualTo("productName", text)
+                    .get();
+            mainEditTextFieldSearchProductName.setText("");
+        } else {
+            // 검색 텍스트가 없을 경우
+            Toast.makeText(MainActivity.this, "검색창에 찾으시는 상품이름을 입력하세요", Toast.LENGTH_SHORT).show();
+            query = db.collection("products").get();
+
+        }
+
+        // 쿼리가 완료된 후 실행될 리스너를 추가합니다.
+        query.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().isEmpty()) {
+                        // 검색 결과가 없을 경우
+                        Toast.makeText(MainActivity.this, "loadItemsFromFireStore()없는 데이터입니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // 기존의 제품 리스트를 클리어합니다.
+                        productDataList.clear();
+                        // 쿼리 결과를 반복하여 각 문서를 처리합니다
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // 각 필드를 가져와서 변수에 저장합니다.
+                            int code = document.getLong("productCode").intValue();
+                            String productName = document.getString("productName");
+                            String category = document.getString("productCategory");
+                            String imageUrl = document.getString("productImage");
+                            int price = document.getLong("productPrice").intValue();
+
+                            // 이미지 URL이 null이거나 비어있으면 기본 이미지 URL을 사용합니다.
+                            if (imageUrl == null || imageUrl.isEmpty()) {
+                                imageUrl = "R.drawable.default_image"; // 기본 이미지 URL 사용
+                            }
+
+                            // 로드된 이미지 URL을 로그에 출력합니다.
+                            Log.d("DatabaseViewActivity", "Loaded imageUrl: " + imageUrl);
+                            // 새로운 인텐트를 생성하고 데이터를 추가합니다.
+                            Intent intent = new Intent(MainActivity.this, MainProductDetail.class);
+                            intent.putExtra("productCode", code);
+                            intent.putExtra("productName", productName);
+                            intent.putExtra("productCategory", category);
+                            intent.putExtra("productImage", imageUrl);
+                            intent.putExtra("productPrice", price);
+
+                            // 새로운 액티비티를 시작합니다.
+                            startActivity(intent);
+                            break; // 첫 번째 결과만 사용한다고 가정하고 루프를 종료합니다.
+                        }
+                       
+                    }
+                } else {
+                    // 쿼리 실행 중 오류가 발생하면 로그에 출력합니다.
+                    Log.e("DatabaseViewActivity", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    void loadItemsFromFireStoreToProductViewPager() {
+        // Firestore 데이터베이스 인스턴스를 가져옵니다.
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Task<QuerySnapshot> query;
+
+        query = db.collection("products")
+                .limit(3)
+                .get();
+
+
+        // 쿼리가 완료된 후 실행될 리스너를 추가합니다.
+        query.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().isEmpty()) {
+                        // 검색 결과가 없을 경우
+                        Toast.makeText(MainActivity.this, "없는 데이터입니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // 기존의 제품 리스트를 클리어합니다.
+                        productDataList.clear();
+                        // 쿼리 결과를 반복하여 각 문서를 처리합니다
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            int code = document.getLong("productCode").intValue();
+                            String productName = document.getString("productName");
+                            String category = document.getString("productCategory");
+                            String imageUrl = document.getString("productImage");
+                            int price = document.getLong("productPrice").intValue();
+
+                            // 이미지 URL이 null이거나 비어있으면 기본 이미지 URL을 사용합니다.
+                            if (imageUrl == null || imageUrl.isEmpty()) {
+                                imageUrl = "R.drawable.default_image"; // 기본 이미지 URL 사용
+                            }
+                            //productImage, String productName, int productPrice, int productCode, String productCategory) {
+                            // 제품 데이터 객체를 생성하고 리스트에 추가합니다.
+                            MainProductData productData = new MainProductData(imageUrl, productName, price, code, category);
+                            productDataList.add(productData);
+                        }
+
+                        // ViewPager 어댑터에 데이터 설정
+                        MainPopularProductPagerAdapter adapter = new MainPopularProductPagerAdapter(MainActivity.this, productDataList);
+                        product_viewPager.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                } else {
+                    // 쿼리 실행 중 오류가 발생하면 로그에 출력합니다.
+                    Log.e("DatabaseViewActivity", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+}

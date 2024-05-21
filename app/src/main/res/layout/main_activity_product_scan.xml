@@ -26,54 +26,72 @@
             android:id="@+id/scannedlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Scanned Items"
+            android:fontFamily="@font/font"
+            android:text="@string/scan_item"
             android:layout_weight="10"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp"
                 android:layout_weight="1">
                 <EditText
                     android:id="@+id/editTextFieldPoint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="포인트"
+                    android:layout_marginBottom="2.5dp"
+                    android:text="@string/point"
                     android:inputType="number"
                     android:textStyle="bold"
+                    android:fontFamily="@font/font"
                     android:textColor="@color/black"
                     android:gravity="center"/>
-                <Button
-                    android:id="@+id/pointBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="포인트 사용"
-                    android:layout_weight="0.1"/>
+                <TextView
+                    android:id="@+id/itemtotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="2.5dp"
+                    android:text="@string/price"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/font"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-                <TextView
-                    android:id="@+id/itemtotal"
-                    android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:layout_weight="2">
+                <android.widget.Button
+                    android:id="@+id/pointBtn"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="금액"
+                    android:text="@string/using_point"
+                    android:layout_marginBottom="2.5dp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:gravity="center"/>
-                <Button
+                    android:fontFamily="@font/font"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_background"
+                    android:layout_weight="1"/>
+                <android.widget.Button
                     android:id="@+id/paybutton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="결제"
-                    android:layout_weight="0.2"/>
+                    android:textStyle="bold"
+                    android:text="@string/scan_payment"
+                    android:fontFamily="@font/font"
+                    android:layout_marginTop="2.5dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_background"
+                    android:layout_weight="1"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

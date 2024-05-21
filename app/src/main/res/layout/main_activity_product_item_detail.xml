@@ -10,7 +10,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:text="뒤로"
                 android:src="@drawable/back" />
             <ImageView
                 android:id="@+id/Item_Image_Detail"
@@ -28,17 +27,19 @@
                     android:id="@+id/Item_Category_Detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/font"
                     android:textSize="20sp"
                     android:layout_marginEnd="15dp"
                     android:textColor="#aaa"
-                    android:hint="카테고리"/>
+                    android:hint="@string/category"/>
                 <TextView
                     android:id="@+id/Item_Name_Detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/font"
                     android:textSize="24sp"
                     android:textColor="@color/black"
-                    android:hint="Product Name"/>
+                    android:hint="@string/product_name"/>
             </LinearLayout>
 
             <TextView
@@ -47,8 +48,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/font"
                 android:textColor="@color/black"
-                android:hint="Product Price"
+                android:hint="@string/product_price"
                 android:layout_gravity="center"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,21 +70,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
                     android:layout_gravity="center_vertical"
-                    android:text="4.5"
+                    android:text="@string/product_score"
+                    android:fontFamily="@font/font"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
-                <Button
+                <android.widget.Button
                     android:id="@+id/productReviewBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="리뷰등록" />
+                    android:fontFamily="@font/font"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_background"
+                    android:text="@string/review_update" />
 
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/reviewListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+    <ListView
+        android:id="@+id/reviewListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_glass"/>
 </LinearLayout>
