@@ -49,7 +49,7 @@ public class AdminCreateQR extends AppCompatActivity {
                         Long lastProductCode = documentSnapshot.getLong("lastProductCode");
                         if (lastProductCode != null) {
                             // Number 타입의 값을 문자열로 변환하여 QR 코드 데이터로 사용합니다.
-                            String text = "productCode:" + String.valueOf(lastProductCode);
+                            String text = "productCode:" + String.valueOf(lastProductCode + 1);
 
                             // QR 코드를 생성하고 ImageView에 표시합니다.
                             generateAndDisplayQRCode(text);

@@ -43,13 +43,16 @@ public class MainStoreLocationActivity extends AppCompatActivity {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         checkLocationPermission();
 
+        // 디스플레이 메트릭스 설정
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
 
+        // 레이아웃 설정
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setBackgroundColor(Color.rgb(238, 255, 65));
 
+        // 텍스트 뷰 설정
         TextView textView = new TextView(this);
         textView.setText(R.string.webView_title);
         textView.setTextColor(Color.BLACK);
@@ -61,6 +64,7 @@ public class MainStoreLocationActivity extends AppCompatActivity {
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics())));
         layout.addView(textView);
 
+        // 웹뷰 설정
         web = new WebView(this);
         WebSettings webSet = web.getSettings();
         webSet.setJavaScriptEnabled(true);
@@ -80,6 +84,7 @@ public class MainStoreLocationActivity extends AppCompatActivity {
         setContentView(layout);
     }
 
+    // 위치 권한 확인 및 요청
     private void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
@@ -103,11 +108,13 @@ public class MainStoreLocationActivity extends AppCompatActivity {
                 });
     }
 
+    // 웹뷰 로드
     private void loadWebView() {
         String url = "file:///android_asset/index.html?lat=" + latitude + "&lng=" + longitude;
         web.loadUrl(url);
     }
 
+    // 위치 권한 요청 결과 처리
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -120,6 +127,7 @@ public class MainStoreLocationActivity extends AppCompatActivity {
         }
     }
 
+    // 뒤로가기 버튼 처리
     @Override
     public void onBackPressed() {
         if (web.canGoBack()) {

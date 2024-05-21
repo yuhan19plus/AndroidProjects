@@ -2,11 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- 애플리케이션이 인터넷에 접근할 수 있는 권한을 요청. 서버와의 통신, 데이터 다운로드, 업로드 등 네트워크 관련 작업에 필요. -->
     <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- 애플리케이션이 네트워크 상태(예: Wi-Fi 연결 여부, 모바일 네트워크 상태)를 확인할 수 있는 권한을 요청.
+         네트워크 연결 상태에 따라 동작을 달리하는 경우(예: Wi-Fi에서만 데이터 동기화) 등에 필요. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- 애플리케이션이 외부 저장소를 읽을 수 있는 권한을 요청. 외부 저장소에 저장된 파일(예: 사진, 동영상, 문서 등)을 읽는 데 필요. -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!-- 애플리케이션이 사용자의 정확한 위치(GPS 등)를 접근할 수 있는 권한을 요청.
+         위치 기반 서비스(예: 지도, 내비게이션, 위치 기록 등)에 필요. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <!-- 애플리케이션이 사용자의 대략적인 위치(기지국, Wi-Fi 등)를 접근할 수 있는 권한을 요청.
+         위치 기반 서비스에 필요하며, 정확한 위치보다는 배터리 소모가 적음. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -20,58 +32,33 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".admin.AdminMainActivity"
-            android:exported="true"
-            android:label="AdminMainActivity" />
-        <activity
-            android:name=".admin.AdminSettingActivity"
-            android:exported="true"
-            android:label="SettingActivity" />
-        <activity
-            android:name=".admin.AdminActivity"
-            android:exported="true"
-            android:label="AdminActivity" />
-        <activity
-            android:name=".admin.AdminScheduleActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:label="AdminScheduleActivity" />
-        <activity
-            android:name=".admin.AdminLoginActivity"
-            android:exported="true"
-            android:label="LoginActivity" />
-        <activity
-            android:name=".admin.AdminFormActivity"
-            android:exported="true"
-            android:label="AdminFormActivity" />
-        <activity
-            android:name=".admin.AdminProductEditActivity"
-            android:exported="true"
-            android:label="ProductEditActivity" />
-        <activity
-            android:name=".admin.AdminCreateQR"
-            android:exported="false" />
-
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
-<!--        스캔으로 앱열때 필요함        -->
-                <data android:scheme="yuhan19plusqrapp" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainProductActivity"
-            android:exported="false"
-            android:label="MainProductActivity" />
-        <activity android:name=".main.MainProductDetail" android:label="MainProductDetail" />
-        <activity android:name=".main.MainActivityProductScan" android:label="MainActivityProductScan" />
-        <activity android:name=".main.MainProductReview" android:label="MainProductReview" />
-        <activity android:name=".main.MainRegisterActivity" android:label="MainRegisterActivity" />
-        <activity android:name=".main.MainStoreLocationActivity" android:label="MainStoreLocationActivity" />
-        <activity android:name=".main.MainMyPageActivity" android:label="MainMyPageActivity" />
-        <activity android:name=".main.MainPaymentActivity" android:label="MainPaymentActivity" />
+
+        <!-- 관리자 -->
+        <activity android:name=".admin.AdminMainActivity" android:exported="true" android:label="AdminMainActivity" />
+        <activity android:name=".admin.AdminSettingActivity" android:exported="true" android:label="SettingActivity" />
+        <activity android:name=".admin.AdminActivity" android:exported="true" android:label="AdminActivity" />
+        <activity android:name=".admin.AdminScheduleActivity" android:exported="true" android:windowSoftInputMode="adjustResize|stateHidden" android:label="AdminScheduleActivity" />
+        <activity android:name=".admin.AdminLoginActivity" android:exported="true" android:label="LoginActivity" />
+        <activity android:name=".admin.AdminFormActivity" android:exported="true" android:label="AdminFormActivity" />
+        <activity android:name=".admin.AdminProductEditActivity" android:exported="true" android:label="ProductEditActivity" />
+        <activity android:name=".admin.AdminCreateQR" android:exported="true" android:label="AdminCreateQR" />
+
+        <!-- 사용자 -->
+        <activity android:name=".main.MainProductActivity" android:exported="true" android:label="MainProductActivity" />
+        <activity android:name=".main.MainProductDetail" android:exported="true" android:label="MainProductDetail" />
+        <activity android:name=".main.MainActivityProductScan" android:exported="true" android:label="MainActivityProductScan" />
+        <activity android:name=".main.MainProductReview" android:exported="true" android:label="MainProductReview" />
+        <activity android:name=".main.MainRegisterActivity" android:exported="true" android:label="MainRegisterActivity" />
+        <activity android:name=".main.MainStoreLocationActivity" android:exported="true" android:label="MainStoreLocationActivity" />
+        <activity android:name=".main.MainMyPageActivity" android:exported="true" android:label="MainMyPageActivity" />
+        <activity android:name=".main.MainPaymentActivity" android:exported="true" android:label="MainPaymentActivity" />
     </application>
 
 </manifest>

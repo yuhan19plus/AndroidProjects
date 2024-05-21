@@ -34,6 +34,7 @@ public class MainProductReview extends AppCompatActivity {
     private ImageView backBtn;
     private int productCode2;
     private String currentMemberId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +44,18 @@ public class MainProductReview extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         db = FirebaseFirestore.getInstance();
 
+        // 뷰 초기화
         backBtn = findViewById(R.id.backBtn);
         reviewContentEditText = findViewById(R.id.reviewContentEditText);
         ratingBar = findViewById(R.id.ratingBar);
 //        ratingTextView = findViewById(R.id.ratingTextView);
         submitReviewButton = findViewById(R.id.submitReviewButton);
+
+        // 인텐트에서 제품 코드 가져오기
         Intent intent = getIntent();
         productCode2 = intent.getIntExtra("productCode", 1);
 
+        // 평점 변경 리스너 설정
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -58,6 +63,7 @@ public class MainProductReview extends AppCompatActivity {
             }
         });
 
+        // 리뷰 제출 버튼 클릭 리스너 설정
         submitReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +71,7 @@ public class MainProductReview extends AppCompatActivity {
             }
         });
 
+        // 뒤로가기 버튼 클릭 리스너 설정
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +81,7 @@ public class MainProductReview extends AppCompatActivity {
     }
 
     private void submitReview() {
-        // 이전 리뷰의 마지막 ID를 조회하고 다음 번호를 계산합니다.
+        // 이전 리뷰의 마지막 ID를 조회하고 다음 번호를 계산
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("product_review")
                 .orderBy("reviewId", Query.Direction.DESCENDING)
@@ -86,13 +93,13 @@ public class MainProductReview extends AppCompatActivity {
                         DocumentSnapshot lastDocument = queryDocumentSnapshots.getDocuments().get(0);
                         nextDocumentId = lastDocument.getLong("reviewId").intValue() + 1;
                     } else {
-                        nextDocumentId = 1; // 문서가 없으면 첫 번째 문서로 시작합니다.
+                        nextDocumentId = 1; // 문서가 없으면 첫 번째 문서로 시작
                     }
 
-                    // 새로운 리뷰 데이터를 생성합니다.
+                    // 새로운 리뷰 데이터 생성
                     String reviewContent = reviewContentEditText.getText().toString().trim();
                     float ratingScore = ratingBar.getRating();
-                    currentMemberId = "exampleMemberId";  // 실제 앱 에서는 사용자 ID
+                    currentMemberId = "exampleMemberId"; // 실제 앱에서는 사용자 ID 사용
 //                    currentMemberId = "MemberId";
                     if (reviewContent.isEmpty() || ratingScore == 0) {
                         Toast.makeText(MainProductReview.this, "Please provide a rating and review content", Toast.LENGTH_SHORT).show();
@@ -103,18 +110,18 @@ public class MainProductReview extends AppCompatActivity {
                     String formattedDate = sdf.format(new Date());
 
                     Map<String, Object> review = new HashMap<>();
-                    review.put("reviewId", nextDocumentId); // 새로운 문서 ID를 설정합니다.
+                    review.put("reviewId", nextDocumentId); // 새로운 문서 ID 설정
                     review.put("creationDate", formattedDate);
                     review.put("memberId", currentMemberId);
                     review.put("ratingScore", ratingScore);
                     review.put("reviewContent", reviewContent);
                     review.put("productCode", productCode);
 
-                    // Firestore에 리뷰를 추가합니다.
+                    // Firestore에 리뷰 추가
                     db.collection("product_review").add(review)
                             .addOnSuccessListener(documentReference -> {
                                 Toast.makeText(MainProductReview.this, "리뷰 등록 완료", Toast.LENGTH_SHORT).show();
-                                finish(); // 리뷰 등록이 완료되면 이전 화면으로 돌아갑니다.
+                                finish(); // 리뷰 등록이 완료되면 이전 화면으로 돌아감
                             })
                             .addOnFailureListener(e -> Toast.makeText(MainProductReview.this, "Error adding review: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 })
