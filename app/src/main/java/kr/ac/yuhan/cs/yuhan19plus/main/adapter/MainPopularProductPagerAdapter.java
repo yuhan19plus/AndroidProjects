@@ -1,5 +1,4 @@
 package kr.ac.yuhan.cs.yuhan19plus.main.adapter;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,79 +10,80 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainProductDetail;
+import kr.ac.yuhan.cs.yuhan19plus.main.data.MainProductData;
 
 public class MainPopularProductPagerAdapter extends RecyclerView.Adapter<MainPopularProductPagerAdapter.ProductViewHolder> {
 
-    // Product 클래스: 이미지 리소스 ID, 상품명, 가격을 담는 클래스
-    public static class Product {
-        int imageResId;
-        String name;
-        String price;
-
-        public Product(int imageResId, String name, String price) {
-            this.imageResId = imageResId;
-            this.name = name;
-            this.price = price;
-        }
-    }
-
-    private List<Product> products; // 상품 목록을 담는 리스트
+    private List<MainProductData> products; // MainProductData 타입의 제품 목록
     private Context context;
-    // ViewHolder 클래스: 아이템 뷰 내의 뷰들을 바인딩
-    public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        ImageView productImage;
-        TextView productName;
-        TextView productPrice;
 
-        public ProductViewHolder(@NonNull View itemView) {
-            super(itemView);
-            productImage = itemView.findViewById(R.id.product_image);
-            productName = itemView.findViewById(R.id.product_name);
-            productPrice = itemView.findViewById(R.id.product_price);
-
-        }
-    }
-
-    public MainPopularProductPagerAdapter(List<Product> products) {
+    // 생성자: 어댑터 생성 시 컨텍스트와 제품 데이터 리스트를 받음
+    public MainPopularProductPagerAdapter(Context context, List<MainProductData> products) {
+        this.context = context;
         this.products = products;
     }
 
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // XML 레이아웃을 inflate 하여 ViewHolder 객체를 생성하여 반환
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_popular_product, parent, false);
+        // 뷰홀더 생성: 제품 정보를 표시할 레이아웃을 인플레이트함
+        View view = LayoutInflater.from(context).inflate(R.layout.main_popular_product, parent, false);
         return new ProductViewHolder(view);
     }
-    //더미데이터 부분
+
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        // ViewHolder에 데이터를 바인딩
-        Product product = products.get(position);
-        holder.productImage.setImageResource(product.imageResId);
-        holder.productName.setText(product.name);
-        holder.productPrice.setText(product.price);
+        // 제품 데이터 바인딩: 제품 정보를 뷰홀더의 뷰들과 연결
+        MainProductData product = products.get(position);
+        // 이미지 로드: Glide 라이브러리를 사용하여 네트워크 이미지 또는 기본 이미지를 로드
+        if (!product.getImageResource().equals("R.drawable.default_image")) {
+            Glide.with(context)
+                    .load(product.getImageResource()) // 이미지 URL
+                    .placeholder(R.drawable.default_image) // 로딩 중 표시할 기본 이미지
+                    .into(holder.productImage); // 이미지를 표시할 뷰
+        } else {
+            // URL이 없을 경우 기본 이미지 표시
+            holder.productImage.setImageResource(R.drawable.default_image);
+        }
+        holder.productName.setText(product.getName()); // 제품 이름 설정
+        holder.productPrice.setText(String.valueOf(product.getPrice())); // 제품 가격 설정
 
-        // 아이템 클릭 리스너 설정
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 새로운 액티비티로 이동
-                Intent intent = new Intent(context, MainProductDetail.class);
-                intent.putExtra("imageResId", product.imageResId);
-                intent.putExtra("name", product.name);
-                intent.putExtra("price", product.price);
-                context.startActivity(intent);
-            }
+        // 클릭 이벤트 처리: 제품을 클릭하면 제품 상세 화면으로 이동
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, MainProductDetail.class);
+            intent.putExtra("productImage", product.getImageResource());
+            intent.putExtra("productName", product.getName());
+            intent.putExtra("productPrice", product.getPrice());
+            intent.putExtra("productCode", product.getProductCode());
+            intent.putExtra("productCategory", product.getCategory());
+            context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
+        // 아이템 개수 반환: 제품 리스트의 크기
         return products.size();
+    }
+
+    // 내부 클래스: 뷰홀더
+    static class ProductViewHolder extends RecyclerView.ViewHolder {
+        ImageView productImage;
+        TextView productName;
+        TextView productPrice;
+
+        // 뷰홀더 생성자: 뷰홀더가 관리할 뷰들을 초기화
+        ProductViewHolder(View itemView) {
+            super(itemView);
+            productImage = itemView.findViewById(R.id.product_image);
+            productName = itemView.findViewById(R.id.product_name);
+            productPrice = itemView.findViewById(R.id.product_price);
+        }
     }
 }

@@ -68,16 +68,22 @@
             android:padding="10dp"
             app:justifyContent="space_between">
             <EditText
+                android:id="@+id/mainEditTextFieldSearchProductName"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="@string/main_serch"
                 android:background="@drawable/main_glass1"/>
+            <Button
+                android:id="@+id/mainProductSearchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         </com.google.android.flexbox.FlexboxLayout>
         <!--광고 배너-->
         <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="40dp"
             android:padding="10dp"
             app:alignItems="center"
             app:justifyContent="space_between">
@@ -105,9 +111,9 @@
         android:padding="5dp">
 
         <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/Product_viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/Product_viewPager"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
