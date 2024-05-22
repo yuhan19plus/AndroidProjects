@@ -8,11 +8,12 @@
     tools:context=".main.MainLoginActivity">
 
     <TextView
+        android:id="@+id/close_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
         android:textStyle="bold"
-        android:onClick="set_home"
+        android:onClick="handleTextViewClick"
         android:layout_marginEnd="5dp"
         android:fontFamily="@font/font"
         android:textSize="16sp"

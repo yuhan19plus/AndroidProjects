@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -35,6 +38,7 @@ import kr.ac.yuhan.cs.yuhan19plus.admin.AdminMainActivity;
 import kr.ac.yuhan.cs.yuhan19plus.admin.adapter.ProductAdapter;
 import kr.ac.yuhan.cs.yuhan19plus.admin.data.ProductData;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainActivityProductScan;
+import kr.ac.yuhan.cs.yuhan19plus.main.MainLoginActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainMyPageActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainProductActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainProductDetail;
@@ -90,6 +94,25 @@ public class MainActivity extends AppCompatActivity {
                 loadItemsFromFireStore();
             }
         });
+    }
+
+    //로그인 페이지 활성화 및 비활성화
+    public void handleTextViewClick(View v) {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
+        int id = v.getId();
+        if (id == R.id.login_text) {
+            // 로그인 텍스트뷰가 클릭된 경우 로그인 화면을 표시합니다.
+            ft.replace(R.id.login_view, new MainLoginActivity(), "one");
+            ft.commitAllowingStateLoss();
+        } else if (id == R.id.close_text) {
+            // 홈 텍스트뷰가 클릭된 경우 로그인 화면을 제거합니다.
+            Fragment fragment = manager.findFragmentByTag("one");
+            if (fragment != null) {
+                ft.remove(fragment);
+                ft.commit();
+            }
+        }
     }
 
     /**

@@ -41,15 +41,15 @@
                 android:text="@string/main_logo"/>
 
             <TextView
-                android:id="@+id/loginBtn"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
+                android:id="@+id/login_text"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:fontFamily="@font/font"
-                android:onClick="set_login"
+                android:onClick="handleTextViewClick"
                 android:text="@string/login"
                 android:background="@drawable/glass2"/>
         </com.google.android.flexbox.FlexboxLayout>
