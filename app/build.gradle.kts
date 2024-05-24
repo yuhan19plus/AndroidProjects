@@ -47,6 +47,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:25.0.0")
     implementation("com.google.firebase:firebase-storage:21.0.0")
     implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation("com.google.firebase:firebase-functions:21.0.0")
 
     // 임성준
     implementation("com.github.fornewid:neumorphism:0.3.2") // 뉴모피즘 추가

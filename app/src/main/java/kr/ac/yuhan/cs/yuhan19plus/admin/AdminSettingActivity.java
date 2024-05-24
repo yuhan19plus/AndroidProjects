@@ -3,13 +3,20 @@ package kr.ac.yuhan.cs.yuhan19plus.admin;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.admin.func.ChangeTextColor;
@@ -19,6 +26,11 @@ import soup.neumorphism.NeumorphImageView;
 
 public class AdminSettingActivity extends AppCompatActivity {
     private NeumorphImageView backBtn;
+
+    // Admin Firebase
+    private FirebaseFirestore adminDBFireStore;
+    // Session Object
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +54,9 @@ public class AdminSettingActivity extends AppCompatActivity {
 
         backBtn = (NeumorphImageView) findViewById(R.id.backBtn);
 
+        // Admin Firebase
+        adminDBFireStore = FirebaseFirestore.getInstance();
+
         if(modeValue == 1) {
             // Change FontColor
             ChangeTextColor.changeDarkTextColor(settingPage, Color.WHITE);
@@ -59,20 +74,39 @@ public class AdminSettingActivity extends AppCompatActivity {
         adminIDCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create Dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(AdminSettingActivity.this);
-                builder.setTitle("관리자 정보");
-                builder.setMessage("관리자 ID: [여기에 관리자 ID 입력]\n관리자 직책: [여기에 관리자 직책 입력]");
+                // 세션 객체를 이용하여 현재 로그인한 관리자의 아이디 값을 가져온다.
+                sharedPreferences = getSharedPreferences("AdminSession", MODE_PRIVATE);
+                String adminId = sharedPreferences.getString("admin_id", null);
 
-                // Add "확인" Btn & onClickListener
-                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                // 'Admins' 컬렉션에서 현재 로그인한 관리자의 ID에 해당하는 문서를 조회합니다.
+                adminDBFireStore.collection("admins").document(adminId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss(); // Close Dialog
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
+                        // 문서에서 관리자 직책 정보를 가져옵니다.
+                        String adminPosition = document.getString("adminPosition");
+
+                        // Create Dialog
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AdminSettingActivity.this);
+                        builder.setTitle("관리자 정보");
+                        builder.setMessage("관리자 ID: " + adminId + "\n관리자 직책: " + adminPosition);
+
+                        // Add "확인" Btn & onClickListener
+                        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss(); // Close Dialog
+                            }
+                        });
+                        // Show Dialog
+                        builder.show();
                     }
                 });
-                // Show Dialog
-                builder.show();
+
+
+
+
+
             }
         });
 

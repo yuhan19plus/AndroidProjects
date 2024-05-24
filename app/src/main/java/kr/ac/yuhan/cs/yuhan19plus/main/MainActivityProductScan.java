@@ -1,15 +1,19 @@
 package kr.ac.yuhan.cs.yuhan19plus.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,7 +24,9 @@ import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
@@ -30,6 +36,10 @@ import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MainScanAdpter;
 public class MainActivityProductScan extends AppCompatActivity {
     private DecoratedBarcodeView barcodeScannerView;
     private CaptureManager capture;
+    private FirebaseFirestore userDBFireStore;
+    private FirebaseAuth userDBFirebaseAuth;
+    private FirebaseUser userDBFirebaseUser;
+    private int pointsUsed = 0; // 포인트 사용 정보를 저장할 변수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +65,13 @@ public class MainActivityProductScan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 processPayment();
+            }
+        });
+        Button pointButton = findViewById(R.id.pointBtn);
+        pointButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                usePoints();
             }
         });
     }
@@ -188,41 +205,40 @@ public class MainActivityProductScan extends AppCompatActivity {
             total += product.getProductPrice() * product.getProductStock();
         }
 
+        total -= pointsUsed; // 포인트 적용
+
         TextView totalTextView = findViewById(R.id.itemtotal);
-        totalTextView.setText(String.format("%,.0f", total));
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+        totalTextView.setText(numberFormat.format(total));
     }
 
     private void processPayment() {
         ListView listView = findViewById(R.id.scannedlist);
+        EditText usePoint = findViewById(R.id.editTextFieldPoint);
         MainScanAdpter adapter = (MainScanAdpter) listView.getAdapter();
         if (adapter == null) return;
 
+        ArrayList<ProductData> products = new ArrayList<>();
         for (int i = 0; i < adapter.getCount(); i++) {
-            ProductData product = adapter.getItem(i);
-            updateProductStock(product);
+            products.add(adapter.getItem(i));
         }
-    }
+        EditText pointEditText = findViewById(R.id.editTextFieldPoint);
+        String pointInput = pointEditText.getText().toString();
+        int pointsToUse = pointInput.isEmpty() ? 0 : Integer.parseInt(pointInput);
 
-    private void updateProductStock(ProductData product) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Log.d("ScanQR", "Querying product with code: " + String.valueOf(product.getProductCode()));
+        TextView totalPrice = findViewById(R.id.itemtotal);
+        String totalPriceStr = totalPrice.getText().toString().replace(",", "");
+        double itemTotal = Double.parseDouble(totalPriceStr);
+        if(itemTotal == 0){
+            Toast.makeText(MainActivityProductScan.this, "결제할 상품이 없습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(MainActivityProductScan.this, MainPaymentActivity.class);
+        intent.putParcelableArrayListExtra("products", products);
+        intent.putExtra("pointsToUse", pointsToUse);
+        intent.putExtra("totalPrice", itemTotal);
+        startActivity(intent);
 
-        db.collection("products")
-                .whereEqualTo("productCode", product.getProductCode())
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (queryDocumentSnapshots.isEmpty()) {
-                        Log.d("ScanQR", "No products found with the code.");
-                        return;
-                    }
-                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        DocumentReference docRef = document.getReference();
-                        runTransactionToUpdateStock(db, docRef, product);
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("ScanQR", "Error fetching documents: " + e.getMessage());
-                });
     }
 
     private void runTransactionToUpdateStock(FirebaseFirestore db, DocumentReference docRef, ProductData product) {
@@ -245,6 +261,53 @@ public class MainActivityProductScan extends AppCompatActivity {
             Log.e("ScanQR", "Error updating stock: " + e.getMessage());
         });
     }
+
+    private void usePoints() {
+        EditText pointEditText = findViewById(R.id.editTextFieldPoint);
+        String pointInput = pointEditText.getText().toString();
+
+        if (pointInput.isEmpty()) {
+            updateTotalPrice();
+            return;
+        }
+
+        int pointsToUse;
+        try {
+            pointsToUse = Integer.parseInt(pointInput);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "올바른 포인트 값을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        userDBFirebaseAuth = FirebaseAuth.getInstance();
+        userDBFirebaseUser = userDBFirebaseAuth.getCurrentUser();
+        String uid = userDBFirebaseUser.getUid();
+        userDBFireStore = FirebaseFirestore.getInstance();
+        userDBFireStore.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
+            int availablePoints;
+            try {
+                availablePoints = documentSnapshot.getLong("userPoint").intValue();
+            } catch (NullPointerException | NumberFormatException e) {
+                Toast.makeText(this, "사용자 포인트를 불러오는 데 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (pointsToUse > availablePoints) {
+                Toast.makeText(MainActivityProductScan.this, "보유 포인트보다 많이 입력했습니다.", Toast.LENGTH_SHORT).show();
+                updateTotalPrice();
+            } else {
+                applyPoints(pointsToUse);
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(MainActivityProductScan.this, "포인트 조회 실패: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void applyPoints(int pointsToUse) {
+        pointsUsed = pointsToUse; // 포인트 사용 정보 저장
+        updateTotalPrice(); // 총 금액 업데이트
+    }
+
 
     @Override
     protected void onResume() {

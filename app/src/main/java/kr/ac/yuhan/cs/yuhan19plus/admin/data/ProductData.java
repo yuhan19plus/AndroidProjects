@@ -1,9 +1,14 @@
 package kr.ac.yuhan.cs.yuhan19plus.admin.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.firebase.firestore.PropertyName;
 
 // 여기서 카테고리는 준비완료
-public class ProductData {
+public class ProductData implements Parcelable {
     private int productCode;
     private String productName;
     private String productImage; // 상품 이미지 또는 3D 파일 데이터
@@ -75,5 +80,42 @@ public class ProductData {
 
     public String getProductCategory() {
         return productCategory;
+    }
+
+    protected ProductData(Parcel in) {
+        productCode = in.readInt();
+        productName = in.readString();
+        productImage = in.readString();
+        productPrice = in.readInt();
+        productStock = in.readInt();
+        productCategory = in.readString();
+    }
+
+    public static final Creator<ProductData> CREATOR = new Creator<ProductData>() {
+        @Override
+        public ProductData createFromParcel(Parcel in) {
+            return new ProductData(in);
+        }
+
+        @Override
+        public ProductData[] newArray(int size) {
+            return new ProductData[size];
+        }
+    };
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(productCode);
+        dest.writeString(productName);
+        dest.writeString(productImage);
+        dest.writeInt(productPrice);
+        dest.writeInt(productStock);
+        dest.writeString(productCategory);
     }
 }

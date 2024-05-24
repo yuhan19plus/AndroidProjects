@@ -38,6 +38,7 @@
         android:layout_margin="5dp"
         android:fontFamily="@font/font"
         android:background="@drawable/edittext_border"
+        android:inputType="textEmailAddress"
         android:textColor="@color/yuhan"
         android:hint="@string/login_id"/>
 
@@ -48,6 +49,7 @@
         android:layout_margin="5dp"
         android:fontFamily="@font/font"
         android:background="@drawable/edittext_border"
+        android:inputType="textPassword"
         android:textColor="@color/yuhan"
         android:hint="@string/login_pwd"/>
 
