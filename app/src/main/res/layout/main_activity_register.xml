@@ -53,6 +53,7 @@
                     android:layout_marginStart="5dp"
                     android:background="@drawable/edittext_border"
                     android:fontFamily="@font/font"
+                    android:inputType="textEmailAddress"
                     android:textColor="@color/yuhan"
                     android:hint="@string/enter_id"/>
                 <android.widget.Button
@@ -85,6 +86,7 @@
                 android:layout_marginStart="5dp"
                 android:background="@drawable/edittext_border"
                 android:fontFamily="@font/font"
+                android:inputType="textPassword"
                 android:textColor="@color/yuhan"
                 android:hint="@string/enter_pwd"/>
             <!--비밀번호 재입력-->
@@ -105,6 +107,7 @@
                 android:layout_marginStart="5dp"
                 android:background="@drawable/edittext_border"
                 android:fontFamily="@font/font"
+                android:inputType="textPassword"
                 android:textColor="@color/yuhan"
                 android:hint="@string/enter_pwd"/>
             <!--이름-->
@@ -167,6 +170,7 @@
                     android:background="@drawable/edittext_border"
                     android:textColor="@color/yuhan"
                     android:fontFamily="@font/font"
+                    android:inputType="number"
                     android:hint="@string/first_num"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -184,6 +188,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/font"
                     android:background="@drawable/edittext_border"
+                    android:inputType="number"
                     android:textColor="@color/yuhan"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -201,6 +206,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/font"
                     android:background="@drawable/edittext_border"
+                    android:inputType="number"
                     android:textColor="@color/yuhan" />
             </LinearLayout>
             <!--생년월일-->
@@ -226,6 +232,7 @@
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/font"
                     android:background="@drawable/edittext_border"
+                    android:inputType="number"
                     android:textColor="@color/yuhan"
                     android:hint="@string/year"/>
 
@@ -237,6 +244,7 @@
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/font"
                     android:background="@drawable/edittext_border"
+                    android:inputType="number"
                     android:textColor="@color/yuhan"
                     android:hint="@string/month"/>
 
@@ -248,6 +256,7 @@
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/font"
                     android:background="@drawable/edittext_border"
+                    android:inputType="number"
                     android:textColor="@color/yuhan"
                     android:hint="@string/day"/>
             </LinearLayout>

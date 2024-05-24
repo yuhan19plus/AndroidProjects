@@ -175,6 +175,7 @@
                                 android:layout_height="35dp"
                                 android:src="@drawable/login" />
                             <TextView
+                                android:id="@+id/adminLoginTextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/adminLoginMenu"
@@ -241,6 +242,7 @@
                         android:padding="15dp"
                         app:neumorph_shapeType="pressed">
                         <EditText
+                            android:id="@+id/editTextFieldSearchMemberName"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"

@@ -59,6 +59,7 @@
         <activity android:name=".main.MainStoreLocationActivity" android:exported="true" android:label="MainStoreLocationActivity" />
         <activity android:name=".main.MainMyPageActivity" android:exported="true" android:label="MainMyPageActivity" />
         <activity android:name=".main.MainPaymentActivity" android:exported="true" android:label="MainPaymentActivity" />
+        <activity android:name=".main.MainRetouchInfoActivity" android:exported="true" android:label="MainRetouchInfoActivity" />
     </application>
 
 </manifest>

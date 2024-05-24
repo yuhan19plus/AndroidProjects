@@ -8,17 +8,21 @@ public class MemberData {
     // Member Data Field
     private int number;
     private String memberId;
+    private String memberName;
     private Date joinDate;
+    private String uid;
     private int point;
 
     private Button outButton;
 
 
     // MemberData Constructor
-    public MemberData(int number, String memberId, Date joinDate, int point) {
+    public MemberData(int number, String memberId, String memberName, Date joinDate, String uid, int point) {
         this.number = number;
         this.memberId = memberId;
+        this.memberName = memberName;
         this.joinDate = joinDate;
+        this.uid = uid;
         this.point = point;
     }
 
@@ -26,15 +30,17 @@ public class MemberData {
     public int getNumber() {
         return number;
     }
-
+    public void setNumber(int number) { this.number = number; }
     public String getMemberId() {
         return memberId;
     }
-
+    public String getMemberName() {
+        return memberName;
+    }
     public Date getJoinDate() {
         return joinDate;
     }
-
+    public String getUid() { return uid; }
     public int getPoint() {
         return point;
     }
