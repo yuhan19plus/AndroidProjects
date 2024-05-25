@@ -38,6 +38,17 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+<!--      yuhan19://testdata가 들어잇는 url 혹은 QR이미지를 스캔하면 이 앱이 실행됨      -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <!-- URL을 클릭하여 앱을 실행할 수 있도록 설정 -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- 사용자 정의 스키마와 호스트 설정 -->
+                <data
+                    android:scheme="yuhan19"
+                    android:host="testdata" />
+            </intent-filter>
         </activity>
 
         <!-- 관리자 -->
@@ -49,6 +60,7 @@
         <activity android:name=".admin.AdminFormActivity" android:exported="true" android:label="AdminFormActivity" />
         <activity android:name=".admin.AdminProductEditActivity" android:exported="true" android:label="ProductEditActivity" />
         <activity android:name=".admin.AdminCreateQR" android:exported="true" android:label="AdminCreateQR" />
+        <activity android:name=".admin.AdminCreateAppQR" android:exported="true" android:label="AdminCreateAppQR" />
 
         <!-- 사용자 -->
         <activity android:name=".main.MainProductActivity" android:exported="true" android:label="MainProductActivity" />
