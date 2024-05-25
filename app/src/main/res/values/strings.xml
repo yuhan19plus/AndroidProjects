@@ -74,6 +74,7 @@
     <string name="adminScheduleMenu">관리자\n일정</string>
     <string name="adminMenu">팀장</string>
     <string name="adminLoginMenu">로그인</string>
+    <string name="adminCreateAppQR">앱QR생성</string>
     <string name="setting_adminExit">관리자\n모드 종료</string>
     <string name="admin_list_ImageView">admin_list_ImageView</string>
     <string name="admin_schedule_ImageView">admin_schedule_ImageView</string>
@@ -176,7 +177,7 @@
     <string name="scan_payment">결제</string>
 
     <!-- main_activity_register.xml -->
-    <string name="enter_id">아이디를 입력해 주세요</string>
+    <string name="enter_id">이메일을 입력해 주세요</string>
     <string name="sign_up">가입 신청</string>
 
     <!-- main_product_review_item.xml -->

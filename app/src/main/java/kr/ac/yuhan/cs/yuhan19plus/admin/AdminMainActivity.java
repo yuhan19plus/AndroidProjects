@@ -125,12 +125,14 @@ public class AdminMainActivity extends AppCompatActivity {
             adminScheduleBtnCardView,
             adminCallBtnCardView,
             adminLoginBtnCardView,
+            adminCreateAppQRBtnCardView,
             adminExitCardView;
     private ImageView
             adminListImage,
             adminScheduleImage,
             adminCallImage,
             adminLoginImage,
+            adminCreateAppQRImage,
             adminExitImage;
 
     private TextView
@@ -222,6 +224,7 @@ public class AdminMainActivity extends AppCompatActivity {
         adminScheduleBtnCardView = findViewById(R.id.adminScheduleBtnCardView);
         adminCallBtnCardView = findViewById(R.id.adminCallBtnCardView);
         adminLoginBtnCardView = findViewById(R.id.adminLoginBtnCardView);
+        adminCreateAppQRBtnCardView = findViewById(R.id.adminCreateAppQRBtnCardView);
         adminExitCardView = findViewById(R.id.adminExitCardView);
 
         // Admin MainPage ImageView Id
@@ -229,6 +232,7 @@ public class AdminMainActivity extends AppCompatActivity {
         adminScheduleImage = findViewById(R.id.adminScheduleImage);
         adminCallImage = findViewById(R.id.adminCallImage);
         adminLoginImage = findViewById(R.id.adminLoginImage);
+        adminCreateAppQRImage = findViewById(R.id.adminCreateAppQRImage);
         adminExitImage = findViewById(R.id.adminExitImage);
 
         // Login/Logout TextView
@@ -377,6 +381,7 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setDarkShadowCardView(adminScheduleBtnCardView);
                     ChangeMode.setDarkShadowCardView(adminCallBtnCardView);
                     ChangeMode.setDarkShadowCardView(adminLoginBtnCardView);
+                    ChangeMode.setDarkShadowCardView(adminCreateAppQRBtnCardView);
                     ChangeMode.setDarkShadowCardView(adminExitCardView);
 
                     // PaymentList Page CardView
@@ -402,6 +407,7 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setColorFilterDark(adminScheduleImage);
                     ChangeMode.setColorFilterDark(adminCallImage);
                     ChangeMode.setColorFilterDark(adminLoginImage);
+                    ChangeMode.setColorFilterDark(adminCreateAppQRImage);
                     ChangeMode.setColorFilterDark(adminExitImage);
 
                     // Footer Menu
@@ -453,6 +459,7 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setLightShadowCardView(adminScheduleBtnCardView);
                     ChangeMode.setLightShadowCardView(adminCallBtnCardView);
                     ChangeMode.setLightShadowCardView(adminLoginBtnCardView);
+                    ChangeMode.setLightShadowCardView(adminCreateAppQRBtnCardView);
                     ChangeMode.setLightShadowCardView(adminExitCardView);
 
                     // PaymentList Page CardView
@@ -478,6 +485,7 @@ public class AdminMainActivity extends AppCompatActivity {
                     ChangeMode.setColorFilterLight(adminScheduleImage);
                     ChangeMode.setColorFilterLight(adminCallImage);
                     ChangeMode.setColorFilterLight(adminLoginImage);
+                    ChangeMode.setColorFilterLight(adminCreateAppQRImage);
                     ChangeMode.setColorFilterLight(adminExitImage);
 
                     // Footer Menu
@@ -600,6 +608,15 @@ public class AdminMainActivity extends AppCompatActivity {
                     Toast.makeText(AdminMainActivity.this, "관리자 로그아웃을 완료했습니다.", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        //adminCreateAppQRBtnCardView onClickListener
+        adminCreateAppQRBtnCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCreateAppQR = new Intent(AdminMainActivity.this, AdminCreateAppQR.class);
+                startActivity(intentCreateAppQR); // AdminCreateQR 액티비티를 시작합니다.
             }
         });
 
@@ -1231,4 +1248,6 @@ public class AdminMainActivity extends AppCompatActivity {
             adminCallBtnCardView.setVisibility(View.GONE);
         }
     }
+
+
 }
