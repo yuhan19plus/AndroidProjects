@@ -19,11 +19,16 @@
         android:padding="10dp"
         app:justifyContent="space_between">
         <EditText
+            android:id="@+id/mainActivityProductEditTextFieldSearchProductName"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:fontFamily="@font/font"
             android:hint="@string/main_serch"
             android:background="@drawable/main_glass1"/>
+        <Button
+            android:id="@+id/mainActivityProductSearchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </com.google.android.flexbox.FlexboxLayout>
     <!-- TabLayout 추가 -->
     <com.google.android.flexbox.FlexboxLayout
