@@ -398,6 +398,7 @@
                             android:padding="15dp"
                             app:neumorph_shapeType="pressed">
                             <EditText
+                                android:id="@+id/editTextFieldPaymentSearchMemberName"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@android:color/transparent"

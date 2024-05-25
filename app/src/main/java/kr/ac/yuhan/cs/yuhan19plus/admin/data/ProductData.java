@@ -82,6 +82,7 @@ public class ProductData implements Parcelable {
         return productCategory;
     }
 
+    // 결제 액티비티에서 객체를 넘길때 사용함
     protected ProductData(Parcel in) {
         productCode = in.readInt();
         productName = in.readString();
