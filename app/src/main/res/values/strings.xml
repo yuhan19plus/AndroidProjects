@@ -12,19 +12,18 @@
     <string name="login_failed">"Login failed"</string>
     <string name="main_text">Yuhan19+</string>
 
-    <!-- 상품리뷰 -->
+    <!-- main_activity_product_review.xml --><!-- 상품 리뷰 페이지 -->
     <string name="productReview_title">상품리뷰</string>
     <string name="productReview_starMessage">상품에 대한 소중한 별점 부탁드립니다.</string>
     <string name="productReview_contentMessage">간단한 후기를 남겨주세요.</string>
     <string name="productReview_btn">리뷰작성</string>
-    <!-- // 상품리뷰 -->
 
-    <!-- 매장위치 -->
+    <!-- main_activity_storelocation -->
     <string name="webView_title">매장위치</string>
-    <!-- // 매장위치 -->
 
 
     <string name="outBtn">삭제 버튼</string>
+
 
     <string name="searchMemberIdHint">회원 이름을 입력 하세요</string>
 
@@ -38,7 +37,6 @@
     <string name="admin_list_item_adminId">AdminId</string>
     <string name="admin_list_item_adminPosition">AdminPosition</string>
 
-
     <!-- Setting.xml -->
     <string name="setting_adminId">관리자 Id</string>
     <string name="setting_adminAdd">관리자 추가</string>
@@ -46,7 +44,7 @@
     <!-- Page Title -->
     <string name="login_title">Yuhan 19+ Admin</string>
 
-    <!-- 관리자 목록 페이지 -->
+    <!-- admin_activity_admin_page.xml -->
     <string name="adminList_title">관리자 목록</string>
     <string name="searchAdminIdHint">관리자 ID를 입력 하세요</string>
     <string name="admin_page_editTextSearchAdminField">editTextSearchAdminField</string>
@@ -89,8 +87,6 @@
     <!-- ProductData Management Menu -->
     <string name="productSearchIdHint">상품명을 입력하세요</string>
 
-    <!-- 결제 내역 메뉴-->
-
     <!-- 상품등록 메뉴 -->
     <string name="product_image">상품 이미지</string>
     <string name="product_name">상품명</string>
@@ -127,12 +123,13 @@
     <string name="productUpdate_title">상품수정</string>
     <string name="product_update">Update</string>
 
+    <!-- 야기서부터는 사용자 페이지 ===================================== -->
+
     <!-- main_activity_page -->
     <string name="main_logo">YUHAN19+</string>
     <string name="main_serch">검색어를 입력해 주세요</string>
 
     <!-- main_activity_login.xml -->
-    <string name="set_home">닫기</string>
     <string name="close_login">닫기</string>
     <string name="login">로그인</string>
     <string name="login_id">아이디</string>

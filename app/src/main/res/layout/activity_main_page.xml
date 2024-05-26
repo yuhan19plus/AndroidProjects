@@ -5,20 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/main_background2"
+    android:background="@drawable/main_background"
+    android:contentDescription="Product Image"
+    app:layout_constraintLeft_toRightOf="parent"
+    app:layout_constraintRight_toLeftOf="parent"
     android:orientation="vertical">
 
     <!--상단-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/main_topbackground"
+        android:background="@drawable/border5"
         android:orientation="horizontal">
-
         <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -37,7 +38,7 @@
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:text="@string/main_logo"/>
 
             <TextView
@@ -51,91 +52,105 @@
                 android:fontFamily="@font/font"
                 android:onClick="handleTextViewClick"
                 android:text="@string/login"
-                android:background="@drawable/glass2"/>
+                android:background="@drawable/border5_gray"/>
         </com.google.android.flexbox.FlexboxLayout>
     </LinearLayout>
 
     <!--중단-->
-
-    <FrameLayout
-        android:layout_width="380dp"
-        android:layout_height="420dp"
-        android:layout_gravity="center"
-        android:padding="5dp">
-        <com.google.android.flexbox.FlexboxLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            app:justifyContent="space_between">
-            <EditText
-                android:id="@+id/mainEditTextFieldSearchProductName"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:hint="@string/main_serch"
-                android:background="@drawable/main_glass1"/>
-            <Button
-                android:id="@+id/mainProductSearchBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </com.google.android.flexbox.FlexboxLayout>
-        <!--광고 배너-->
-        <com.google.android.flexbox.FlexboxLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="40dp"
-            android:padding="10dp"
-            app:alignItems="center"
-            app:justifyContent="space_between">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/viewPager"
-                />
-
-        </com.google.android.flexbox.FlexboxLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:orientation="vertical">
         <!-- 로그인 페이지 -->
         <FrameLayout
             android:id="@+id/login_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"/>
-    </FrameLayout>
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@drawable/border5"
+            app:justifyContent="space_between">
+            <EditText
+                android:id="@+id/mainEditTextFieldSearchProductName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColor="@color/deepdarkgray"
+                android:textColorHint="@color/darkgray"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:background="@drawable/border4"
+                android:hint="@string/main_serch" />
+            <ImageView
+                android:id="@+id/mainProductSearchBtn"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                android:src="@drawable/pngwing"
+                android:background="@drawable/border4"
+                />
+        </com.google.android.flexbox.FlexboxLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:layout_gravity="center">
+
+            <!--광고 배너-->
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border5"
+                android:padding="10dp"
+                app:alignItems="center"
+                app:justifyContent="space_between"
+                android:layout_gravity="bottom">
+                <androidx.viewpager2.widget.ViewPager2
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/viewPager" />
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </FrameLayout>
+    </LinearLayout>
 
     <!--상품 칸-->
-    <FrameLayout
-        android:layout_width="380dp"
-        android:layout_height="240dp"
-        android:layout_gravity="center"
-        android:padding="5dp">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/Product_viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/main_glass1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp">
         <FrameLayout
-            android:id="@+id/mypage_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            android:layout_gravity="center"
+            android:background="@drawable/border6">
 
-    </FrameLayout>
-
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/Product_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp" />
+            <FrameLayout
+                android:id="@+id/mypage_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+    </LinearLayout>
     <!--하단-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/main_lowbarbackground"
+        android:padding="5dp"
+        android:background="@drawable/border6"
         android:layout_gravity="bottom"
         >
         <com.google.android.flexbox.FlexboxLayout
@@ -149,8 +164,7 @@
                 android:id="@+id/store_location_Btn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="7.5dp"
-                android:layout_marginEnd="7.5dp"
+                android:background="@drawable/border4"
                 android:src="@drawable/main_store_location"
                 />
 
@@ -158,16 +172,14 @@
                 android:id="@+id/product_Btn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="7.5dp"
-                android:layout_marginEnd="7.5dp"
+                android:background="@drawable/border4"
                 android:src="@drawable/main_item"
                 />
 
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="7.5dp"
-                android:layout_marginEnd="7.5dp"
+                android:background="@drawable/border4"
                 android:src="@drawable/main_yuhan_logo"
                 />
 
@@ -175,22 +187,20 @@
                 android:id="@+id/payment_Btn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="7.5dp"
-                android:layout_marginEnd="7.5dp"
                 android:src="@drawable/main_payment"
+                android:background="@drawable/border4"
                 />
 
             <ImageView
                 android:id="@+id/mypage_Btn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="7.5dp"
-                android:layout_marginEnd="7.5dp"
+                android:background="@drawable/border4"
                 android:src="@drawable/main_mypage"/>
         </com.google.android.flexbox.FlexboxLayout>
 
     </LinearLayout>
-
 </LinearLayout>
+
 
 
