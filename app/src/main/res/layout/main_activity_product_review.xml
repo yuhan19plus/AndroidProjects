@@ -50,10 +50,7 @@
             android:numStars="5"
             android:stepSize="1.0"
             android:rating="0"
-            android:progressTint="#FFD700"
-            android:progressBackgroundTint="#80B0B0B0"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
+            style="@style/YellowRatingBar"
             android:isIndicator="false" />
         <!--
         별점 Test를 위한 TextView
