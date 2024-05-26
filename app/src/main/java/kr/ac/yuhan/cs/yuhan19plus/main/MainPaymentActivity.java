@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -122,7 +123,7 @@ public class MainPaymentActivity extends AppCompatActivity {
                     @Override
                     public void onDone(String data) {
                         Log.d("done", data);
-                        savePaymentData(userDBFirebaseUser.getUid(), totalPrice, pointsToUse, products, data);
+                        savePaymentData(userDBFirebaseUser.getUid(), totalPrice, pointsToUse, products, data, userDBFirebaseUser);
                         updateUserPoints(userDBFirebaseUser.getUid(), pointsToUse, totalPrice); // 포인트 업데이트 함수 호출
                         updateProductStocks(products);
                         Toast.makeText(MainPaymentActivity.this, "결제가 완료되었습니다.", Toast.LENGTH_LONG).show();
@@ -138,7 +139,7 @@ public class MainPaymentActivity extends AppCompatActivity {
 
 
     // 결제 데이터 저장 메소드
-    private void savePaymentData(String uid, double totalPrice, int pointsUsed, ArrayList<ProductData> products, String data) {
+    private void savePaymentData(String uid, double totalPrice, int pointsUsed, ArrayList<ProductData> products, String data, FirebaseUser userDBFirebaseUser) {
         Map<String, Object> paymentData = new HashMap<>();
         paymentData.put("uid", uid);
         paymentData.put("totalPrice", totalPrice);
@@ -154,15 +155,27 @@ public class MainPaymentActivity extends AppCompatActivity {
             Log.e("JSON", "Error parsing JSON data", e);
         }
 
-        Map<String, Integer> productMap = new HashMap<>();
+        Map<String, Number> productMap = new HashMap<>();
         for (ProductData product : products) {
-            productMap.put(String.valueOf(product.getProductCode()), product.getProductStock());
+            productMap.put(String.valueOf(product.getProductName()), product.getProductStock());
         }
         paymentData.put("products", productMap);
+        paymentData.put("payDay", new Date());
+        paymentData.put("userEmail", userDBFirebaseUser.getEmail());
+        paymentData.put("isValid", true);
 
-        db.collection("payments").add(paymentData)
-                .addOnSuccessListener(documentReference -> Log.d("Firestore", "Payment data saved with ID: " + documentReference.getId()))
-                .addOnFailureListener(e -> Log.e("Firestore", "Error saving payment data", e));
+        // Firestore에서 사용자 이름을 가져와서 paymentData에 추가한 후 payments 컬렉션에 저장합니다.
+        db.collection("users").document(uid).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    String userName = documentSnapshot.getString("userName");
+                    paymentData.put("userName", userName);
+
+                    // userName을 추가한 후 paymentData를 payments 컬렉션에 저장합니다.
+                    db.collection("payments").add(paymentData)
+                            .addOnSuccessListener(documentReference -> Log.d("Firestore", "Payment data saved with ID: " + documentReference.getId()))
+                            .addOnFailureListener(e -> Log.e("Firestore", "Error saving payment data", e));
+                })
+                .addOnFailureListener(e -> Log.e("Firestore", "Error getting user data", e));
     }
 
 

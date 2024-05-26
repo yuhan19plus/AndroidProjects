@@ -48,12 +48,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import kr.ac.yuhan.cs.yuhan19plus.MainActivity;
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.admin.adapter.MemberAdapter;
+import kr.ac.yuhan.cs.yuhan19plus.admin.adapter.PayMentAdapter;
 import kr.ac.yuhan.cs.yuhan19plus.admin.adapter.ProductAdapter;
 import kr.ac.yuhan.cs.yuhan19plus.admin.data.MemberData;
+import kr.ac.yuhan.cs.yuhan19plus.admin.data.PaymentData;
 import kr.ac.yuhan.cs.yuhan19plus.admin.data.ProductData;
 import kr.ac.yuhan.cs.yuhan19plus.admin.util.ChangeMode;
 import soup.neumorphism.NeumorphButton;
@@ -70,6 +72,10 @@ public class AdminMainActivity extends AppCompatActivity {
     // Member Firebase and Adapter
     private FirebaseFirestore memberDBFireStore;
     private MemberAdapter memberAdapter;
+
+    // Payment Firebase and Adapter
+    private FirebaseFirestore paymentDBFireStore;
+    private PayMentAdapter paymentAdapter;
 
 
     // Session Object
@@ -102,11 +108,12 @@ public class AdminMainActivity extends AppCompatActivity {
             productPushBtn;
 
     // MemberManagement Page Menu
+    private ListView memberListView;
     private NeumorphCardView
             memberListCardView,
             input_searchIdCardView;
     private NeumorphButton memberSearchBtn;
-    private ListView memberListView;
+    private EditText editTextFieldSearchMemberName;
 
     // ProductManagement Page Menu
     private ListView productListView;
@@ -115,8 +122,8 @@ public class AdminMainActivity extends AppCompatActivity {
             productListCardView;
     private ImageView imageViewProduct;
     private NeumorphButton productSearchBtn;
-    private EditText editTextFieldSearchProductName,
-                     editTextFieldSearchMemberName;
+    private EditText editTextFieldSearchProductName;
+
     private String currentSearchText = ""; // 검색 창 초기값 설정
 
     // HOMEManagement Page Menu
@@ -139,10 +146,12 @@ public class AdminMainActivity extends AppCompatActivity {
             adminLoginTextView;
 
     // PaymentList Page Menu
-    private NeumorphButton paySearchBtn;
+    private ListView paymentListView;
     private NeumorphCardView
             payListCardView,
             input_searchPayIdCardView;
+    private NeumorphButton paySearchBtn;
+    private EditText editTextFieldPaymentSearchMemberName;
 
     // ProductRegister Page Menu
     private NeumorphCardView
@@ -184,19 +193,24 @@ public class AdminMainActivity extends AppCompatActivity {
         // 리스트 뷰 셋팅
         memberListView = findViewById(R.id.memberListView);
         productListView = findViewById(R.id.productListView);
-
-        // MemberAdapter 설정
-        memberAdapter = new MemberAdapter(this, new ArrayList<MemberData>());
-        memberListView.setAdapter(memberAdapter);
+        paymentListView = findViewById(R.id.payListView);
 
         // 카테고리를 클릭하지 않고 넘기는 경우 기본값으로 지정
         if(productCategory == null){
             productCategory = product_categoryDefault;
         }
 
+        // MemberAdapter 설정
+        memberAdapter = new MemberAdapter(this, new ArrayList<MemberData>());
+        memberListView.setAdapter(memberAdapter);
+
         // ProductAdapter 설정
         productAdapter = new ProductAdapter(this, productDataList);
         productListView.setAdapter(productAdapter); // 리스트 뷰에 어댑터 설정
+
+        // PaymentAdapter 설정
+        paymentAdapter = new PayMentAdapter(this, new ArrayList<PaymentData>());
+        paymentListView.setAdapter(paymentAdapter);
 
         startAutoRefresh(); // 상품데이터 새로고침
         loadItemsFromFireStore(); // 파이어베이스에서 상품명으로 검색하고 데이터를 읽어오는 메서드 호출
@@ -256,9 +270,12 @@ public class AdminMainActivity extends AppCompatActivity {
         editTextFieldSearchProductName = findViewById(R.id.editTextFieldSearchProductName);
 
         // Payment List Page Id
+        input_searchPayIdCardView =findViewById(R.id.input_searchPayIdCardView);
+        editTextFieldPaymentSearchMemberName = findViewById(R.id.editTextFieldPaymentSearchMemberName);
         paySearchBtn = findViewById(R.id.paySearchBtn);
         payListCardView = findViewById(R.id.payListCardView);
-        input_searchPayIdCardView =findViewById(R.id.input_searchPayIdCardView);
+
+
 
         // ProductData Register Page Id
         input_productImageCardView = findViewById(R.id.input_productImageCardView);
@@ -304,6 +321,7 @@ public class AdminMainActivity extends AppCompatActivity {
             adminListBtnCardView.setVisibility(View.VISIBLE);
             adminScheduleBtnCardView.setVisibility(View.VISIBLE);
             adminCallBtnCardView.setVisibility(View.VISIBLE);
+            adminCreateAppQRBtnCardView.setVisibility(View.VISIBLE);
 
         }
         else{
@@ -311,10 +329,9 @@ public class AdminMainActivity extends AppCompatActivity {
             adminListBtnCardView.setVisibility(View.GONE);
             adminScheduleBtnCardView.setVisibility(View.GONE);
             adminCallBtnCardView.setVisibility(View.GONE);
+            adminCreateAppQRBtnCardView.setVisibility(View.GONE);
 
         }
-
-
 
         // SettingBtn onClickListener
         admin_setting.setOnClickListener(new View.OnClickListener() {
@@ -605,6 +622,7 @@ public class AdminMainActivity extends AppCompatActivity {
                     adminListBtnCardView.setVisibility(View.GONE);
                     adminScheduleBtnCardView.setVisibility(View.GONE);
                     adminCallBtnCardView.setVisibility(View.GONE);
+                    adminCreateAppQRBtnCardView.setVisibility(View.GONE);
                     Toast.makeText(AdminMainActivity.this, "관리자 로그아웃을 완료했습니다.", Toast.LENGTH_SHORT).show();
                 }
 
@@ -702,6 +720,14 @@ public class AdminMainActivity extends AppCompatActivity {
             }
         });
 
+        // memberSearchBtn onClickListener
+        memberSearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadeMemberFromFireStore();
+            }
+        });
+
         // ProductBtn onClickListener
         productBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -727,68 +753,7 @@ public class AdminMainActivity extends AppCompatActivity {
             }
         });
 
-        // memberSearchBtn onClickListener
-        memberSearchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 인스턴스 가져오기, 회원 목록 배열 생성
-                memberDBFireStore = FirebaseFirestore.getInstance();
-                ArrayList<MemberData> memberList = new ArrayList<>();
 
-                // 검색창에 입력한 값을 가져오기
-                String searchId = editTextFieldSearchMemberName.getText().toString().trim();
-
-                // 쿼리문 작성
-                Query query;
-                if (searchId.isEmpty()) {
-                    // 검색어가 없을 경우 전체 문서를 조회
-                    query = memberDBFireStore.collection("users");
-                } else {
-                    // 입력된 검색어로 시작하는 adminId를 가진 문서를 조회
-                    query = memberDBFireStore.collection("users").orderBy("userName").startAt(searchId).endAt(searchId + '\uf8ff');
-                }
-
-                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    // DB에서 검색이 완료된 경우
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            int i = 1; // num을 위한 카운터 시작 값
-                            // 검색한 회원 수 만큼 반복
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String id = document.getString("userEmail");
-                                String name = document.getString("userName");
-                                Date joindate = document.getTimestamp("userJoindate").toDate();
-                                String uid = document.getString("uid");
-                                int point = document.getLong("userPoint").intValue();
-                                boolean isValid = document.getBoolean("isValid");
-                                
-                                // 탈퇴하지 않은 회원인 경우 리스트에 추가
-                                if(isValid){
-                                    memberList.add(new MemberData(i, id, name, joindate, uid, point));
-                                    i++;
-                                }
-                            }
-                            // 검색 결과가 없는 경우
-                            if (memberList.isEmpty()) {
-                                memberAdapter.updateData(memberList);
-                                Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
-                            }
-                            // 검색결과가 있는 경우
-                            else {
-                                memberAdapter.updateData(memberList);
-                                Toast.makeText(getApplicationContext(), "검색 완료", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        // DB에서 데이터를 가져오는 중 오류가 발생한 경우
-                        else {
-                            Log.d("Firestore Search", "Error getting documents: ", task.getException());
-                            Toast.makeText(getApplicationContext(), "검색 중 오류 발생", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });
 
         // Product ListView Item onClickListener
         productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -840,6 +805,22 @@ public class AdminMainActivity extends AppCompatActivity {
                     return;
                 }
                 vFlipper.setDisplayedChild(3);
+                fetchPaymentData();
+            }
+        });
+        paymentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get Information of Clicked Payment Item
+                PaymentData selectedItem = (PaymentData) paymentAdapter.getItem(position);
+                showPaymentInfoDialog(selectedItem);
+            }
+        });
+
+        paySearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadePaymentFromFireStore();
             }
         });
 
@@ -901,7 +882,7 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
-    // 사용자 데이터 가져오기
+    // 회원 데이터를 가져오는 메서드 (이석재)
     private void fetchMemberData() {
         memberDBFireStore = FirebaseFirestore.getInstance();
         ArrayList<MemberData> memberDataList = new ArrayList<>();
@@ -926,10 +907,52 @@ public class AdminMainActivity extends AppCompatActivity {
                     }
                     if (memberDataList.isEmpty()){
                         Toast.makeText(getApplicationContext(), "결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                        memberAdapter.updateData(memberDataList);
                     }
                     else{
                         memberAdapter.updateData(memberDataList);
                     }
+                }
+            }
+        });
+    }
+
+
+
+    // 결제 데이터를 가져오는 메서드 (이석재)
+    private void fetchPaymentData(){
+        paymentDBFireStore = FirebaseFirestore.getInstance();
+        ArrayList<PaymentData> paymentDataList = new ArrayList<>();
+
+        paymentDBFireStore.collection("payments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                int i = 1;  // num을 위한 카운터 시작 값
+                if (task.isSuccessful()){
+                    for(QueryDocumentSnapshot document : task.getResult()){
+                        String receiptId = document.getString("receipt_id");
+                        String name = document.getString("userName");
+                        String uid = document.getString("uid");
+                        String email = document.getString("userEmail");
+                        Map<String, Number> products = (Map<String, Number>) document.get("products");
+                        int totalPrice = document.getLong("totalPrice").intValue();
+                        int usePoint = document.getLong("usePoint").intValue();
+                        Date payDay = document.getTimestamp("payDay").toDate();
+                        boolean isValid = document.getBoolean("isValid");
+
+                        if(isValid){
+                            paymentDataList.add(new PaymentData(i, receiptId, name, uid, email, products, totalPrice, usePoint, payDay));
+                            i++;
+                        }
+                    }
+
+                }
+                if (paymentDataList.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                    paymentAdapter.updateData(paymentDataList);
+                }
+                else{
+                    paymentAdapter.updateData(paymentDataList);
                 }
             }
         });
@@ -1007,6 +1030,51 @@ public class AdminMainActivity extends AppCompatActivity {
         // Show Dialog
         dialog.show();
     }
+
+
+
+    // Member Info Dialog
+    private void showPaymentInfoDialog(PaymentData selectedItem) {
+        // Create Dialog & Layout Setting
+        Dialog dialog = new Dialog(AdminMainActivity.this);
+        dialog.setContentView(R.layout.admin_dialog_payment_item_info);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String formattedDate = sdf.format(selectedItem.getPayDay());
+
+        // Get TextView ID in Dialog
+        TextView textViewPaymentNum = dialog.findViewById(R.id.textViewPaymentNum);
+        textViewPaymentNum.setText("Num : " + selectedItem.getNumber());
+
+        TextView textViewReceiptId = dialog.findViewById(R.id.textViewReceiptId);
+        textViewReceiptId.setText("주문ID : " + selectedItem.getReceiptId());
+
+        TextView textViewUserName = dialog.findViewById(R.id.textViewUserName);
+        textViewUserName.setText("회원이름 : " + selectedItem.getUserName());
+
+        TextView textViewUid = dialog.findViewById(R.id.textViewUid);
+        textViewUid.setText("UID : " + selectedItem.getUid());
+
+        TextView textViewUserEmail = dialog.findViewById(R.id.textViewUserEmail);
+        textViewUserEmail.setText("회원아이디 : " + selectedItem.getEmail());
+
+        TextView textViewProducts = dialog.findViewById(R.id.textViewProducts);
+        textViewProducts.setText("상품 : " + selectedItem.getProducts());
+
+        TextView textViewTotalPrice = dialog.findViewById(R.id.textViewTotalPrice);
+        textViewTotalPrice.setText("결제금액 : " + selectedItem.getTotalPrice());
+
+        TextView textViewUsePoint = dialog.findViewById(R.id.textViewUsePoint);
+        textViewUsePoint.setText("사용포인트 : " + selectedItem.getUsePoint());
+
+        TextView textViewPayDay = dialog.findViewById(R.id.textViewPayDay);
+        textViewPayDay.setText("결제일 : " + selectedItem.getPayDay());
+
+        // Show Dialog
+        dialog.show();
+    }
+
+
+
 
 
     // 자동으로 새로고침을 하게 만들어주는 메서드 (made by 오자현)
@@ -1204,6 +1272,132 @@ public class AdminMainActivity extends AppCompatActivity {
             imageViewProduct.setImageURI(selectedFileUri);
         }
     }
+
+
+
+    // 파이어베이스에서 회원 이름으로 검색하고 회원 데이터를 읽어오는 메서드 (이석재)
+    private void loadeMemberFromFireStore() {
+        // 인스턴스 가져오기, 회원 목록 배열 생성
+        memberDBFireStore = FirebaseFirestore.getInstance();
+        ArrayList<MemberData> memberList = new ArrayList<>();
+
+        // 검색창에 입력한 값을 가져오기
+        String searchId = editTextFieldSearchMemberName.getText().toString().trim();
+
+        // 쿼리문 작성
+        Query query;
+        if (searchId.isEmpty()) {
+            // 검색어가 없을 경우 전체 문서를 조회
+            query = memberDBFireStore.collection("users");
+        } else {
+            // 입력된 검색어로 시작하는 adminId를 가진 문서를 조회
+            query = memberDBFireStore.collection("users").orderBy("userName").startAt(searchId).endAt(searchId + '\uf8ff');
+        }
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            // DB에서 검색이 완료된 경우
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int i = 1; // num을 위한 카운터 시작 값
+                    // 검색한 회원 수 만큼 반복
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String id = document.getString("userEmail");
+                        String name = document.getString("userName");
+                        Date joindate = document.getTimestamp("userJoindate").toDate();
+                        String uid = document.getString("uid");
+                        int point = document.getLong("userPoint").intValue();
+                        boolean isValid = document.getBoolean("isValid");
+
+                        // 탈퇴하지 않은 회원인 경우 리스트에 추가
+                        if(isValid){
+                            memberList.add(new MemberData(i, id, name, joindate, uid, point));
+                            i++;
+                        }
+                    }
+                    // 검색 결과가 없는 경우
+                    if (memberList.isEmpty()) {
+                        memberAdapter.updateData(memberList);
+                        Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    // 검색결과가 있는 경우
+                    else {
+                        memberAdapter.updateData(memberList);
+                        Toast.makeText(getApplicationContext(), "검색 완료", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                // DB에서 데이터를 가져오는 중 오류가 발생한 경우
+                else {
+                    Log.d("Firestore Search", "Error getting documents: ", task.getException());
+                    Toast.makeText(getApplicationContext(), "검색 중 오류 발생", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    // 파이어베이스에서 회원 이름으로 검색하고 결제 데이터를 읽어오는 메서드 (이석재)
+    private void loadePaymentFromFireStore(){
+        // 인스턴스 가져오기, 회원 목록 배열 생성
+        paymentDBFireStore = FirebaseFirestore.getInstance();
+        ArrayList<PaymentData> paymentList = new ArrayList<>();
+
+        // 검색창에 입력한 값을 가져오기
+        String searchId = editTextFieldPaymentSearchMemberName.getText().toString().trim();
+
+        // 쿼리문 작성
+        Query query;
+        if (searchId.isEmpty()) {
+            // 검색어가 없을 경우 전체 문서를 조회
+            query = paymentDBFireStore.collection("payments");
+        } else {
+            // 입력된 검색어로 시작하는 adminId를 가진 문서를 조회
+            query = paymentDBFireStore.collection("payments").orderBy("userName").startAt(searchId).endAt(searchId + '\uf8ff');
+        }
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            // DB에서 검색이 완료된 경우
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int i = 1; // num을 위한 카운터 시작 값
+                    // 검색한 회원 수 만큼 반복
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String receiptId = document.getString("receipt_id");
+                        String name = document.getString("userName");
+                        String uid = document.getString("uid");
+                        String email = document.getString("userEmail");
+                        Map<String, Number> products = (Map<String, Number>) document.get("products");
+                        int totalPrice = document.getLong("totalPrice").intValue();
+                        int usePoint = document.getLong("usePoint").intValue();
+                        Date payDay = document.getTimestamp("payDay").toDate();
+                        boolean isValid = document.getBoolean("isValid");
+                        if(isValid){
+                            paymentList.add(new PaymentData(i, receiptId, name, uid, email, products, totalPrice, usePoint, payDay));
+                            i++;
+                        }
+                    }
+                    // 검색 결과가 없는 경우
+                    if (paymentList.isEmpty()) {
+                        paymentAdapter.updateData(paymentList);
+                        Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    // 검색결과가 있는 경우
+                    else {
+                        paymentAdapter.updateData(paymentList);
+                        Toast.makeText(getApplicationContext(), "검색 완료", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                // DB에서 데이터를 가져오는 중 오류가 발생한 경우
+                else {
+                    Log.d("Firestore Search", "Error getting documents: ", task.getException());
+                    Toast.makeText(getApplicationContext(), "검색 중 오류 발생", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+
     @Override
     public void onBackPressed() {
         // AlertDialog를 통해 사용자에게 종료 여부를 물음
@@ -1212,6 +1406,11 @@ public class AdminMainActivity extends AppCompatActivity {
         builder.setPositiveButton("종료", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // 로그아웃 처리
+                sharedPreferences = getSharedPreferences("AdminSession", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("admin_id");
+                editor.apply();
                 // 사용자가 종료를 선택한 경우 액티비티 종료
                 // 상위 클래스의 구현도 호출
                 finish();
@@ -1240,12 +1439,14 @@ public class AdminMainActivity extends AppCompatActivity {
             adminListBtnCardView.setVisibility(View.VISIBLE);
             adminScheduleBtnCardView.setVisibility(View.VISIBLE);
             adminCallBtnCardView.setVisibility(View.VISIBLE);
+            adminCreateAppQRBtnCardView.setVisibility(View.VISIBLE);
         }
         else{
             adminLoginTextView.setText("로그인");
             adminListBtnCardView.setVisibility(View.GONE);
             adminScheduleBtnCardView.setVisibility(View.GONE);
             adminCallBtnCardView.setVisibility(View.GONE);
+            adminCreateAppQRBtnCardView.setVisibility(View.GONE);
         }
     }
 

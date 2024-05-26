@@ -133,63 +133,7 @@ public class AdminActivity extends AppCompatActivity {
         adminSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 현재 로그인한 관리자 ID 가져오기
-                sharedPreferences = getSharedPreferences("AdminSession", MODE_PRIVATE);
-                String currentAdminId = sharedPreferences.getString("admin_id", null);
-
-                // 인스턴스 가져오기, 관리자 목록 배열 생성
-                adminDBFireStore = FirebaseFirestore.getInstance();
-                ArrayList<AdminData> adminList = new ArrayList<>();
-
-                // 검색창에 입력한 값을 가져오기
-                EditText input_searchId = findViewById(R.id.input_searchId);
-                String searchId = input_searchId.getText().toString().trim();
-                
-                // 쿼리문 작성
-                Query query;
-                if (searchId.isEmpty()) {
-                    // 검색어가 없을 경우 전체 문서를 조회
-                    query = adminDBFireStore.collection("admins");
-                } else {
-                    // 입력된 검색어로 시작하는 adminId를 가진 문서를 조회
-                    query = adminDBFireStore.collection("admins").orderBy("adminId").startAt(searchId).endAt(searchId + '\uf8ff');
-                }
-
-                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    // DB에서 검색이 완료된 경우
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            int i = 1; // num을 위한 카운터 시작 값
-                            // 검색한 관리자 수 만큼 반복
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                // 현재 로그인한 관리자가 아닌 경우 리스트에 추가
-                                if (!document.getId().equals(currentAdminId)) {
-                                    String adminId = document.getId();
-                                    String password = document.getString("adminPassword");
-                                    String position = document.getString("adminPosition");
-                                    adminList.add(new AdminData(i, adminId, password, position));
-                                    i++;  // 다음 num 값 증가
-                                }
-                            }
-                            // 검색 결과가 없는 경우
-                            if (adminList.isEmpty()) {
-                                adapter.updateData(adminList);
-                                Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
-                            }
-                            // 검색결과가 있는 경우
-                            else {
-                                adapter.updateData(adminList);
-                                Toast.makeText(getApplicationContext(), "검색 완료", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        // DB에서 데이터를 가져오는 중 오류가 발생한 경우
-                        else {
-                            Log.d("Firestore Search", "Error getting documents: ", task.getException());
-                            Toast.makeText(getApplicationContext(), "검색 중 오류 발생", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                loadAdminFromFireStore();
             }
         });
 
@@ -273,4 +217,66 @@ public class AdminActivity extends AppCompatActivity {
         // Show Dialog
         dialog.show();
     }
+
+    // 파이어베이스에서 관리자 아이디로 검색하고 관리자 데이터를 읽어오는 메서드 (이석재)
+    private void loadAdminFromFireStore() {
+        // 현재 로그인한 관리자 ID 가져오기
+        sharedPreferences = getSharedPreferences("AdminSession", MODE_PRIVATE);
+        String currentAdminId = sharedPreferences.getString("admin_id", null);
+
+        // 인스턴스 가져오기, 관리자 목록 배열 생성
+        adminDBFireStore = FirebaseFirestore.getInstance();
+        ArrayList<AdminData> adminList = new ArrayList<>();
+
+        // 검색창에 입력한 값을 가져오기
+        EditText input_searchId = findViewById(R.id.input_searchId);
+        String searchId = input_searchId.getText().toString().trim();
+
+        // 쿼리문 작성
+        Query query;
+        if (searchId.isEmpty()) {
+            // 검색어가 없을 경우 전체 문서를 조회
+            query = adminDBFireStore.collection("admins");
+        } else {
+            // 입력된 검색어로 시작하는 adminId를 가진 문서를 조회
+            query = adminDBFireStore.collection("admins").orderBy("adminId").startAt(searchId).endAt(searchId + '\uf8ff');
+        }
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            // DB에서 검색이 완료된 경우
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int i = 1; // num을 위한 카운터 시작 값
+                    // 검색한 관리자 수 만큼 반복
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        // 현재 로그인한 관리자가 아닌 경우 리스트에 추가
+                        if (!document.getId().equals(currentAdminId)) {
+                            String adminId = document.getId();
+                            String password = document.getString("adminPassword");
+                            String position = document.getString("adminPosition");
+                            adminList.add(new AdminData(i, adminId, password, position));
+                            i++;  // 다음 num 값 증가
+                        }
+                    }
+                    // 검색 결과가 없는 경우
+                    if (adminList.isEmpty()) {
+                        adapter.updateData(adminList);
+                        Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    // 검색결과가 있는 경우
+                    else {
+                        adapter.updateData(adminList);
+                        Toast.makeText(getApplicationContext(), "검색 완료", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                // DB에서 데이터를 가져오는 중 오류가 발생한 경우
+                else {
+                    Log.d("Firestore Search", "Error getting documents: ", task.getException());
+                    Toast.makeText(getApplicationContext(), "검색 중 오류 발생", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }
