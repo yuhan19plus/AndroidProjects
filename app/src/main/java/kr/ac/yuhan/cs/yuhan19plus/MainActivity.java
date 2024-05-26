@@ -13,15 +13,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -35,6 +41,7 @@ import kr.ac.yuhan.cs.yuhan19plus.admin.AdminMainActivity;
 import kr.ac.yuhan.cs.yuhan19plus.admin.adapter.ProductAdapter;
 import kr.ac.yuhan.cs.yuhan19plus.admin.data.ProductData;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainActivityProductScan;
+import kr.ac.yuhan.cs.yuhan19plus.main.MainLoginActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainMyPageActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainProductActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainProductDetail;
@@ -53,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
     private List<Integer> imageList;
     private int currentPage = 0;
     private Timer timer;
-    private Button mainProductSearchBtn;
+    private ImageView mainProductSearchBtn;
     private EditText mainEditTextFieldSearchProductName;
     private ArrayList<MainProductData> productDataList = new ArrayList<>(); // 상품 정보를 담을 리스트
+    private FirebaseAuth userDBFirebaseAuth;
+    private FirebaseUser userDBFirebaseUser;
 
 
     /**
@@ -72,6 +81,16 @@ public class MainActivity extends AppCompatActivity {
         initializeViews();
         setupViewListeners();
         setupViewPager();
+
+        userDBFirebaseAuth = FirebaseAuth.getInstance();
+        TextView login_text = findViewById(R.id.login_text);
+        if (userDBFirebaseAuth.getCurrentUser() != null) {
+            // User is signed in
+            login_text.setText("로그아웃");
+        } else {
+            // No user is signed in
+            login_text.setText("로그인");
+        }
     }
 
     /**
@@ -90,6 +109,36 @@ public class MainActivity extends AppCompatActivity {
                 loadItemsFromFireStore();
             }
         });
+    }
+
+    //로그인 페이지 활성화 및 비활성화
+    public void handleTextViewClick(View v) {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
+        int id = v.getId();
+        if (id == R.id.login_text) {
+            TextView login_text = (TextView) v;
+            if("로그인".equals(login_text.getText().toString())){
+                // 로그인 텍스트뷰가 클릭된 경우 로그인 화면을 표시합니다.
+                ft.replace(R.id.login_view, new MainLoginActivity(), "one");
+                ft.commitAllowingStateLoss();
+            }
+            else if("로그아웃".equals(login_text.getText().toString())){
+                // 로그아웃 텍스트뷰가 클릭된 경우 로그아웃 처리합니다.
+                userDBFirebaseAuth = FirebaseAuth.getInstance();
+                userDBFirebaseAuth.signOut();
+                login_text.setText("로그인");
+                Toast.makeText(MainActivity.this, "로그아웃에 성공했습니다.", Toast.LENGTH_SHORT).show();
+            }
+
+        } else if (id == R.id.close_text) {
+            // 홈 텍스트뷰가 클릭된 경우 로그인 화면을 제거합니다.
+            Fragment fragment = manager.findFragmentByTag("one");
+            if (fragment != null) {
+                ft.remove(fragment);
+                ft.commit();
+            }
+        }
     }
 
     /**
@@ -154,8 +203,15 @@ public class MainActivity extends AppCompatActivity {
      * @param cls 시작할 액티비티의 클래스 객체
      */
     private void launchActivity(Class<?> cls) {
-        Intent intent = new Intent(MainActivity.this, cls);
-        startActivity(intent);
+        userDBFirebaseAuth = FirebaseAuth.getInstance();
+        userDBFirebaseUser = userDBFirebaseAuth.getCurrentUser();
+        if ((cls == MainMyPageActivity.class || cls == MainActivityProductScan.class) && userDBFirebaseUser == null) {
+            Toast.makeText(MainActivity.this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Intent intent = new Intent(MainActivity.this, cls);
+            startActivity(intent);
+        }
     }
 
     /**
@@ -340,4 +396,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

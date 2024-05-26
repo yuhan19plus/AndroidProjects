@@ -133,27 +133,30 @@
                         android:id="@+id/adminCallBtnCardView"
                         android:layout_width="120dp"
                         android:layout_height="120dp">
+
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="101dp"
+                            android:layout_height="102dp"
                             android:orientation="vertical"
                             android:padding="15dp">
+
                             <ImageView
                                 android:id="@+id/adminCallImage"
-                                android:contentDescription="@string/admin_call_ImageView"
-                                android:layout_gravity="center"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/admin_call_ImageView"
                                 android:src="@drawable/phone" />
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/adminMenu"
-                                android:textColor="@color/mainText"
-                                android:gravity="center"
-                                android:layout_marginTop="5dp"
                                 android:layout_gravity="center"
-                                android:fontFamily="@font/nanumgothicregular"/>
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/nanumgothicregular"
+                                android:gravity="center"
+                                android:text="@string/adminMenu"
+                                android:textColor="@color/mainText" />
                         </LinearLayout>
                     </soup.neumorphism.NeumorphCardView>
 
@@ -175,6 +178,7 @@
                                 android:layout_height="35dp"
                                 android:src="@drawable/login" />
                             <TextView
+                                android:id="@+id/adminLoginTextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/adminLoginMenu"
@@ -185,6 +189,37 @@
                                 android:fontFamily="@font/nanumgothicregular"/>
                         </LinearLayout>
                     </soup.neumorphism.NeumorphCardView>
+                    <soup.neumorphism.NeumorphCardView
+                        style="@style/Widget.Neumorph.CardView"
+                        android:id="@+id/adminCreateAppQRBtnCardView"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp">
+                        <LinearLayout
+                            android:layout_width="101dp"
+                            android:layout_height="102dp"
+                            android:orientation="vertical"
+                            android:padding="15dp">
+
+                            <ImageView
+                                android:id="@+id/adminCreateAppQRImage"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/admin_call_ImageView"
+                                android:src="@drawable/appqrimage" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/nanumgothicregular"
+                                android:gravity="center"
+                                android:text="@string/adminCreateAppQR"
+                                android:textColor="@color/mainText" />
+                        </LinearLayout>
+                    </soup.neumorphism.NeumorphCardView>
+
                     <soup.neumorphism.NeumorphCardView
                         style="@style/Widget.Neumorph.CardView"
                         android:id="@+id/adminExitCardView"
@@ -241,6 +276,7 @@
                         android:padding="15dp"
                         app:neumorph_shapeType="pressed">
                         <EditText
+                            android:id="@+id/editTextFieldSearchMemberName"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
@@ -362,6 +398,7 @@
                             android:padding="15dp"
                             app:neumorph_shapeType="pressed">
                             <EditText
+                                android:id="@+id/editTextFieldPaymentSearchMemberName"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@android:color/transparent"

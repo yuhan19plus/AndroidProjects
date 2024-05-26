@@ -34,6 +34,7 @@
                 android:textColor="@color/yuhan"
                 android:text="@string/retouch_info_user"/>
             <TextView
+                android:id="@+id/id_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -60,6 +61,7 @@
 
             </LinearLayout>
             <TextView
+                android:id="@+id/pw_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
@@ -75,8 +77,10 @@
                 android:layout_marginStart="5dp"
                 android:background="@drawable/edittext_border"
                 android:textColor="@color/yuhan"
+                android:inputType="textPassword"
                 android:hint="@string/enter_pwd"/>
             <TextView
+                android:id="@+id/pwCk_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -92,6 +96,7 @@
                 android:layout_marginStart="5dp"
                 android:background="@drawable/edittext_border"
                 android:textColor="@color/yuhan"
+                android:inputType="textPassword"
                 android:hint="@string/enter_pwd"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -153,6 +158,7 @@
                     android:background="@drawable/edittext_border"
                     android:fontFamily="@font/font"
                     android:textColor="@color/yuhan"
+                    android:inputType="number"
                     android:hint="@string/first_num"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -169,6 +175,7 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edittext_border"
+                    android:inputType="number"
                     android:textColor="@color/yuhan"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -185,6 +192,7 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edittext_border"
+                    android:inputType="number"
                     android:textColor="@color/yuhan"/>
             </LinearLayout>
             <TextView
@@ -211,6 +219,7 @@
                     android:background="@drawable/edittext_border"
                     android:fontFamily="@font/font"
                     android:textColor="@color/yuhan"
+                    android:inputType="number"
                     android:hint="@string/year"/>
 
                 <EditText
@@ -222,6 +231,7 @@
                     android:background="@drawable/edittext_border"
                     android:fontFamily="@font/font"
                     android:textColor="@color/yuhan"
+                    android:inputType="number"
                     android:hint="@string/month"/>
 
                 <EditText
@@ -233,6 +243,7 @@
                     android:background="@drawable/edittext_border"
                     android:fontFamily="@font/font"
                     android:textColor="@color/yuhan"
+                    android:inputType="number"
                     android:hint="@string/day"/>
             </LinearLayout>
             <TextView

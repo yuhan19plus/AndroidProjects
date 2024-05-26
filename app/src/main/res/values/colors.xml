@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="mainText">#006961</color>
+    <color name="darkgray">#5D5D5D</color>
+    <color name="deepdarkgray">#353535</color>
+    <color name="gray">#BDBDBD</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#ECF0F3</color>

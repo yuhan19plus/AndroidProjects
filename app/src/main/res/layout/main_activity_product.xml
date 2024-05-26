@@ -19,33 +19,59 @@
         android:padding="10dp"
         app:justifyContent="space_between">
         <EditText
+            android:id="@+id/mainActivityProductEditTextFieldSearchProductName"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
+            android:background="@drawable/border4"
             android:fontFamily="@font/font"
             android:hint="@string/main_serch"
-            android:background="@drawable/main_glass1"/>
+            android:padding="5dp"
+            android:textColor="@color/deepdarkgray"
+            android:textColorHint="@color/darkgray" />
+        <ImageView
+            android:id="@+id/mainActivityProductSearchBtn"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:src="@drawable/pngwing"
+            android:background="@drawable/border4"
+            />
     </com.google.android.flexbox.FlexboxLayout>
     <!-- TabLayout 추가 -->
-    <com.google.android.flexbox.FlexboxLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        app:justifyContent="space_between">
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+        <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/glass2"/>
-    </com.google.android.flexbox.FlexboxLayout>
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/border5"
+            app:justifyContent="space_between">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_height="60dp"
+                android:background="@drawable/border4"/>
+        </com.google.android.flexbox.FlexboxLayout>
+    </LinearLayout>
     <!-- ViewPager2 추가 -->
-    <com.google.android.flexbox.FlexboxLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        app:justifyContent="space_between">
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
+        android:padding="10dp">
+        <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.google.android.flexbox.FlexboxLayout>
+            android:layout_height="match_parent"
+            android:background="@drawable/border5"
+            app:justifyContent="space_between">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.flexbox.FlexboxLayout>
+    </LinearLayout>
 </LinearLayout>
