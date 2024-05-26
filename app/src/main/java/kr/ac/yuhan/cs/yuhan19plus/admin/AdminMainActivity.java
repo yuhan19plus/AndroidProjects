@@ -66,118 +66,117 @@ public class AdminMainActivity extends AppCompatActivity {
     public int mode = 0;
 
     // Product Firebase
-    private FirebaseFirestore productDBFireStore;
-    private Uri productFileUri = null;
+    private FirebaseFirestore productDBFireStore; // 제품 Firebase
+    private Uri productFileUri = null; // 제품 파일 Uri
 
     // Member Firebase and Adapter
-    private FirebaseFirestore memberDBFireStore;
-    private MemberAdapter memberAdapter;
+    private FirebaseFirestore memberDBFireStore; // 회원 Firebase 및 어댑터
+    private MemberAdapter memberAdapter; // 회원 어댑터
 
     // Payment Firebase and Adapter
-    private FirebaseFirestore paymentDBFireStore;
-    private PayMentAdapter paymentAdapter;
+    private FirebaseFirestore paymentDBFireStore; // 결제 Firebase 및 어댑터
+    private PayMentAdapter paymentAdapter; // 결제 어댑터
 
-
-    // Session Object
+    // 세션 객체
     SharedPreferences sharedPreferences;
 
     private static final int PICK_FILE_REQUEST = 2; // 이미지 파일 선택을 위한 요청 코드
 
     // ViewFlipper
-    private ViewFlipper vFlipper;
+    private ViewFlipper vFlipper; // 뷰 플리퍼
 
-    // Basic Colors
-    private int backgroundColor;
-    private int mainBackgroundColor = Color.rgb(236, 240, 243); // 기본 main 배경색
-    private final int darkModeBackgroundColor = Color.rgb(97, 97, 97); // 다크모드 main 배경색
-    private final int btnColor = Color.rgb(0, 174, 142); // 기본 버튼 색
-    private final int radioButtonTextColor = Color.rgb(0, 105, 97); // radio버튼 text색
+    // 기본 색상
+    private int backgroundColor; // 배경 색상
+    private int mainBackgroundColor = Color.rgb(236, 240, 243); // 기본 메인 배경색
+    private final int darkModeBackgroundColor = Color.rgb(97, 97, 97); // 다크 모드 메인 배경색
+    private final int btnColor = Color.rgb(0, 174, 142); // 기본 버튼 색상
+    private final int radioButtonTextColor = Color.rgb(0, 105, 97); // 라디오 버튼 텍스트 색상
 
-    // Header ButtonImage
-    private NeumorphImageView admin_setting, changeMode;
+    // 헤더 버튼 이미지
+    private NeumorphImageView admin_setting, changeMode; // 관리자 설정, 모드 변경
 
-    // MainActivity CardView
-    private NeumorphCardView mainCardView, footer_menu;
+    // 메인 액티비티 카드뷰
+    private NeumorphCardView mainCardView, footer_menu; // 메인 카드뷰, 푸터 메뉴
 
-    // Footer Bar Menu
+    // 푸터 바 메뉴
     private NeumorphImageView
-            homeBtn,
-            memberBtn,
-            productBtn,
-            payHistoryBtn,
-            productPushBtn;
+            homeBtn, // 홈 버튼
+            memberBtn, // 회원 버튼
+            productBtn, // 제품 버튼
+            payHistoryBtn, // 결제 내역 버튼
+            productPushBtn; // 제품 푸시 버튼
 
-    // MemberManagement Page Menu
-    private ListView memberListView;
+    // 회원 관리 페이지 메뉴
+    private ListView memberListView; // 회원 리스트 뷰
     private NeumorphCardView
-            memberListCardView,
-            input_searchIdCardView;
-    private NeumorphButton memberSearchBtn;
-    private EditText editTextFieldSearchMemberName;
+            memberListCardView, // 회원 리스트 카드뷰
+            input_searchIdCardView; // ID 검색 카드뷰
+    private NeumorphButton memberSearchBtn; // 회원 검색 버튼
+    private EditText editTextFieldSearchMemberName; // 회원 이름 검색 입력란
 
-    // ProductManagement Page Menu
-    private ListView productListView;
+    // 제품 관리 페이지 메뉴
+    private ListView productListView; // 제품 리스트 뷰
     private NeumorphCardView
-            input_searchProductIdCardView,
-            productListCardView;
-    private ImageView imageViewProduct;
-    private NeumorphButton productSearchBtn;
-    private EditText editTextFieldSearchProductName;
+            input_searchProductIdCardView, // 제품 ID 검색 카드뷰
+            productListCardView; // 제품 리스트 카드뷰
+    private ImageView imageViewProduct; // 제품 이미지
+    private NeumorphButton productSearchBtn; // 제품 검색 버튼
+    private EditText editTextFieldSearchProductName; // 제품 이름 검색 입력란
 
     private String currentSearchText = ""; // 검색 창 초기값 설정
 
     // HOMEManagement Page Menu
     private NeumorphCardView
-            adminListBtnCardView,
-            adminScheduleBtnCardView,
-            adminCallBtnCardView,
-            adminLoginBtnCardView,
-            adminCreateAppQRBtnCardView,
-            adminExitCardView;
+            adminListBtnCardView, // 관리자 목록 카드뷰
+            adminScheduleBtnCardView, // 관리자 일정 카드뷰
+            adminCallBtnCardView, // 관리자 전화 카드뷰
+            adminLoginBtnCardView, // 관리자 로그인 카드뷰
+            adminCreateAppQRBtnCardView, // 앱 QR코드 생성 카드뷰
+            adminExitCardView; // 관리자 종료 카드뷰
     private ImageView
-            adminListImage,
-            adminScheduleImage,
-            adminCallImage,
-            adminLoginImage,
-            adminCreateAppQRImage,
-            adminExitImage;
+            adminListImage, // 관리자 목록 이미지
+            adminScheduleImage, // 관리자 일정 이미지
+            adminCallImage, // 관리자 전화 이미지
+            adminLoginImage, // 관리자 로그인 이미지
+            adminCreateAppQRImage, // 앱 QR코드 생성 이미지
+            adminExitImage; // 관리자 종료 이미지
 
     private TextView
-            adminLoginTextView;
+            adminLoginTextView; // 관리자 로그인 텍스트뷰
 
     // PaymentList Page Menu
-    private ListView paymentListView;
+    private ListView paymentListView; // 결제 리스트 뷰
     private NeumorphCardView
-            payListCardView,
-            input_searchPayIdCardView;
-    private NeumorphButton paySearchBtn;
-    private EditText editTextFieldPaymentSearchMemberName;
+            payListCardView, // 결제 리스트 카드뷰
+            input_searchPayIdCardView; // 결제 ID 검색 카드뷰
+    private NeumorphButton paySearchBtn; // 결제 검색 버튼
+    private EditText editTextFieldPaymentSearchMemberName; // 결제 회원 이름 검색 입력란
 
     // ProductRegister Page Menu
     private NeumorphCardView
-            input_productImageCardView,
-            input_productNameCardView,
-            input_productStockCardView,
-            input_productCategoryCardView,
-            input_productPriceCardView;
+            input_productImageCardView, // 제품 이미지 카드뷰
+            input_productNameCardView, // 제품 이름 카드뷰
+            input_productStockCardView, // 제품 재고 카드뷰
+            input_productCategoryCardView, // 제품 카테고리 카드뷰
+            input_productPriceCardView; // 제품 가격 카드뷰
     private EditText
-            editTextFieldProductName,
-            editTextFieldProductPrice,
-            editTextFieldProductStock;
-    private RadioGroup radioGroup;
+            editTextFieldProductName, // 제품 이름 입력란
+            editTextFieldProductPrice, // 제품 가격 입력란
+            editTextFieldProductStock; // 제품 재고 입력란
+    private RadioGroup radioGroup; // 라디오 그룹
     private RadioButton
-            categoryRadioBtn1,
-            categoryRadioBtn2,
-            categoryRadioBtn3;
+            categoryRadioBtn1, // 카테고리 라디오 버튼1
+            categoryRadioBtn2, // 카테고리 라디오 버튼2
+            categoryRadioBtn3; // 카테고리 라디오 버튼3
     private NeumorphButton
-            createQRBtn,
-            createProductBtn;
+            createQRBtn, // QR코드 생성 버튼
+            createProductBtn; // 제품 생성 버튼
 
     // 오자현 추가 부분
-    private String productCategory;
-    private ProductAdapter productAdapter;
-    private Handler handler = new Handler();
-    private Runnable runnable;
+    private String productCategory; // 제품 카테고리
+    private ProductAdapter productAdapter; // 제품 어댑터
+    private Handler handler = new Handler(); // 핸들러
+    private Runnable runnable; // 실행 가능한 객체
     private ArrayList<ProductData> productDataList = new ArrayList<>(); // 상품 정보를 담을 리스트
 
     @Override
@@ -190,7 +189,7 @@ public class AdminMainActivity extends AppCompatActivity {
         String categoryStr2 = getString(R.string.product_category2);
         String categoryStr3 = getString(R.string.product_category3);
 
-        // 리스트 뷰 셋팅
+        // 리스트 뷰 설정
         memberListView = findViewById(R.id.memberListView);
         productListView = findViewById(R.id.productListView);
         paymentListView = findViewById(R.id.payListView);
@@ -200,40 +199,40 @@ public class AdminMainActivity extends AppCompatActivity {
             productCategory = product_categoryDefault;
         }
 
-        // MemberAdapter 설정
+        // 회원 어댑터 설정
         memberAdapter = new MemberAdapter(this, new ArrayList<MemberData>());
         memberListView.setAdapter(memberAdapter);
 
-        // ProductAdapter 설정
+        // 제품 어댑터 설정
         productAdapter = new ProductAdapter(this, productDataList);
         productListView.setAdapter(productAdapter); // 리스트 뷰에 어댑터 설정
 
-        // PaymentAdapter 설정
+        // 결제 어댑터 설정
         paymentAdapter = new PayMentAdapter(this, new ArrayList<PaymentData>());
         paymentListView.setAdapter(paymentAdapter);
 
-        startAutoRefresh(); // 상품데이터 새로고침
+        startAutoRefresh(); // 상품 데이터 자동 새로고침
         loadItemsFromFireStore(); // 파이어베이스에서 상품명으로 검색하고 데이터를 읽어오는 메서드 호출
         productDBFireStore = FirebaseFirestore.getInstance();
 
         // ViewFlipper 설정
         vFlipper = findViewById(R.id.viewFlipper1);
 
-        // Main Layout 설정
+        // 메인 레이아웃 설정
         LinearLayout main = findViewById(R.id.main);
 
-        // Basic Background Color 설정
+        // 기본 배경 색상 설정
         backgroundColor = mainBackgroundColor;
         main.setBackgroundColor(backgroundColor);
 
         Drawable backgroundDrawable = main.getBackground();
         mainBackgroundColor = ((ColorDrawable) backgroundDrawable).getColor();
 
-        // MainActivity Header Id
+        // 메인 액티비티 헤더 ID
         admin_setting = findViewById(R.id.admin_setting);
         changeMode = findViewById(R.id.darkMode);
 
-        // Admin MainPage CardView Id
+        // 관리자 메인 페이지 카드뷰 ID
         adminListBtnCardView = findViewById(R.id.adminListBtnCardView);
         adminScheduleBtnCardView = findViewById(R.id.adminScheduleBtnCardView);
         adminCallBtnCardView = findViewById(R.id.adminCallBtnCardView);
@@ -241,7 +240,7 @@ public class AdminMainActivity extends AppCompatActivity {
         adminCreateAppQRBtnCardView = findViewById(R.id.adminCreateAppQRBtnCardView);
         adminExitCardView = findViewById(R.id.adminExitCardView);
 
-        // Admin MainPage ImageView Id
+        // 관리자 메인 페이지 이미지뷰 ID
         adminListImage = findViewById(R.id.adminListImage);
         adminScheduleImage = findViewById(R.id.adminScheduleImage);
         adminCallImage = findViewById(R.id.adminCallImage);
@@ -249,35 +248,33 @@ public class AdminMainActivity extends AppCompatActivity {
         adminCreateAppQRImage = findViewById(R.id.adminCreateAppQRImage);
         adminExitImage = findViewById(R.id.adminExitImage);
 
-        // Login/Logout TextView
+        // 로그인/로그아웃 텍스트뷰
         adminLoginTextView = (TextView) findViewById(R.id.adminLoginTextView);
 
-        // MainActivity CardView & Footer Id
+        // 메인 액티비티 카드뷰 & 푸터 ID
         mainCardView = findViewById(R.id.mainCardView);
         footer_menu = findViewById(R.id.footer_menu);
 
-        // Member Management Page Id
+        // 회원 관리 페이지 ID
         input_searchIdCardView = findViewById(R.id.input_searchIdCardView);
         editTextFieldSearchMemberName = findViewById(R.id.editTextFieldSearchMemberName);
         memberSearchBtn = findViewById(R.id.memberSearchBtn);
         memberListCardView = findViewById(R.id.memberListCardView);
 
-        // Product Management Page Id
+        // 제품 관리 페이지 ID
         input_searchProductIdCardView = findViewById(R.id.input_searchProductIdCardView);
         productSearchBtn = findViewById(R.id.productSearchBtn);
         productListCardView = findViewById(R.id.productListCardView);
         imageViewProduct = findViewById(R.id.imageViewProduct);
         editTextFieldSearchProductName = findViewById(R.id.editTextFieldSearchProductName);
 
-        // Payment List Page Id
+        // 결제 목록 페이지 ID
         input_searchPayIdCardView =findViewById(R.id.input_searchPayIdCardView);
         editTextFieldPaymentSearchMemberName = findViewById(R.id.editTextFieldPaymentSearchMemberName);
         paySearchBtn = findViewById(R.id.paySearchBtn);
         payListCardView = findViewById(R.id.payListCardView);
 
-
-
-        // ProductData Register Page Id
+        // 제품 등록 페이지 ID
         input_productImageCardView = findViewById(R.id.input_productImageCardView);
         input_productNameCardView = findViewById(R.id.input_productNameCardView);
         input_productStockCardView = findViewById(R.id.input_productStockCardView);
@@ -1396,8 +1393,6 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
-
-
     @Override
     public void onBackPressed() {
         // AlertDialog를 통해 사용자에게 종료 여부를 물음
@@ -1449,6 +1444,4 @@ public class AdminMainActivity extends AppCompatActivity {
             adminCreateAppQRBtnCardView.setVisibility(View.GONE);
         }
     }
-
-
 }
