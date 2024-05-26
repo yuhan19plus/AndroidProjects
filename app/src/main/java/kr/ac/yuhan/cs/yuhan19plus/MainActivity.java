@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Integer> imageList;
     private int currentPage = 0;
     private Timer timer;
-    private Button mainProductSearchBtn;
+    private ImageView mainProductSearchBtn;
     private EditText mainEditTextFieldSearchProductName;
     private ArrayList<MainProductData> productDataList = new ArrayList<>(); // 상품 정보를 담을 리스트
     private FirebaseAuth userDBFirebaseAuth;

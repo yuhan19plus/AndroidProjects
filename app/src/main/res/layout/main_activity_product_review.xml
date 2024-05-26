@@ -23,7 +23,7 @@
         android:layout_height="600dp"
         android:orientation="vertical"
         android:padding="30dp"
-        android:background="@drawable/glass1">
+        android:background="@drawable/border4">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:fontFamily="@font/font"
-            android:textSize="42sp"
+            android:textSize="38sp"
             android:textStyle="bold"
             android:textColor="@color/black" />
         <TextView
@@ -46,11 +46,15 @@
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:numStars="5"
             android:stepSize="1.0"
             android:rating="0"
-            android:isIndicator="false"
-            android:layout_margin="16dp"/>
+            android:progressTint="#FFD700"
+            android:progressBackgroundTint="#80B0B0B0"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:isIndicator="false" />
         <!--
         별점 Test를 위한 TextView
         <TextView
@@ -67,18 +71,20 @@
             android:layout_height="0dp"
             android:layout_weight="3"
             android:fontFamily="@font/font"
+            android:textColorHint="#5D5D5D"
             android:hint="@string/productReview_contentMessage"
             android:background="@color/white"
             android:textColor="@color/black"
             android:gravity="top"
             android:padding="10dp"/>
-        <Button
+        <android.widget.Button
             android:id="@+id/submitReviewButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font"
             android:text="@string/productReview_btn"
-            android:textColor="@color/black"
+            android:background="@drawable/button_background"
+            android:textColor="@color/white"
             android:layout_marginTop="16dp"/>
     </LinearLayout>
 </LinearLayout>

@@ -35,7 +35,7 @@ import kr.ac.yuhan.cs.yuhan19plus.main.data.MainProductData;
 
 public class MainProductActivity extends AppCompatActivity {
 
-    private Button mainActivityProductSearchbtn;
+    private ImageView mainActivityProductSearchbtn;
     private EditText mainActivityProductEditTextFieldSearchProductName;
     private ArrayList<MainProductData> productDataList = new ArrayList<>(); // 상품 정보를 담을 리스트
 
