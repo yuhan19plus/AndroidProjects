@@ -69,7 +69,7 @@ public class MainProductCustomAdapter extends BaseAdapter {
 
         // 가격 설정
         TextView priceView = convertView.findViewById(R.id.item_price);
-        priceView.setText(String.valueOf(product.getPrice())); // 가격을 문자열로 변환하여 설정
+        priceView.setText(String.valueOf(product.getPrice()+" 원")); // 가격을 문자열로 변환하여 설정
 
         return convertView;
     }

@@ -17,6 +17,7 @@
                 android:id="@+id/Close_Register_Btn"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:contentDescription="@string/backBtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/back"/>
@@ -51,6 +52,7 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="5dp"
+                    android:autofillHints="emailAddress"
                     android:background="@drawable/edittext_border"
                     android:fontFamily="@font/font"
                     android:inputType="textEmailAddress"
@@ -84,6 +86,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
+                android:autofillHints="password"
                 android:background="@drawable/edittext_border"
                 android:fontFamily="@font/font"
                 android:inputType="textPassword"
@@ -108,6 +111,7 @@
                 android:background="@drawable/edittext_border"
                 android:fontFamily="@font/font"
                 android:inputType="textPassword"
+                android:autofillHints="password"
                 android:textColor="@color/yuhan"
                 android:hint="@string/enter_pwd"/>
             <!--이름-->
@@ -129,21 +133,12 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="5dp"
+                    android:autofillHints="username"
+                    android:inputType="text"
                     android:background="@drawable/edittext_border"
                     android:fontFamily="@font/font"
                     android:textColor="@color/yuhan"
                     android:hint="@string/using_name"/>
-                <android.widget.Button
-                    android:id="@+id/Register_Name_Check"
-                    android:layout_width="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/button_background"
-                    android:fontFamily="@font/font"
-                    android:textColor="@color/white"
-                    android:text="@string/double_check"
-                    />
             </LinearLayout>
             <!--전화번호-->
             <TextView
@@ -167,10 +162,11 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="5dp"
+                    android:autofillHints="phone"
                     android:background="@drawable/edittext_border"
                     android:textColor="@color/yuhan"
                     android:fontFamily="@font/font"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:hint="@string/first_num"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -186,9 +182,10 @@
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
+                    android:autofillHints="phone"
                     android:fontFamily="@font/font"
                     android:background="@drawable/edittext_border"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:textColor="@color/yuhan"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -205,8 +202,9 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/font"
+                    android:autofillHints="phone"
                     android:background="@drawable/edittext_border"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:textColor="@color/yuhan" />
             </LinearLayout>
             <!--생년월일-->
@@ -231,6 +229,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/font"
+                    android:autofillHints="@string/year"
                     android:background="@drawable/edittext_border"
                     android:inputType="number"
                     android:textColor="@color/yuhan"
@@ -246,6 +245,7 @@
                     android:background="@drawable/edittext_border"
                     android:inputType="number"
                     android:textColor="@color/yuhan"
+                    android:autofillHints="@string/month"
                     android:hint="@string/month"/>
 
                 <EditText
@@ -258,6 +258,7 @@
                     android:background="@drawable/edittext_border"
                     android:inputType="number"
                     android:textColor="@color/yuhan"
+                    android:autofillHints="@string/day"
                     android:hint="@string/day"/>
             </LinearLayout>
             <TextView
@@ -281,8 +282,10 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="5dp"
+                    android:inputType="text"
                     android:background="@drawable/edittext_border"
                     android:textColor="@color/yuhan"
+                    android:autofillHints="@string/address"
                     android:hint="@string/address"/>
 
                 <EditText
@@ -294,6 +297,8 @@
                     android:fontFamily="@font/font"
                     android:background="@drawable/edittext_border"
                     android:textColor="@color/yuhan"
+                    android:inputType="text"
+                    android:autofillHints="@string/detail_address"
                     android:hint="@string/detail_address"/>
             </LinearLayout>
             <!--회원가입 버튼-->

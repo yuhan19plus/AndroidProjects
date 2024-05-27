@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@drawable/main_background"
-    android:contentDescription="Product Image"
+    android:contentDescription="@string/app_name"
     app:layout_constraintLeft_toRightOf="parent"
     app:layout_constraintRight_toLeftOf="parent"
     android:orientation="vertical">
@@ -31,6 +31,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:padding="25dp"
+                android:contentDescription="@string/setting"
                 android:src="@drawable/setting" />
 
             <TextView
@@ -57,18 +58,12 @@
     </LinearLayout>
 
     <!--중단-->
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:padding="10dp"
         android:orientation="vertical">
-        <!-- 로그인 페이지 -->
-        <FrameLayout
-            android:id="@+id/login_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"/>
         <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,6 +74,7 @@
                 android:id="@+id/mainEditTextFieldSearchProductName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:inputType="text"
                 android:textColor="@color/deepdarkgray"
                 android:textColorHint="@color/darkgray"
                 android:layout_marginEnd="5dp"
@@ -87,6 +83,7 @@
                 android:hint="@string/main_serch" />
             <ImageView
                 android:id="@+id/mainProductSearchBtn"
+                android:contentDescription="@string/search"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:padding="5dp"
@@ -97,13 +94,12 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
             android:layout_gravity="center">
 
             <!--광고 배너-->
             <com.google.android.flexbox.FlexboxLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/border5"
                 android:padding="10dp"
                 app:alignItems="center"
@@ -111,22 +107,39 @@
                 android:layout_gravity="bottom">
                 <androidx.viewpager2.widget.ViewPager2
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="175dp"
                     android:id="@+id/viewPager" />
             </com.google.android.flexbox.FlexboxLayout>
-
+            <!-- 로그인 페이지 -->
+            <FrameLayout
+                android:id="@+id/login_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"/>
         </FrameLayout>
-    </LinearLayout>
+    </FrameLayout>
 
     <!--상품 칸-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textColor="@color/yuhan"
+            android:background="@drawable/border6"
+            android:text="@string/new_product"/>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="2.5dp"
             android:layout_gravity="center"
             android:background="@drawable/border6">
 
@@ -134,11 +147,7 @@
                 android:id="@+id/Product_viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp" />
-            <FrameLayout
-                android:id="@+id/mypage_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:padding="5dp"/>
         </FrameLayout>
     </LinearLayout>
     <!--하단-->
@@ -164,6 +173,7 @@
                 android:id="@+id/store_location_Btn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:contentDescription="@string/store_location_Btn"
                 android:background="@drawable/border4"
                 android:src="@drawable/main_store_location"
                 />
@@ -173,6 +183,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/border4"
+                android:contentDescription="@string/product_Btn"
                 android:src="@drawable/main_item"
                 />
 
@@ -180,11 +191,13 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/border4"
+                android:contentDescription="@string/main_text"
                 android:src="@drawable/main_yuhan_logo"
                 />
 
             <ImageView
                 android:id="@+id/payment_Btn"
+                android:contentDescription="@string/payment_Btn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/main_payment"
@@ -192,6 +205,7 @@
                 />
 
             <ImageView
+                android:contentDescription="@string/mypage_Btn"
                 android:id="@+id/mypage_Btn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"

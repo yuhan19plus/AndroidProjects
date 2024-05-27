@@ -52,6 +52,8 @@ public class MainProductActivity extends AppCompatActivity {
                 loadItemsFromFireStore();
             }
         });
+
+        //상품 페이지 창 닫기 및 뷰페이저2 탭레이아웃 설정 <이정민>
         // 메인 페이지 이동 부분
         ImageView imageView = findViewById(R.id.Close_Product_Btn);
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +136,7 @@ public class MainProductActivity extends AppCompatActivity {
                             String category = document.getString("productCategory");
                             String imageUrl = document.getString("productImage");
                             int price = document.getLong("productPrice").intValue();
+
 
                             // 이미지 URL이 null이거나 비어있으면 기본 이미지 URL을 사용합니다.
                             if (imageUrl == null || imageUrl.isEmpty()) {

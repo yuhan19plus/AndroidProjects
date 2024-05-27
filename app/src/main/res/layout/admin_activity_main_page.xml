@@ -496,8 +496,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:inputType="number"
-                                android:autofillHints="product_count"
-                                android:hint="@string/product_count"
+                                android:autofillHints="@string/product_stock"
+                                android:hint="@string/product_stock"
                                 android:textColor="@color/mainText"/>
                         </soup.neumorphism.NeumorphCardView>
                         <soup.neumorphism.NeumorphCardView

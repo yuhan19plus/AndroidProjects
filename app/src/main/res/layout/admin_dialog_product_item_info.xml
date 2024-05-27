@@ -1,53 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
+    android:stretchColumns="1"
     android:padding="20dp">
 
-    <ImageView
-        android:id="@+id/imageViewProductImage"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="10dp" />
-
-    <TextView
-        android:id="@+id/textViewProductCode"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="10dp"/>
+        android:paddingBottom="10dp">
+        <ImageView
+            android:id="@+id/imageViewProductImage"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center_horizontal"
+            android:contentDescription="@string/product_image"
+            android:layout_marginBottom="10dp" />
+    </TableRow>
 
-    <TextView
-        android:id="@+id/textViewProductName"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/product_code"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/textViewProductCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp"/>
+    </TableRow>
 
-    <TextView
-        android:id="@+id/textViewProductCategory"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:paddingBottom="5dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/product_name"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/textViewProductName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+    </TableRow>
 
-    <TextView
-        android:id="@+id/textViewProductStock"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:paddingBottom="5dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/category"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/textViewProductCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+    </TableRow>
 
-    <TextView
-        android:id="@+id/textViewProductPrice"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"/>
-</LinearLayout>
+        android:paddingBottom="5dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/product_stock"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/textViewProductStock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/price"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/textViewProductPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+    </TableRow>
+
+</TableLayout>

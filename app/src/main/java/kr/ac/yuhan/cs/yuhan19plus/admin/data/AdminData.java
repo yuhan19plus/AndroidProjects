@@ -1,5 +1,8 @@
 package kr.ac.yuhan.cs.yuhan19plus.admin.data;
 
+/** 담당자 임성준
+ * 임성준 작성
+ * */
 public class AdminData {
     // Admin Data Field
     private int adminNum;

@@ -12,6 +12,7 @@
         android:layout_marginBottom="5dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:contentDescription="@string/backBtn"
         android:src="@drawable/back"/>
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
@@ -24,6 +25,7 @@
             android:layout_height="50dp"
             android:background="@drawable/border4"
             android:fontFamily="@font/font"
+            android:inputType="text"
             android:hint="@string/main_serch"
             android:padding="5dp"
             android:textColor="@color/deepdarkgray"
@@ -33,6 +35,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:padding="5dp"
+            android:contentDescription="@string/search"
             android:src="@drawable/pngwing"
             android:background="@drawable/border4"
             />

@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">QrSystem</string>
+    <string name="setting">설정</string>
+    <string name="qrcode">qrcode</string>
+    <string name="search">검색</string>
+    <string name="close">닫기</string>
+    <string name="plus">plus</string>
+    <string name="minus">minus</string>
 
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_id">Admin ID</string>
@@ -35,9 +41,9 @@
     <string name="todoDate">todoDate</string>
 
     <!-- admin_list.xml -->
-    <string name="admin_list_item_adminNum">AdminNum</string>
-    <string name="admin_list_item_adminId">AdminId</string>
-    <string name="admin_list_item_adminPosition">AdminPosition</string>
+    <string name="admin_list_item_adminNum">관리자 번호</string>
+    <string name="admin_list_item_adminId">관리자 ID</string>
+    <string name="admin_list_item_adminPosition">관리자 직책</string>
 
     <!-- Setting.xml -->
     <string name="setting_adminId">관리자 Id</string>
@@ -84,7 +90,24 @@
     <string name="memberOut_ImageView">memberOut_ImageView</string>
 
     <!-- Member 메뉴 -->
-    <string name="search">검색</string>
+
+    <!-- 회원관리 모달창 -->
+    <string name="memberId">회원아이디</string>
+    <string name="joinDate">가입날짜</string>
+    <string name="memberPoint">보유포인트</string>
+
+    <!-- 상품관리 모달창 -->
+    <string name="product_code">상품코드</string>
+    <string name="product_stock">상품재고</string>
+
+    <!-- 결제내역 모달창 -->
+    <string name="receipt_id">영수증 ID</string>
+    <string name="user_id">사용자 ID</string>
+    <string name="user_email">사용자 이메일</string>
+    <string name="products">제품</string>
+    <string name="total_price">총 가격</string>
+    <string name="use_points">사용 포인트</string>
+    <string name="payment_date">결제 날짜</string>
 
     <!-- ProductData Management Menu -->
     <string name="productSearchIdHint">상품명을 입력하세요</string>
@@ -99,7 +122,6 @@
     <string name="product_category1">문구류</string>
     <string name="product_category2">생필품</string>
     <string name="product_category3">주방 도구</string>
-    <string name="product_count">상품 재고</string>
     <string name="product_price">상품 가격</string>
     <string name="create_QR">QR 생성</string>
     <string name="product_register_btn">상품 등록</string>
@@ -108,8 +130,8 @@
     <string name="admin_form_title">관리자 등록</string>
     <string name="admin_form_editTextIdField">Admin Id</string>
     <string name="admin_form_editTextPwField">Admin Pw</string>
-    <string name="admin_form_editTextPositionField">Admin Position</string>
-    <string name="admin_form_adminAddBtn">Admin Register</string>
+    <string name="admin_form_editTextPositionField">관리자 직책</string>
+    <string name="admin_form_adminAddBtn">관리자 등록</string>
 
     <!-- member_list.xml -->
     <string name="member_list_item_memberNum">memberNum</string>
@@ -129,7 +151,13 @@
 
     <!-- main_activity_page -->
     <string name="main_logo">YUHAN19+</string>
+    <string name="new_product">최신 상품</string>
     <string name="main_serch">검색어를 입력해 주세요</string>
+    <string name="store_location_Btn">매장위치</string>
+    <string name="payment_Btn">결제</string>
+    <string name="product_Btn">상품</string>
+    <string name="mypage_Btn">회원정보</string>
+    <string name="admin_code">admin_code</string>
 
     <!-- main_activity_login.xml -->
     <string name="close_login">닫기</string>
