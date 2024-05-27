@@ -52,7 +52,7 @@ public class MainPopularProductPagerAdapter extends RecyclerView.Adapter<MainPop
             holder.productImage.setImageResource(R.drawable.default_image);
         }
         holder.productName.setText(product.getName()); // 제품 이름 설정
-        holder.productPrice.setText(String.valueOf(product.getPrice())); // 제품 가격 설정
+        holder.productPrice.setText(String.valueOf(product.getPrice()+" 원")); // 제품 가격 설정
 
         // 클릭 이벤트 처리: 제품을 클릭하면 제품 상세 화면으로 이동
         holder.itemView.setOnClickListener(v -> {
