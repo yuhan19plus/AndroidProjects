@@ -61,8 +61,13 @@ import soup.neumorphism.NeumorphButton;
 import soup.neumorphism.NeumorphCardView;
 import soup.neumorphism.NeumorphImageView;
 
+/** 담당자 임성준, 이석재, 오자현
+ * 초기 작성 및 관리자 전체 UI담당 및 다크모드 기능 구현 임성준.
+ * 회원관리 기능, 결제내역 기능 구현 이석재
+ * 상품관리 기능, 상품등록 기능 구현 오자현
+ * */
 public class AdminMainActivity extends AppCompatActivity {
-    // 상수 선언
+    // 상수 선언 - 이석재 오자현
     private static final int PICK_FILE_REQUEST = 2;
     private static final int MAIN_CHILD_INDEX = 0;
     private static final int MEMBER_CHILD_INDEX = 1;
@@ -70,7 +75,7 @@ public class AdminMainActivity extends AppCompatActivity {
     private static final int PAYMENT_CHILD_INDEX = 3;
     private static final int PRODUCT_PUSH_CHILD_INDEX = 4;
 
-    // 다크/라이트 모드 초기값
+    // 다크/라이트 모드 초기값 & 기본색상 설정 - 임성준
     private int mode = 0;
     private int backgroundColor;
     private int mainBackgroundColor = Color.rgb(236, 240, 243);
@@ -78,7 +83,7 @@ public class AdminMainActivity extends AppCompatActivity {
     private final int btnColor = Color.rgb(0, 174, 142);
     private final int radioButtonTextColor = Color.rgb(0, 105, 97);
 
-    // Firebase 인스턴스 및 어댑터
+    // Firebase 인스턴스 및 어댑터 - 임성준 오자현 이석재
     private FirebaseFirestore productDBFireStore;
     private FirebaseFirestore memberDBFireStore;
     private FirebaseFirestore paymentDBFireStore;
@@ -87,71 +92,55 @@ public class AdminMainActivity extends AppCompatActivity {
     private PayMentAdapter paymentAdapter;
     private ProductAdapter productAdapter;
 
-    // UI 요소
+    // UI 요소 - 임성준
     // 뷰 플리퍼 (여러 화면 전환을 위한 뷰 그룹)
     private ViewFlipper vFlipper;
-
     // 관리자 설정 및 모드 변경을 위한 이미지 뷰
     private NeumorphImageView admin_setting, changeMode;
-
     // 메인 카드뷰 및 푸터 메뉴
     private NeumorphCardView mainCardView, footer_menu;
-
     // 이미지 뷰 - 홈, 회원, 제품, 결제 내역, 제품 푸시 버튼
     private NeumorphImageView homeBtn, memberBtn, productBtn, payHistoryBtn, productPushBtn;
-
     // 회원, 제품, 결제 목록을 표시하는 리스트 뷰
     private ListView memberListView, productListView, paymentListView;
-
     // 회원 리스트 카드뷰, ID 검색 카드뷰, 회원 검색 버튼
     private NeumorphCardView memberListCardView, input_searchIdCardView;
     private NeumorphButton memberSearchBtn;
-
     // 회원 이름 검색 입력란
     private EditText editTextFieldSearchMemberName;
-
     // 제품 ID 검색 카드뷰, 제품 리스트 카드뷰, 제품 이미지 뷰, 제품 검색 버튼
     private NeumorphCardView input_searchProductIdCardView, productListCardView;
     private ImageView imageViewProduct;
     private NeumorphButton productSearchBtn;
-
     // 제품 이름 검색 입력란
     private EditText editTextFieldSearchProductName;
-
     // 관리자 버튼 카드뷰들 (관리자 목록, 일정, 전화, 로그인, QR코드 생성, 종료)
     private NeumorphCardView adminListBtnCardView, adminScheduleBtnCardView, adminCallBtnCardView, adminLoginBtnCardView, adminCreateAppQRBtnCardView, adminExitCardView;
-
     // 관리자 이미지 뷰들 (관리자 목록, 일정, 전화, 로그인, QR코드 생성, 종료)
     private ImageView adminListImage, adminScheduleImage, adminCallImage, adminLoginImage, adminCreateAppQRImage, adminExitImage;
-
     // 관리자 로그인 텍스트뷰
     private TextView adminLoginTextView;
-
     // 결제 목록 카드뷰, 결제 ID 검색 카드뷰, 결제 검색 버튼
     private NeumorphCardView payListCardView, input_searchPayIdCardView;
     private NeumorphButton paySearchBtn;
-
     // 결제 회원 이름 검색 입력란
     private EditText editTextFieldPaymentSearchMemberName;
-
     // 제품 이미지 카드뷰, 제품 이름 카드뷰, 제품 재고 카드뷰, 제품 카테고리 카드뷰, 제품 가격 카드뷰
     private NeumorphCardView input_productImageCardView, input_productNameCardView, input_productStockCardView, input_productCategoryCardView, input_productPriceCardView;
-
     // 제품 이름, 가격, 재고 입력란
     private EditText editTextFieldProductName, editTextFieldProductPrice, editTextFieldProductStock;
-
     // 라디오 그룹 및 카테고리 라디오 버튼
     private RadioGroup radioGroup;
     private RadioButton categoryRadioBtn1, categoryRadioBtn2, categoryRadioBtn3;
-
     // QR코드 생성 버튼 및 제품 생성 버튼
     private NeumorphButton createQRBtn, createProductBtn;
 
-    // 데이터 및 핸들러
+    // 데이터 및 핸들러 - 오자현
     private String productCategory;
     private String currentSearchText = "";
     private Handler handler = new Handler();
     private ArrayList<ProductData> productDataList = new ArrayList<>();
+
     // 세션 객체
     SharedPreferences sharedPreferences;
 
@@ -173,7 +162,7 @@ public class AdminMainActivity extends AppCompatActivity {
         loadItemsFromFireStore();
     }
 
-    // UI 요소 초기화 메서드
+    // UI 요소 초기화 메서드 - 임성준 이석재 작성. 오자현 리팩토링
     private void initUI() {
         vFlipper = findViewById(R.id.viewFlipper1);
         LinearLayout main = findViewById(R.id.main);
@@ -261,7 +250,7 @@ public class AdminMainActivity extends AppCompatActivity {
         updateLoginStatus();
     }
 
-    // 어댑터 초기화 메서드
+    // 어댑터 초기화 메서드 - 임성준 이석재 오자현
     private void initAdapters() {
         memberAdapter = new MemberAdapter(this, new ArrayList<MemberData>());
         memberListView = findViewById(R.id.memberListView);
@@ -276,14 +265,14 @@ public class AdminMainActivity extends AppCompatActivity {
         paymentListView.setAdapter(paymentAdapter);
     }
 
-    // Firebase 초기화 메서드
+    // Firebase 초기화 메서드 - 이석재 오자현
     private void initFirebase() {
         productDBFireStore = FirebaseFirestore.getInstance();
         memberDBFireStore = FirebaseFirestore.getInstance();
         paymentDBFireStore = FirebaseFirestore.getInstance();
     }
 
-    // 리스너 설정 메서드
+    // 리스너 설정 메서드 - 임성준 작성. 오자현 리팩토링
     private void setupListeners() {
         admin_setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -447,7 +436,7 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
-    // 버튼 색상 설정 메서드
+    // 버튼 색상 설정 메서드 - 임성준 작성. 오자현 리팩토링
     private void setButtonColors() {
         memberSearchBtn.setBackgroundColor(btnColor);
         productSearchBtn.setBackgroundColor(btnColor);
@@ -456,14 +445,14 @@ public class AdminMainActivity extends AppCompatActivity {
         createProductBtn.setBackgroundColor(btnColor);
     }
 
-    // 라디오 버튼 색상 설정 메서드
+    // 라디오 버튼 색상 설정 메서드 - 임성준 작성. 오자현 리팩토링
     private void setRadioButtonColors() {
         categoryRadioBtn1.setTextColor(radioButtonTextColor);
         categoryRadioBtn2.setTextColor(radioButtonTextColor);
         categoryRadioBtn3.setTextColor(radioButtonTextColor);
     }
 
-    // 로그인 상태 업데이트 메서드
+    // 로그인 상태 업데이트 메서드 - 이석재 작성. 오자현 리팩토링
     private void updateLoginStatus() {
         String adminId = sharedPreferences.getString("admin_id", null);
         if (adminId != null) {
@@ -475,7 +464,7 @@ public class AdminMainActivity extends AppCompatActivity {
         }
     }
 
-    // 관리자 버튼 표시 설정 메서드
+    // 관리자 버튼 표시 설정 메서드 - 임성준 이석재 작성. 오자현 리팩토링
     private void showAdminButtons(boolean isVisible) {
         int visibility = isVisible ? View.VISIBLE : View.GONE;
         adminListBtnCardView.setVisibility(visibility);
@@ -484,7 +473,7 @@ public class AdminMainActivity extends AppCompatActivity {
         adminCreateAppQRBtnCardView.setVisibility(visibility);
     }
 
-    // 설정 버튼 클릭 핸들러
+    // 설정 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleSettingClick() {
         admin_setting.setShapeType(1);
         postDelayedShapeChange(admin_setting);
@@ -495,7 +484,7 @@ public class AdminMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // 모드 변경 버튼 클릭 핸들러
+    // 모드 변경 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleChangeModeClick() {
         changeMode.setShapeType(1);
         postDelayedShapeChange(changeMode);
@@ -508,7 +497,7 @@ public class AdminMainActivity extends AppCompatActivity {
         }
     }
 
-    // 다크 모드 적용 메서드
+    // 다크 모드 적용 메서드 - 임성준 작성. 오자현 리팩토링
     private void applyDarkMode() {
         backgroundColor = darkModeBackgroundColor;
         LinearLayout main = findViewById(R.id.main);
@@ -519,7 +508,7 @@ public class AdminMainActivity extends AppCompatActivity {
         mode++;
     }
 
-    // 라이트 모드 적용 메서드
+    // 라이트 모드 적용 메서드 - 임성준 작성. 오자현 리팩토링
     private void applyLightMode() {
         backgroundColor = mainBackgroundColor;
         LinearLayout main = findViewById(R.id.main);
@@ -530,7 +519,7 @@ public class AdminMainActivity extends AppCompatActivity {
         mode--;
     }
 
-    // 다크 모드 스타일 적용 메서드
+    // 다크 모드 스타일 적용 메서드 - 임성준 작성. 오자현 리팩토링
     private void applyDarkModeStyles() {
         applyCardViewDarkShadow(mainCardView, footer_menu);
         applyCardViewDarkShadow(input_searchIdCardView, memberSearchBtn, memberListCardView);
@@ -544,7 +533,7 @@ public class AdminMainActivity extends AppCompatActivity {
         applyColorFilterDark(changeMode);
     }
 
-    // 라이트 모드 스타일 적용 메서드
+    // 라이트 모드 스타일 적용 메서드 - 임성준 작성. 오자현 리팩토링
     private void applyLightModeStyles() {
         applyCardViewLightShadow(mainCardView, footer_menu);
         applyCardViewLightShadow(input_searchIdCardView, memberSearchBtn, memberListCardView);
@@ -558,7 +547,7 @@ public class AdminMainActivity extends AppCompatActivity {
         applyColorFilterLight(changeMode);
     }
 
-    // 관리자 목록 버튼 클릭 핸들러
+    // 관리자 목록 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleAdminListClick() {
         adminListBtnCardView.setShapeType(1);
         postDelayedShapeChange(adminListBtnCardView);
@@ -568,7 +557,7 @@ public class AdminMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // 관리자 일정 버튼 클릭 핸들러
+    // 관리자 일정 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleAdminScheduleClick() {
         adminScheduleBtnCardView.setShapeType(1);
         postDelayedShapeChange(adminScheduleBtnCardView);
@@ -578,7 +567,7 @@ public class AdminMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // 관리자 전화 버튼 클릭 핸들러
+    // 관리자 전화 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleAdminCallClick() {
         adminCallBtnCardView.setShapeType(1);
         postDelayedShapeChange(adminCallBtnCardView);
@@ -586,7 +575,7 @@ public class AdminMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // 관리자 로그인 버튼 클릭 핸들러
+    // 관리자 로그인 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleAdminLoginClick() {
         adminLoginBtnCardView.setShapeType(1);
         postDelayedShapeChange(adminLoginBtnCardView);
@@ -598,25 +587,25 @@ public class AdminMainActivity extends AppCompatActivity {
         }
     }
 
-    // 앱 QR 생성 버튼 클릭 핸들러
+    // 앱 QR 생성 버튼 클릭 핸들러 - 오자현
     private void handleCreateAppQRClick() {
         Intent intentCreateAppQR = new Intent(AdminMainActivity.this, AdminCreateAppQR.class);
         startActivity(intentCreateAppQR);
     }
 
-    // 관리자 종료 버튼 클릭 핸들러
+    // 관리자 종료 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleAdminExitClick() {
         showExitDialog();
     }
 
-    // 홈 버튼 클릭 핸들러
+    // 홈 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleHomeClick() {
         homeBtn.setShapeType(1);
         postDelayedShapeChange(homeBtn);
         vFlipper.setDisplayedChild(MAIN_CHILD_INDEX);
     }
 
-    // 회원 버튼 클릭 핸들러
+    // 회원 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleMemberClick() {
         memberBtn.setShapeType(1);
         postDelayedShapeChange(memberBtn);
@@ -625,13 +614,13 @@ public class AdminMainActivity extends AppCompatActivity {
         vFlipper.setDisplayedChild(MEMBER_CHILD_INDEX);
     }
 
-    // 회원 리스트 아이템 클릭 핸들러
+    // 회원 리스트 아이템 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleMemberItemClick(int position) {
         MemberData selectedItem = (MemberData) memberAdapter.getItem(position);
         showMemberInfoDialog(selectedItem);
     }
 
-    // 제품 버튼 클릭 핸들러
+    // 제품 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleProductClick() {
         productBtn.setShapeType(1);
         postDelayedShapeChange(productBtn);
@@ -639,13 +628,13 @@ public class AdminMainActivity extends AppCompatActivity {
         vFlipper.setDisplayedChild(PRODUCT_CHILD_INDEX);
     }
 
-    // 제품 리스트 아이템 클릭 핸들러
+    // 제품 리스트 아이템 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleProductItemClick(int position) {
         ProductData selectedItem = productDataList.get(position);
         showProductInfoDialog(selectedItem);
     }
 
-    // 제품 검색 버튼 클릭 핸들러
+    // 제품 검색 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handleProductSearch() {
         String searchText = editTextFieldSearchProductName.getText().toString();
         editTextFieldSearchProductName.setText("");
@@ -654,7 +643,7 @@ public class AdminMainActivity extends AppCompatActivity {
         currentSearchText = "";
     }
 
-    // 결제 내역 버튼 클릭 핸들러
+    // 결제 내역 버튼 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handlePayHistoryClick() {
         payHistoryBtn.setShapeType(1);
         postDelayedShapeChange(payHistoryBtn);
@@ -663,19 +652,19 @@ public class AdminMainActivity extends AppCompatActivity {
         fetchPaymentData();
     }
 
-    // 결제 리스트 아이템 클릭 핸들러
+    // 결제 리스트 아이템 클릭 핸들러 - 임성준 작성. 오자현 리팩토링
     private void handlePaymentItemClick(int position) {
         PaymentData selectedItem = (PaymentData) paymentAdapter.getItem(position);
         showPaymentInfoDialog(selectedItem);
     }
 
-    // 제품 생성 버튼 클릭 핸들러
+    // 제품 생성 버튼 클릭 핸들러 - 오자현
     private void handleCreateProduct() {
         Toast.makeText(this, "서버와 연동으로 인해 약간의 딜레이가 발생할 수 있습니다.", Toast.LENGTH_SHORT).show();
         uploadFileAndSaveProductInfo();
     }
 
-    // 라디오 그룹 체크 변경 핸들러
+    // 라디오 그룹 체크 변경 핸들러 - 오자현
     private void handleRadioGroupCheck(int checkedId) {
         if (checkedId == R.id.categoryRadioBtn1) {
             productCategory = getString(R.string.product_category1);
@@ -686,7 +675,7 @@ public class AdminMainActivity extends AppCompatActivity {
         }
     }
 
-    // 제품 푸시 버튼 클릭 핸들러
+    // 제품 푸시 버튼 클릭 핸들러 - 오자현
     private void handleProductPushClick() {
         productPushBtn.setShapeType(1);
         postDelayedShapeChange(productPushBtn);
@@ -694,7 +683,7 @@ public class AdminMainActivity extends AppCompatActivity {
         vFlipper.setDisplayedChild(PRODUCT_PUSH_CHILD_INDEX);
     }
 
-    // 관리자 로그인 여부 확인 메서드
+    // 관리자 로그인 여부 확인 메서드 - 이석재 작성. 오자현 리팩토링
     private boolean isAdminLoggedIn() {
         sharedPreferences = getSharedPreferences("AdminSession", MODE_PRIVATE);
         String adminId = sharedPreferences.getString("admin_id", null);
@@ -705,7 +694,7 @@ public class AdminMainActivity extends AppCompatActivity {
         return true;
     }
 
-    // 관리자 로그아웃 메서드
+    // 관리자 로그아웃 메서드 - 이석재 작성. 오자현 리팩토링
     private void performLogout() {
         sharedPreferences = getSharedPreferences("AdminSession", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -716,7 +705,7 @@ public class AdminMainActivity extends AppCompatActivity {
         Toast.makeText(this, "관리자 로그아웃을 완료했습니다.", Toast.LENGTH_SHORT).show();
     }
 
-    // 관리자 로그인 페이지로 이동 메서드
+    // 관리자 로그인 페이지로 이동 메서드 - 임성준 작성. 오자현 리팩토링
     private void navigateToAdminLogin() {
         Intent intent = new Intent(getApplicationContext(), AdminLoginActivity.class);
         intent.putExtra("background_color", backgroundColor);
@@ -724,7 +713,7 @@ public class AdminMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // 뷰의 형태 변화를 지연시키는 메서드
+    // 뷰의 형태 변화를 지연시키는 메서드 - 임성준 작성. 오자현 리팩토링
     private void postDelayedShapeChange(final View view) {
         if (view instanceof NeumorphImageView) {
             ((NeumorphImageView) view).setShapeType(1);
@@ -753,7 +742,7 @@ public class AdminMainActivity extends AppCompatActivity {
         }
     }
 
-    // 종료 다이얼로그 표시 메서드
+    // 종료 다이얼로그 표시 메서드 - 임성준 작성. 오자현 리팩토링
     private void showExitDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("정말 종료 하시겠습니까?")
@@ -773,7 +762,7 @@ public class AdminMainActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    // 자동 새로고침 시작 메서드
+    // 자동 새로고침 시작 메서드 - 임성준 오자현
     private void startAutoRefresh() {
         handler.postDelayed(new Runnable() {
             @Override
@@ -784,7 +773,7 @@ public class AdminMainActivity extends AppCompatActivity {
         }, 5000);
     }
 
-    // Firestore에서 아이템 로드 메서드
+    // Firestore에서 아이템 로드 메서드 - 오자현 작성. 임성준 리팩토링
     private void loadItemsFromFireStore() {
         Query query = currentSearchText.isEmpty()
                 ? productDBFireStore.collection("products")
@@ -813,7 +802,7 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
-    // 파일 업로드 및 제품 정보 저장 메서드
+    // 파일 업로드 및 제품 정보 저장 메서드 - 오자현 작성. 임성준 리팩토링
     private void uploadFileAndSaveProductInfo() {
         String name = editTextFieldProductName.getText().toString().trim();
         String priceStr = editTextFieldProductPrice.getText().toString().trim();
@@ -837,7 +826,7 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
-    // 제품 정보를 Firestore에 저장 메서드
+    // 제품 정보를 Firestore에 저장 메서드 - 오자현 작성. 임성준 리팩토링
     private void saveProductInfoToFirestore(String name, String fileUrl, int price, int stock, String category) {
         DocumentReference counterRef = productDBFireStore.collection("counters").document("productCounter");
         productDBFireStore.runTransaction(transaction -> {
@@ -866,7 +855,7 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
-    // 액티비티 종료 후 결과 반환 메서드
+    // 액티비티 종료 후 결과 반환 메서드 - 오자현 작성. 임성준 리팩토링
     private void finishActivityWithResult() {
         vFlipper.setDisplayedChild(MAIN_CHILD_INDEX);
         imageViewProduct.setImageResource(android.R.drawable.ic_menu_camera);
@@ -876,7 +865,7 @@ public class AdminMainActivity extends AppCompatActivity {
         radioGroup.check(R.id.categoryRadioBtn1);
     }
 
-    // 파일 매니저 열기 메서드
+    // 파일 매니저 열기 메서드 - 오자현
     private void openFileManager() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -884,6 +873,7 @@ public class AdminMainActivity extends AppCompatActivity {
         startActivityForResult(intent, PICK_FILE_REQUEST);
     }
 
+    // 임성준 오자현
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -893,7 +883,7 @@ public class AdminMainActivity extends AppCompatActivity {
         }
     }
 
-    // Firestore에서 회원 데이터 로드 메서드
+    // Firestore에서 회원 데이터 로드 메서드 - 이석재 작성. 오자현 리팩토링
     private void loadMembersFromFireStore() {
         String searchId = editTextFieldSearchMemberName.getText().toString().trim();
         Query query = searchId.isEmpty()
@@ -927,7 +917,7 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
-    // Firestore에서 결제 데이터 로드 메서드
+    // Firestore에서 결제 데이터 로드 메서드 - 이석재 작성. 오자현 리팩토링
     private void loadPaymentsFromFireStore() {
         String searchId = editTextFieldPaymentSearchMemberName.getText().toString().trim();
         Query query = searchId.isEmpty()
@@ -964,12 +954,12 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
-    // 토스트 메시지 표시 메서드
+    // 토스트 메시지 표시 메서드 - 이석재 작성. 오자현 리팩토링
     private void showToastMessage(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    // 다크 모드 카드뷰 그림자 적용 메서드
+    // 다크 모드 카드뷰 그림자 적용 메서드 - 임성준 작성. 오자현 리팩토링
     private void applyCardViewDarkShadow(View... views) {
         for (View view : views) {
             if (view instanceof NeumorphCardView) {
@@ -980,7 +970,7 @@ public class AdminMainActivity extends AppCompatActivity {
         }
     }
 
-    // 라이트 모드 카드뷰 그림자 적용 메서드
+    // 라이트 모드 카드뷰 그림자 적용 메서드 - 임성준 작성. 오자현 리팩토링
     private void applyCardViewLightShadow(View... views) {
         for (View view : views) {
             if (view instanceof NeumorphCardView) {
@@ -991,21 +981,21 @@ public class AdminMainActivity extends AppCompatActivity {
         }
     }
 
-    // 다크 모드 색상 필터 적용 메서드
+    // 다크 모드 색상 필터 적용 메서드 - 임성준 작성. 오자현 리팩토링
     private void applyColorFilterDark(View... views) {
         for (View view : views) {
             ChangeMode.setColorFilterDark(view);
         }
     }
 
-    // 라이트 모드 색상 필터 적용 메서드
+    // 라이트 모드 색상 필터 적용 메서드 - 임성준 작성. 오자현 리팩토링
     private void applyColorFilterLight(View... views) {
         for (View view : views) {
             ChangeMode.setColorFilterLight(view);
         }
     }
 
-    // 다크 모드 푸터 메뉴 필터 적용 메서드
+    // 다크 모드 푸터 메뉴 필터 적용 메서드 - 임성준 작성. 오자현 리팩토링
     private void applyFooterMenuDarkFilter(NeumorphImageView... buttons) {
         for (NeumorphImageView button : buttons) {
             ChangeMode.setColorFilterDark(button);
@@ -1013,7 +1003,7 @@ public class AdminMainActivity extends AppCompatActivity {
         }
     }
 
-    // 라이트 모드 푸터 메뉴 필터 적용 메서드
+    // 라이트 모드 푸터 메뉴 필터 적용 메서드 - 임성준 작성. 오자현 리팩토링
     private void applyFooterMenuLightFilter(NeumorphImageView... buttons) {
         for (NeumorphImageView button : buttons) {
             ChangeMode.setLightShadowCardView(button);
@@ -1021,7 +1011,7 @@ public class AdminMainActivity extends AppCompatActivity {
         }
     }
 
-    // 회원 정보 다이얼로그 표시 메서드
+    // 회원 정보 다이얼로그 표시 메서드 - 임성준 작성. 오자현 리팩토링
     private void showMemberInfoDialog(MemberData selectedItem) {
         Dialog dialog = createInfoDialog(R.layout.admin_dialog_member_item_info);
         setTextInDialog(dialog, R.id.textViewMemberNum, selectedItem.getNumber() + "");
@@ -1031,7 +1021,7 @@ public class AdminMainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    // 제품 정보 다이얼로그 표시 메서드
+    // 제품 정보 다이얼로그 표시 메서드 - 임성준 작성. 오자현 리팩토링
     private void showProductInfoDialog(ProductData selectedItem) {
         Dialog dialog = createInfoDialog(R.layout.admin_dialog_product_item_info);
         ImageView imageViewProductImage = dialog.findViewById(R.id.imageViewProductImage);
@@ -1044,7 +1034,7 @@ public class AdminMainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    // 결제 정보 다이얼로그 표시 메서드
+    // 결제 정보 다이얼로그 표시 메서드 - 임성준 작성. 오자현 리팩토링
     private void showPaymentInfoDialog(PaymentData selectedItem) {
         Dialog dialog = createInfoDialog(R.layout.admin_dialog_payment_item_info);
         setTextInDialog(dialog, R.id.textViewPaymentNum, selectedItem.getNumber()+"");
@@ -1059,20 +1049,20 @@ public class AdminMainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    // 정보 다이얼로그 생성 메서드
+    // 정보 다이얼로그 생성 메서드 - 임성준 작성. 오자현 리팩토링
     private Dialog createInfoDialog(int layoutId) {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(layoutId);
         return dialog;
     }
 
-    // 다이얼로그 내 텍스트 설정 메서드
+    // 다이얼로그 내 텍스트 설정 메서드 - 임성준 작성. 오자현 리팩토링
     private void setTextInDialog(Dialog dialog, int textViewId, String text) {
         TextView textView = dialog.findViewById(textViewId);
         textView.setText(text);
     }
 
-    // 날짜 형식 변환 메서드
+    // 날짜 형식 변환 메서드 - 임성준 작성. 오자현 리팩토링
     private String formatDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         return sdf.format(date);
@@ -1081,7 +1071,7 @@ public class AdminMainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         showExitDialog();
-    }
+    } //  - 임성준
 
     @Override
     protected void onResume() {
@@ -1089,7 +1079,7 @@ public class AdminMainActivity extends AppCompatActivity {
         updateLoginStatus();
     }
 
-    // 오류 다이얼로그 표시 메서드
+    // 오류 다이얼로그 표시 메서드 - 임성준 작성. 오자현 리팩토링
     public static void showErrorDialog(Context context, String message) {
         // 다이얼로그 생성
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -1105,7 +1095,7 @@ public class AdminMainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    // 회원 데이터를 가져오는 메서드 (이석재)
+    // 회원 데이터를 가져오는 메서드  - 이석재 작성. 오자현 리팩토링
     private void fetchMemberData() {
         memberDBFireStore = FirebaseFirestore.getInstance();
         ArrayList<MemberData> memberDataList = new ArrayList<>();
@@ -1139,7 +1129,7 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
-    // 결제 데이터를 가져오는 메서드 (이석재)
+    // 결제 데이터를 가져오는 메서드  - 이석재 작성. 오자현 리팩토링
     private void fetchPaymentData() {
         paymentDBFireStore = FirebaseFirestore.getInstance();
         ArrayList<PaymentData> paymentDataList = new ArrayList<>();

@@ -25,6 +25,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/score"
                 android:src="@drawable/star" />
             <TextView
                 android:id="@+id/textViewRatingScore"

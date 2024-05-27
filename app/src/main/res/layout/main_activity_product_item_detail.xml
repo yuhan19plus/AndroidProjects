@@ -9,13 +9,14 @@
         android:id="@+id/Back_ListView_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/backBtn"
         android:layout_gravity="start"
         android:src="@drawable/back" />
     <ImageView
         android:id="@+id/Item_Image_Detail"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:contentDescription="Product Image"
+        android:contentDescription="@string/product_image"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"/>
     <LinearLayout
@@ -62,6 +63,7 @@
             android:id="@+id/Item_Average_Detail"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/score"
             android:layout_marginEnd="5dp"
             android:src="@drawable/star"/>
         <TextView

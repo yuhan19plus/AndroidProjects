@@ -22,6 +22,10 @@ import java.util.ArrayList;
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.admin.data.AdminData;
 
+/** 담당자 임성준, 이석재
+ * 초기 작성 임성준.
+ * 이석재 관리자 삭제 기능 추가
+ * */
 public class AdminAdapter extends BaseAdapter {
     private ArrayList<AdminData> adminList;
     private LayoutInflater inflater;
