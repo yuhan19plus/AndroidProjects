@@ -36,6 +36,10 @@ import soup.neumorphism.NeumorphButton;
 import soup.neumorphism.NeumorphCardView;
 import soup.neumorphism.NeumorphImageView;
 
+/** 담당자 임성준, 이석재
+ * 초기 작성 및 관리자 전체 UI담당 및 다크모드 기능, 모달창 구현 임성준.
+ * 관리자 관리 기능 구현 이석재
+ * */
 public class AdminActivity extends AppCompatActivity {
     // Admin Firebase
     private FirebaseFirestore adminDBFireStore;
