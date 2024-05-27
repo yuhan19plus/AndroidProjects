@@ -147,6 +147,7 @@
 
     <!-- main_activity_page -->
     <string name="main_logo">YUHAN19+</string>
+    <string name="new_product">최신 상품</string>
     <string name="main_serch">검색어를 입력해 주세요</string>
 
     <!-- main_activity_login.xml -->
