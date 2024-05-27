@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,31 +9,37 @@
     tools:context=".admin.AdminScheduleActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal">
-        <soup.neumorphism.NeumorphImageView
-            style="@style/Widget.Neumorph.ImageView"
-            android:id="@+id/backBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:padding="20dp"
-            android:layout_gravity="start"
-            android:src="@drawable/back"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/adminSchedule_title"
-            android:textSize="42sp"
-            android:textStyle="bold"
-            android:textColor="@color/mainText"
-            android:layout_marginStart="20dp"
-            android:gravity="center"/>
-        <soup.neumorphism.NeumorphImageView
-            android:id="@+id/todoAddBtn"
-            android:layout_width="wrap_content"
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp"
-            android:src="@drawable/todoadd" />
+            app:alignItems="center"
+            app:justifyContent="space_between">
+            <soup.neumorphism.NeumorphImageView
+                style="@style/Widget.Neumorph.ImageView"
+                android:id="@+id/backBtn"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:layout_gravity="start"
+                android:src="@drawable/back"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/adminSchedule_title"
+                android:textSize="42sp"
+                android:textStyle="bold"
+                android:textColor="@color/mainText"
+                android:layout_marginStart="20dp"
+                android:gravity="center"/>
+            <soup.neumorphism.NeumorphImageView
+                android:id="@+id/todoAddBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:src="@drawable/todoadd" />
+        </com.google.android.flexbox.FlexboxLayout>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
