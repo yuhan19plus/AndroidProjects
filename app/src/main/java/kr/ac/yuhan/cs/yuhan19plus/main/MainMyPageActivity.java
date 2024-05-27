@@ -58,13 +58,15 @@ public class MainMyPageActivity extends AppCompatActivity {
         myPaymentAdapter = new MyPaymentAdapter(this, R.layout.main_mypayment_list_item, paymentList);
         myPaymentListView.setAdapter(myPaymentAdapter);
 
+
+        //회원정보 창 닫기 -> <이정민>
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
+        //회원정보수정 창 이동 -> <이정민>
         Button updateButton = findViewById(R.id.Update_Info_Btn);
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override

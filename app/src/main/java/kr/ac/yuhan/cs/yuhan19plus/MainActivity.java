@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //로그인 페이지 활성화 및 비활성화
+    //로그인 페이지 활성화 및 비활성화 <이정민>
     public void handleTextViewClick(View v) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();

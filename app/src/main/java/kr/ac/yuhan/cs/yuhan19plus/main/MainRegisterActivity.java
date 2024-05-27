@@ -69,15 +69,13 @@ public class MainRegisterActivity extends AppCompatActivity {
         mBtnIdCheck = findViewById(R.id.Register_Id_Check);
         mBtnRegister = findViewById(R.id.Register_Clear);
 
+        // 회원가입 창 닫기 이동 <이정민>
         close_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainRegisterActivity.this, MainActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
-        //석재애몽 도와줘요-->>>>>>>>>>>>>>>>>> 회원가입 페이지 main_activity_register.xml 참조
 
         // 아이디를 재입력시 중복확인을 추가로 할 수 있도록 처리
         input_email.addTextChangedListener(new TextWatcher() {

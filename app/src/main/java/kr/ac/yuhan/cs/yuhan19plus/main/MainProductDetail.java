@@ -55,6 +55,7 @@ public class MainProductDetail extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         Button productReviewBtn = findViewById(R.id.productReviewBtn);
 
+        //상세 상품 페이지 창 닫기 <이정민>
         ImageView backlist = findViewById(R.id.Back_ListView_Btn);
         backlist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +91,7 @@ public class MainProductDetail extends AppCompatActivity {
             productNameTextView.setText(productName);
         }
         // int 타입은 null 값을 가질 수 없으므로 null 체크가 필요하지 않습니다. // int 타입을 String으로 변환하여 설정
-        productPriceTextView.setText(String.valueOf(productPrice));
+        productPriceTextView.setText(String.valueOf(productPrice)+" 원");
         if (productCategory != null) {
             productCategoryTextView.setText(productCategory);
         }

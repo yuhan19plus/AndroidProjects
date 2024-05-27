@@ -121,17 +121,6 @@
                 android:background="@drawable/edittext_border"
                 android:textColor="@color/yuhan"
                 android:hint="@string/using_name"/>
-            <android.widget.Button
-                android:id="@+id/Register_Name_Check"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/button_background"
-                android:fontFamily="@font/font"
-                android:textColor="@color/white"
-                android:text="@string/double_check"
-                />
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
