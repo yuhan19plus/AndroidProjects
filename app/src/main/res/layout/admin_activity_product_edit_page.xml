@@ -112,20 +112,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/product_category1"
-                            android:textColor="@color/mainText"/>
+                            android:textColor="@color/black"/>
                         <RadioButton
                             android:checked="false"
                             android:id="@+id/categoryRadioBtns2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/mainText"
+                            android:textColor="@color/black"
                             android:text="@string/product_category2"/>
                         <RadioButton
                             android:checked="false"
                             android:id="@+id/categoryRadioBtns3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/mainText"
+                            android:textColor="@color/black"
                             android:text="@string/product_category3"/>
                     </RadioGroup>
                 </soup.neumorphism.NeumorphCardView>

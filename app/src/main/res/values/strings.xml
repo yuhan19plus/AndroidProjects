@@ -35,9 +35,9 @@
     <string name="todoDate">todoDate</string>
 
     <!-- admin_list.xml -->
-    <string name="admin_list_item_adminNum">AdminNum</string>
-    <string name="admin_list_item_adminId">AdminId</string>
-    <string name="admin_list_item_adminPosition">AdminPosition</string>
+    <string name="admin_list_item_adminNum">관리자 번호</string>
+    <string name="admin_list_item_adminId">관리자 ID</string>
+    <string name="admin_list_item_adminPosition">관리자 직책</string>
 
     <!-- Setting.xml -->
     <string name="setting_adminId">관리자 Id</string>
@@ -85,6 +85,24 @@
 
     <!-- Member 메뉴 -->
     <string name="search">검색</string>
+
+    <!-- 회원관리 모달창 -->
+    <string name="memberId">회원아이디</string>
+    <string name="joinDate">가입날짜</string>
+    <string name="memberPoint">보유포인트</string>
+
+    <!-- 상품관리 모달창 -->
+    <string name="product_code">상품코드</string>
+    <string name="product_stock">재고</string>
+
+    <!-- 결제내역 모달창 -->
+    <string name="receipt_id">영수증 ID</string>
+    <string name="user_id">사용자 ID</string>
+    <string name="user_email">사용자 이메일</string>
+    <string name="products">제품</string>
+    <string name="total_price">총 가격</string>
+    <string name="use_points">사용 포인트</string>
+    <string name="payment_date">결제 날짜</string>
 
     <!-- ProductData Management Menu -->
     <string name="productSearchIdHint">상품명을 입력하세요</string>

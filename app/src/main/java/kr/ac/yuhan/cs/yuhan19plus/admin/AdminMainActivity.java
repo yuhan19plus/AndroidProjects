@@ -89,63 +89,63 @@ public class AdminMainActivity extends AppCompatActivity {
 
     // UI 요소
     // 뷰 플리퍼 (여러 화면 전환을 위한 뷰 그룹)
-private ViewFlipper vFlipper;
+    private ViewFlipper vFlipper;
 
-// 관리자 설정 및 모드 변경을 위한 네움모르프 이미지 뷰
-private NeumorphImageView admin_setting, changeMode;
+    // 관리자 설정 및 모드 변경을 위한 이미지 뷰
+    private NeumorphImageView admin_setting, changeMode;
 
-// 메인 카드뷰 및 푸터 메뉴
-private NeumorphCardView mainCardView, footer_menu;
+    // 메인 카드뷰 및 푸터 메뉴
+    private NeumorphCardView mainCardView, footer_menu;
 
-// 네움모르프 이미지 뷰 - 홈, 회원, 제품, 결제 내역, 제품 푸시 버튼
-private NeumorphImageView homeBtn, memberBtn, productBtn, payHistoryBtn, productPushBtn;
+    // 이미지 뷰 - 홈, 회원, 제품, 결제 내역, 제품 푸시 버튼
+    private NeumorphImageView homeBtn, memberBtn, productBtn, payHistoryBtn, productPushBtn;
 
-// 회원, 제품, 결제 목록을 표시하는 리스트 뷰
-private ListView memberListView, productListView, paymentListView;
+    // 회원, 제품, 결제 목록을 표시하는 리스트 뷰
+    private ListView memberListView, productListView, paymentListView;
 
-// 회원 리스트 카드뷰, ID 검색 카드뷰, 회원 검색 버튼
-private NeumorphCardView memberListCardView, input_searchIdCardView;
-private NeumorphButton memberSearchBtn;
+    // 회원 리스트 카드뷰, ID 검색 카드뷰, 회원 검색 버튼
+    private NeumorphCardView memberListCardView, input_searchIdCardView;
+    private NeumorphButton memberSearchBtn;
 
-// 회원 이름 검색 입력란
-private EditText editTextFieldSearchMemberName;
+    // 회원 이름 검색 입력란
+    private EditText editTextFieldSearchMemberName;
 
-// 제품 ID 검색 카드뷰, 제품 리스트 카드뷰, 제품 이미지 뷰, 제품 검색 버튼
-private NeumorphCardView input_searchProductIdCardView, productListCardView;
-private ImageView imageViewProduct;
-private NeumorphButton productSearchBtn;
+    // 제품 ID 검색 카드뷰, 제품 리스트 카드뷰, 제품 이미지 뷰, 제품 검색 버튼
+    private NeumorphCardView input_searchProductIdCardView, productListCardView;
+    private ImageView imageViewProduct;
+    private NeumorphButton productSearchBtn;
 
-// 제품 이름 검색 입력란
-private EditText editTextFieldSearchProductName;
+    // 제품 이름 검색 입력란
+    private EditText editTextFieldSearchProductName;
 
-// 관리자 버튼 카드뷰들 (관리자 목록, 일정, 전화, 로그인, QR코드 생성, 종료)
-private NeumorphCardView adminListBtnCardView, adminScheduleBtnCardView, adminCallBtnCardView, adminLoginBtnCardView, adminCreateAppQRBtnCardView, adminExitCardView;
+    // 관리자 버튼 카드뷰들 (관리자 목록, 일정, 전화, 로그인, QR코드 생성, 종료)
+    private NeumorphCardView adminListBtnCardView, adminScheduleBtnCardView, adminCallBtnCardView, adminLoginBtnCardView, adminCreateAppQRBtnCardView, adminExitCardView;
 
-// 관리자 이미지 뷰들 (관리자 목록, 일정, 전화, 로그인, QR코드 생성, 종료)
-private ImageView adminListImage, adminScheduleImage, adminCallImage, adminLoginImage, adminCreateAppQRImage, adminExitImage;
+    // 관리자 이미지 뷰들 (관리자 목록, 일정, 전화, 로그인, QR코드 생성, 종료)
+    private ImageView adminListImage, adminScheduleImage, adminCallImage, adminLoginImage, adminCreateAppQRImage, adminExitImage;
 
-// 관리자 로그인 텍스트뷰
-private TextView adminLoginTextView;
+    // 관리자 로그인 텍스트뷰
+    private TextView adminLoginTextView;
 
-// 결제 목록 카드뷰, 결제 ID 검색 카드뷰, 결제 검색 버튼
-private NeumorphCardView payListCardView, input_searchPayIdCardView;
-private NeumorphButton paySearchBtn;
+    // 결제 목록 카드뷰, 결제 ID 검색 카드뷰, 결제 검색 버튼
+    private NeumorphCardView payListCardView, input_searchPayIdCardView;
+    private NeumorphButton paySearchBtn;
 
-// 결제 회원 이름 검색 입력란
-private EditText editTextFieldPaymentSearchMemberName;
+    // 결제 회원 이름 검색 입력란
+    private EditText editTextFieldPaymentSearchMemberName;
 
-// 제품 이미지 카드뷰, 제품 이름 카드뷰, 제품 재고 카드뷰, 제품 카테고리 카드뷰, 제품 가격 카드뷰
-private NeumorphCardView input_productImageCardView, input_productNameCardView, input_productStockCardView, input_productCategoryCardView, input_productPriceCardView;
+    // 제품 이미지 카드뷰, 제품 이름 카드뷰, 제품 재고 카드뷰, 제품 카테고리 카드뷰, 제품 가격 카드뷰
+    private NeumorphCardView input_productImageCardView, input_productNameCardView, input_productStockCardView, input_productCategoryCardView, input_productPriceCardView;
 
-// 제품 이름, 가격, 재고 입력란
-private EditText editTextFieldProductName, editTextFieldProductPrice, editTextFieldProductStock;
+    // 제품 이름, 가격, 재고 입력란
+    private EditText editTextFieldProductName, editTextFieldProductPrice, editTextFieldProductStock;
 
-// 라디오 그룹 및 카테고리 라디오 버튼
-private RadioGroup radioGroup;
-private RadioButton categoryRadioBtn1, categoryRadioBtn2, categoryRadioBtn3;
+    // 라디오 그룹 및 카테고리 라디오 버튼
+    private RadioGroup radioGroup;
+    private RadioButton categoryRadioBtn1, categoryRadioBtn2, categoryRadioBtn3;
 
-// QR코드 생성 버튼 및 제품 생성 버튼
-private NeumorphButton createQRBtn, createProductBtn;
+    // QR코드 생성 버튼 및 제품 생성 버튼
+    private NeumorphButton createQRBtn, createProductBtn;
 
     // 데이터 및 핸들러
     private String productCategory;
@@ -159,7 +159,6 @@ private NeumorphButton createQRBtn, createProductBtn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_activity_main_page);
-
         // UI 초기화
         initUI();
         // 어댑터 초기화
@@ -168,7 +167,6 @@ private NeumorphButton createQRBtn, createProductBtn;
         initFirebase();
         // 리스너 설정
         setupListeners();
-
         // 자동 새로고침 시작
         startAutoRefresh();
         // Firestore에서 아이템 로드
@@ -185,9 +183,11 @@ private NeumorphButton createQRBtn, createProductBtn;
         Drawable backgroundDrawable = main.getBackground();
         mainBackgroundColor = ((ColorDrawable) backgroundDrawable).getColor();
 
+        // 상단
         admin_setting = findViewById(R.id.admin_setting);
         changeMode = findViewById(R.id.darkMode);
 
+        // admin main
         adminListBtnCardView = findViewById(R.id.adminListBtnCardView);
         adminScheduleBtnCardView = findViewById(R.id.adminScheduleBtnCardView);
         adminCallBtnCardView = findViewById(R.id.adminCallBtnCardView);
@@ -195,6 +195,7 @@ private NeumorphButton createQRBtn, createProductBtn;
         adminCreateAppQRBtnCardView = findViewById(R.id.adminCreateAppQRBtnCardView);
         adminExitCardView = findViewById(R.id.adminExitCardView);
 
+        // admin main 이미지
         adminListImage = findViewById(R.id.adminListImage);
         adminScheduleImage = findViewById(R.id.adminScheduleImage);
         adminCallImage = findViewById(R.id.adminCallImage);
@@ -207,22 +208,26 @@ private NeumorphButton createQRBtn, createProductBtn;
         mainCardView = findViewById(R.id.mainCardView);
         footer_menu = findViewById(R.id.footer_menu);
 
+        // 회원관리
         input_searchIdCardView = findViewById(R.id.input_searchIdCardView);
         editTextFieldSearchMemberName = findViewById(R.id.editTextFieldSearchMemberName);
         memberSearchBtn = findViewById(R.id.memberSearchBtn);
         memberListCardView = findViewById(R.id.memberListCardView);
 
+        // 상품관리
         input_searchProductIdCardView = findViewById(R.id.input_searchProductIdCardView);
         productSearchBtn = findViewById(R.id.productSearchBtn);
         productListCardView = findViewById(R.id.productListCardView);
         imageViewProduct = findViewById(R.id.imageViewProduct);
         editTextFieldSearchProductName = findViewById(R.id.editTextFieldSearchProductName);
 
+        // 결제내역
         input_searchPayIdCardView = findViewById(R.id.input_searchPayIdCardView);
         editTextFieldPaymentSearchMemberName = findViewById(R.id.editTextFieldPaymentSearchMemberName);
         paySearchBtn = findViewById(R.id.paySearchBtn);
         payListCardView = findViewById(R.id.payListCardView);
 
+        // 상품등록
         input_productImageCardView = findViewById(R.id.input_productImageCardView);
         input_productNameCardView = findViewById(R.id.input_productNameCardView);
         input_productStockCardView = findViewById(R.id.input_productStockCardView);
@@ -239,6 +244,7 @@ private NeumorphButton createQRBtn, createProductBtn;
         createProductBtn = findViewById(R.id.createProductBtn);
         memberSearchBtn = findViewById(R.id.memberSearchBtn);
 
+        // 하단 바 메뉴
         memberBtn = findViewById(R.id.memberBtn);
         productBtn = findViewById(R.id.productBtn);
         homeBtn = findViewById(R.id.homeBtn);
@@ -1018,10 +1024,10 @@ private NeumorphButton createQRBtn, createProductBtn;
     // 회원 정보 다이얼로그 표시 메서드
     private void showMemberInfoDialog(MemberData selectedItem) {
         Dialog dialog = createInfoDialog(R.layout.admin_dialog_member_item_info);
-        setTextInDialog(dialog, R.id.textViewMemberNum, "Num : " + selectedItem.getNumber());
-        setTextInDialog(dialog, R.id.textViewMemberId, "회원아이디 : " + selectedItem.getMemberId());
-        setTextInDialog(dialog, R.id.textViewMemberDate, "가입날짜 : " + formatDate(selectedItem.getJoinDate()));
-        setTextInDialog(dialog, R.id.textViewMemberPoint, "Point : " + selectedItem.getPoint() + "점");
+        setTextInDialog(dialog, R.id.textViewMemberNum, selectedItem.getNumber() + "");
+        setTextInDialog(dialog, R.id.textViewMemberId, selectedItem.getMemberId());
+        setTextInDialog(dialog, R.id.textViewMemberDate, formatDate(selectedItem.getJoinDate()));
+        setTextInDialog(dialog, R.id.textViewMemberPoint, selectedItem.getPoint() + "점");
         dialog.show();
     }
 
@@ -1030,26 +1036,26 @@ private NeumorphButton createQRBtn, createProductBtn;
         Dialog dialog = createInfoDialog(R.layout.admin_dialog_product_item_info);
         ImageView imageViewProductImage = dialog.findViewById(R.id.imageViewProductImage);
         Glide.with(this).load(selectedItem.getProductImage()).placeholder(R.drawable.default_image).into(imageViewProductImage);
-        setTextInDialog(dialog, R.id.textViewProductCode, "상품코드: " + selectedItem.getProductCode());
-        setTextInDialog(dialog, R.id.textViewProductName, "상품명: " + selectedItem.getProductName());
-        setTextInDialog(dialog, R.id.textViewProductCategory, "카테고리: " + selectedItem.getProductCategory());
-        setTextInDialog(dialog, R.id.textViewProductStock, "상품재고: " + selectedItem.getProductStock());
-        setTextInDialog(dialog, R.id.textViewProductPrice, "상품가격: " + selectedItem.getProductPrice() + "원");
+        setTextInDialog(dialog, R.id.textViewProductCode, selectedItem.getProductCode()+"");
+        setTextInDialog(dialog, R.id.textViewProductName, selectedItem.getProductName());
+        setTextInDialog(dialog, R.id.textViewProductCategory, selectedItem.getProductCategory());
+        setTextInDialog(dialog, R.id.textViewProductStock, selectedItem.getProductStock()+"개");
+        setTextInDialog(dialog, R.id.textViewProductPrice, selectedItem.getProductPrice() + "원");
         dialog.show();
     }
 
     // 결제 정보 다이얼로그 표시 메서드
     private void showPaymentInfoDialog(PaymentData selectedItem) {
         Dialog dialog = createInfoDialog(R.layout.admin_dialog_payment_item_info);
-        setTextInDialog(dialog, R.id.textViewPaymentNum, "Num : " + selectedItem.getNumber());
-        setTextInDialog(dialog, R.id.textViewReceiptId, "주문ID : " + selectedItem.getReceiptId());
-        setTextInDialog(dialog, R.id.textViewUserName, "회원이름 : " + selectedItem.getUserName());
-        setTextInDialog(dialog, R.id.textViewUid, "UID : " + selectedItem.getUid());
-        setTextInDialog(dialog, R.id.textViewUserEmail, "회원아이디 : " + selectedItem.getEmail());
-        setTextInDialog(dialog, R.id.textViewProducts, "상품 : " + selectedItem.getProducts());
-        setTextInDialog(dialog, R.id.textViewTotalPrice, "결제금액 : " + selectedItem.getTotalPrice());
-        setTextInDialog(dialog, R.id.textViewUsePoint, "사용포인트 : " + selectedItem.getUsePoint());
-        setTextInDialog(dialog, R.id.textViewPayDay, "결제일 : " + formatDate(selectedItem.getPayDay()));
+        setTextInDialog(dialog, R.id.textViewPaymentNum, selectedItem.getNumber()+"");
+        setTextInDialog(dialog, R.id.textViewReceiptId, selectedItem.getReceiptId());
+        setTextInDialog(dialog, R.id.textViewUserName, selectedItem.getUserName());
+        setTextInDialog(dialog, R.id.textViewUid, selectedItem.getUid());
+        setTextInDialog(dialog, R.id.textViewUserEmail, selectedItem.getEmail());
+        setTextInDialog(dialog, R.id.textViewProducts, selectedItem.getProducts()+"");
+        setTextInDialog(dialog, R.id.textViewTotalPrice, selectedItem.getTotalPrice()+"");
+        setTextInDialog(dialog, R.id.textViewUsePoint, selectedItem.getUsePoint()+"");
+        setTextInDialog(dialog, R.id.textViewPayDay, formatDate(selectedItem.getPayDay()));
         dialog.show();
     }
 
@@ -1169,5 +1175,4 @@ private NeumorphButton createQRBtn, createProductBtn;
             }
         });
     }
-
 }

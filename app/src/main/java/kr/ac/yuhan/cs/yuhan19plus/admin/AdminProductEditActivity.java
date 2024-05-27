@@ -55,7 +55,7 @@ public class AdminProductEditActivity extends AppCompatActivity {
         setContentView(R.layout.admin_activity_product_edit_page);
         LinearLayout productEditPage = findViewById(R.id.productEditPage);
 
-        int backgroundColor = Color.rgb(97, 97, 97);
+        int backgroundColor = Color.rgb(102, 102, 102);
 
         // 배경 색 설정
         View backgroundView = getWindow().getDecorView().getRootView();
@@ -333,10 +333,13 @@ public class AdminProductEditActivity extends AppCompatActivity {
     }
 
     private void finishActivityWithResult() {
+        // AdminMainActivity로 이동하는 Intent 생성
         Intent database_viewIntent = new Intent(AdminProductEditActivity.this, AdminMainActivity.class);
+        // Activity 스택에서 AdminMainActivity 이전의 모든 Activity를 제거하고 AdminMainActivity를 최상위로 설정
         database_viewIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        // AdminMainActivity로 이동
         startActivity(database_viewIntent);
-        finish();
+        // 현재 Activity 종료
         finish();
     }
 }

@@ -206,13 +206,13 @@ public class AdminActivity extends AppCompatActivity {
 
         // Get TextView ID in Dialog
         TextView textViewAdminNum = dialog.findViewById(R.id.textViewAdminNum);
-        textViewAdminNum.setText("Num : " + selectedItem.getAdminNum());
+        textViewAdminNum.setText(selectedItem.getAdminNum() + "");
 
         TextView textViewAdminId = dialog.findViewById(R.id.textViewAdminId);
-        textViewAdminId.setText("관리자 ID : " + selectedItem.getAdminId());
+        textViewAdminId.setText(selectedItem.getAdminId());
 
         TextView textViewAdminPosition = dialog.findViewById(R.id.textViewAdminPosition);
-        textViewAdminPosition.setText("직책 : " + selectedItem.getAdminPosition());
+        textViewAdminPosition.setText(selectedItem.getAdminPosition());
 
         // Show Dialog
         dialog.show();
