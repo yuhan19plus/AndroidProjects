@@ -44,40 +44,40 @@ public class AdminScheduleActivity extends AppCompatActivity {
 
         schedulePage = findViewById(R.id.schedulePage);
 
-        // Receives current mode value
+        // 현재 모드 값을 수신합니다
         int modeValue = getIntent().getIntExtra("mode", 1);
 
-        // Receives background color value passed from MainActivity
+        // MainActivity에서 전달된 배경 색상 값을 수신합니다
         int backgroundColor = getIntent().getIntExtra("background_color", Color.rgb(236, 240, 243));
 
-        // Setting BackgroundColor
+        // 배경 색상 설정
         View backgroundView = getWindow().getDecorView().getRootView();
         backgroundView.setBackgroundColor(backgroundColor);
 
-        // AdminSchedule Page Btn
+        // AdminSchedule 페이지 버튼
         backBtn = findViewById(R.id.backBtn);
         todoAddBtn = findViewById(R.id.todoAddBtn);
 
-        // AdminSchedule Page Content
+        // AdminSchedule 페이지 내용
         calendarView = findViewById(R.id.calendarView);
         todoListView = findViewById(R.id.todoListView);
         scheduleCardView = findViewById(R.id.scheduleCardView);
         scheduleRegisterCardView = findViewById(R.id.scheduleRegisterCardView);
 
-        // ListView Init
+        // ListView 초기화
         todoListView = findViewById(R.id.todoListView);
 
         if(modeValue == 1) {
-            // DarkMode
+            // 다크 모드
             ChangeMode.applySubTheme(schedulePage, modeValue);
 
-            // AdminSchedule Page Btn
+            // AdminSchedule 페이지 버튼
             ChangeMode.setColorFilterDark(backBtn);
             ChangeMode.setDarkShadowCardView(backBtn);
             ChangeMode.setColorFilterDark(todoAddBtn);
             ChangeMode.setDarkShadowCardView(todoAddBtn);
 
-            // AdminSchedule Page CardView content
+            // AdminSchedule 페이지 CardView 내용
             ChangeMode.setDarkShadowCardView(scheduleCardView);
             ChangeMode.setDarkShadowCardView(scheduleRegisterCardView);
         }
@@ -86,42 +86,42 @@ public class AdminScheduleActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                // Code to get date in current calendar view
+                // 현재 캘린더 뷰에서 날짜를 가져오는 코드
                 Calendar selectedDate = Calendar.getInstance();
                 selectedDate.set(year, month, dayOfMonth);
 
-                int currentDay = selectedDate.get(Calendar.DATE); // current day
-                int currentMonth = selectedDate.get(Calendar.MONTH); // current month
-                int currentYear = selectedDate.get(Calendar.YEAR); // current year
+                int currentDay = selectedDate.get(Calendar.DATE); // 현재 일
+                int currentMonth = selectedDate.get(Calendar.MONTH); // 현재 월
+                int currentYear = selectedDate.get(Calendar.YEAR); // 현재 연도
                 loadTodoList(currentYear, currentMonth + 1, currentDay);
             }
         });
 
-        // TodoAddBtn onClickListener
+        // todoAddBtn onClickListener
         todoAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Change ShapeType to 'pressed' when clicked
+                // 클릭 시 'pressed'로 ShapeType 변경
                 todoAddBtn.setShapeType(1);
-                // After clicked, it changes back to 'flat'
+                // 클릭 후 'flat'으로 변경
                 v.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         todoAddBtn.setShapeType(0);
                     }
                 }, 200);
-                // show Dialog
+                // 다이얼로그 표시
                 showTodoDialog();
             }
         });
 
-        // BackBtn onClickListener
+        // backBtn onClickListener
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Change ShapeType to 'pressed' when clicked
+                // 클릭 시 'pressed'로 ShapeType 변경
                 backBtn.setShapeType(1);
-                // After clicked, it changes back to 'flat'
+                // 클릭 후 'flat'으로 변경
                 v.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -133,13 +133,13 @@ public class AdminScheduleActivity extends AppCompatActivity {
         });
     }
 
-    // Show Dialog Method
+    // 다이얼로그 표시 메소드
     private void showTodoDialog() {
         DialogFragment dialogFragment = new TodoDialogFragment();
         dialogFragment.show(getSupportFragmentManager(), "TodoDialogFragment");
     }
 
-    // The DialogFragment class that defines the Todo modal window
+    // 할일 모달 창을 정의하는 DialogFragment 클래스
     public static class TodoDialogFragment extends DialogFragment {
         @NonNull
         @Override
@@ -158,9 +158,9 @@ public class AdminScheduleActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             String date = editTextDate.getText().toString();
                             String todo = editTextTodo.getText().toString();
-                            // Call Todo Data Add Code
+                            // 할일 데이터 추가 코드 호출
                             DatabaseHelper dbHelper = new DatabaseHelper(requireContext());
-                            dbHelper.insertTodo("SeongJun1", todo, date);
+                            dbHelper.insertTodo("SeongJun1", todo, date); // 관리자 ID 적용 필요
                         }
                     })
                     .setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -172,18 +172,18 @@ public class AdminScheduleActivity extends AppCompatActivity {
         }
     }
 
-    // Method to load Todo Data and display it in ListView
+    // 할일 데이터를 로드하고 ListView에 표시하는 메소드
     private void loadTodoList(int year, int month, int day) {
-        // Create DBHelper Object
+        // DBHelper 객체 생성
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 
-        // View Todo data corresponding to selected month
+        // 선택한 월에 해당하는 Todo 데이터 조회
         ArrayList<TodoData> todoList = dbHelper.getTodosByMonth(year, month, day);
 
-        // Create Adapter
+        // 어댑터 생성
         TodoListAdapter adapter = new TodoListAdapter(this, todoList);
 
-        // Adapter settings for ListView
+        // ListView에 어댑터 설정
         todoListView.setAdapter(adapter);
     }
 }
