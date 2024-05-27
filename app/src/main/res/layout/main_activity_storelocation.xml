@@ -14,7 +14,7 @@
             android:layout_height="match_parent"
             android:text="@string/webView_title"
             android:textStyle="bold"
-            android:textSize="52dp"
+            android:textSize="52sp"
             android:gravity="center_vertical"/>
     </LinearLayout>
 

@@ -13,6 +13,7 @@
         <ImageView
             android:id="@+id/scan_imageViewProduct"
             android:layout_width="200dp"
+            android:contentDescription="@string/product_image"
             android:layout_height="match_parent"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,7 +49,7 @@
                 android:gravity="center">
                 <TextView
                     android:id="@+id/scan_textViewPrice"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/price"
                     android:textColor="@color/black"
@@ -61,6 +62,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:padding="15dp"
+                    android:contentDescription="@string/plus"
                     android:src="@drawable/plus"/>
 
                 <TextView
@@ -78,6 +80,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:padding="15dp"
+                    android:contentDescription="@string/minus"
                     android:src="@drawable/minus"/>
             </LinearLayout>
         </LinearLayout>

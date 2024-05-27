@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:background="@drawable/border_yuhan"
-                android:contentDescription="Product Image"
+                android:contentDescription="@string/product_image"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="parent" />
         </com.google.android.flexbox.FlexboxLayout>

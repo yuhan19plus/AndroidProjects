@@ -23,6 +23,7 @@
                 android:id="@+id/product_image"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
+                android:contentDescription="@string/product_image"
                 android:layout_gravity="center"/>
 
             <LinearLayout

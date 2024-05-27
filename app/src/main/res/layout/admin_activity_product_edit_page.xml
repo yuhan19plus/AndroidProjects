@@ -51,8 +51,9 @@
                     <EditText
                         android:id="@+id/editProductName2"
                         android:layout_width="match_parent"
+                        android:inputType="text"
                         android:layout_height="wrap_content"
-                        android:hint="Product Name"/>
+                        android:hint="@string/product_name"/>
                 </soup.neumorphism.NeumorphCardView>
                 <soup.neumorphism.NeumorphCardView
                     android:layout_width="match_parent"
@@ -66,7 +67,7 @@
                         android:layout_height="200dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:contentDescription="해당 view에 대한 설명"
+                        android:contentDescription="@string/product_image"
                         android:src="@android:drawable/ic_menu_camera"/>
                 </soup.neumorphism.NeumorphCardView>
                 <soup.neumorphism.NeumorphCardView
@@ -79,7 +80,7 @@
                         android:id="@+id/editProductPrice2"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:hint="Price"
+                        android:hint="@string/product_price"
                         android:inputType="numberDecimal"/>
                 </soup.neumorphism.NeumorphCardView>
                 <soup.neumorphism.NeumorphCardView
@@ -92,7 +93,7 @@
                         android:id="@+id/editProductStock2"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:hint="Stock"
+                        android:hint="@string/product_stock"
                         android:inputType="number" />
                 </soup.neumorphism.NeumorphCardView>
                 <soup.neumorphism.NeumorphCardView
