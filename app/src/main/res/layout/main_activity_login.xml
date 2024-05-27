@@ -26,7 +26,7 @@
         android:gravity="center"
         android:fontFamily="@font/font"
         android:textStyle="bold"
-        android:textSize="26sp"
+        android:textSize="25sp"
         android:textColor="@color/yuhan"
         android:text="@string/login"/>
 

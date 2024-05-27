@@ -7,11 +7,12 @@
     android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="380dp"
+        android:layout_height="210dp"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/border5">
         <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -72,5 +73,6 @@
                     android:textColor="@android:color/holo_red_dark" />
             </LinearLayout>
         </com.google.android.flexbox.FlexboxLayout>
+
     </LinearLayout>
 </LinearLayout>
