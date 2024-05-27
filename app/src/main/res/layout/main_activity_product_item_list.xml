@@ -13,7 +13,10 @@
         android:layout_height="50dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/border4"/>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
     <!-- 텍스트뷰 레이아웃 (상품명) 추가 -->
     <LinearLayout
         android:layout_width="wrap_content"
@@ -40,9 +43,8 @@
 
     <!-- 텍스트뷰 레이아웃 (가격) 추가 -->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -51,6 +53,7 @@
             android:fontFamily="@font/font"
             android:textColor="@color/deepdarkgray"
             android:text="@string/product_price"
+            android:layout_gravity="end"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -59,7 +62,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:layout_gravity="end"
             android:fontFamily="@font/font"
             android:textSize="14sp" />
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -9,10 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +36,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import kr.ac.yuhan.cs.yuhan19plus.admin.AdminMainActivity;
-import kr.ac.yuhan.cs.yuhan19plus.admin.adapter.ProductAdapter;
-import kr.ac.yuhan.cs.yuhan19plus.admin.data.ProductData;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainActivityProductScan;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainLoginActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainMyPageActivity;
@@ -47,7 +43,6 @@ import kr.ac.yuhan.cs.yuhan19plus.main.MainProductActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainProductDetail;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainStoreLocationActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MainPopularProductPagerAdapter;
-import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MainProductCustomAdapter;
 import kr.ac.yuhan.cs.yuhan19plus.main.data.MainProductData;
 
 /**
@@ -111,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //로그인 페이지 활성화 및 비활성화
+    //로그인 페이지 활성화 및 비활성화 <이정민>
     public void handleTextViewClick(View v) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
@@ -243,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         @NonNull
         @Override
         public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adv_image, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_adv_image, parent, false);
             return new ImageViewHolder(view);
         }
 

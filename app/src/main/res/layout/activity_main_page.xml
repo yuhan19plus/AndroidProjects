@@ -57,18 +57,12 @@
     </LinearLayout>
 
     <!--중단-->
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:padding="10dp"
         android:orientation="vertical">
-        <!-- 로그인 페이지 -->
-        <FrameLayout
-            android:id="@+id/login_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"/>
         <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -97,13 +91,12 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
             android:layout_gravity="center">
 
             <!--광고 배너-->
             <com.google.android.flexbox.FlexboxLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/border5"
                 android:padding="10dp"
                 app:alignItems="center"
@@ -111,22 +104,39 @@
                 android:layout_gravity="bottom">
                 <androidx.viewpager2.widget.ViewPager2
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="175dp"
                     android:id="@+id/viewPager" />
             </com.google.android.flexbox.FlexboxLayout>
-
+            <!-- 로그인 페이지 -->
+            <FrameLayout
+                android:id="@+id/login_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"/>
         </FrameLayout>
-    </LinearLayout>
+    </FrameLayout>
 
     <!--상품 칸-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textColor="@color/yuhan"
+            android:background="@drawable/border6"
+            android:text="@string/new_product"/>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="2.5dp"
             android:layout_gravity="center"
             android:background="@drawable/border6">
 
@@ -134,11 +144,7 @@
                 android:id="@+id/Product_viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp" />
-            <FrameLayout
-                android:id="@+id/mypage_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:padding="5dp"/>
         </FrameLayout>
     </LinearLayout>
     <!--하단-->

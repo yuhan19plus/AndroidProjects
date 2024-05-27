@@ -15,6 +15,7 @@ public class MainProductPageAdapter extends FragmentStateAdapter {
         super(fragmentActivity);
     }
 
+    // 상품 확인창 탭 레이아웃 띄우는 부분 <이정민>
     // 여기 데이터가 중요함 저기서 순서랑 이름을 잘못 입력하면 상품카테고리별로 보는 곳에서 꼬임
     @NonNull
     @Override
