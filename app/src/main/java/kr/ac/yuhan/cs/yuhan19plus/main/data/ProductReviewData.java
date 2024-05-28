@@ -1,5 +1,6 @@
 package kr.ac.yuhan.cs.yuhan19plus.main.data;
 
+/** 담당자 : 임성준 */
 public class ProductReviewData {
     private String memberId;
     private int ratingScore;

@@ -20,12 +20,14 @@ import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.admin.data.TodoData;
 import kr.ac.yuhan.cs.yuhan19plus.admin.db.DatabaseHelper;
 
-
+/** 담당자 : 임성준, 이석재
+ * 관리자 일정 기능 : 임성준
+ * 관리자 세션 처리 : 이석재 */
 public class TodoListAdapter extends ArrayAdapter<TodoData> {
     private final Context mContext;
     private final List<TodoData> todoList;
 
-    // AdminId HardCoding
+    // 관리자 TestID
     String adminId = "SeongJun1";
 
     // TodoListAdapter Constructor
@@ -67,7 +69,7 @@ public class TodoListAdapter extends ArrayAdapter<TodoData> {
         return listItem;
     }
 
-    // Delete Todo Item
+    // 할일 데이터 삭제
     private void deleteItem(String adminId, TodoData item) {
         // Create AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);

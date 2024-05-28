@@ -27,6 +27,8 @@ import kr.ac.yuhan.cs.yuhan19plus.admin.util.ChangeMode;
 import soup.neumorphism.NeumorphCardView;
 import soup.neumorphism.NeumorphImageView;
 
+/** 담당자 : 임성준
+ * 관리자 일정 기능구현 및 다크모드 적용 */
 public class AdminScheduleActivity extends AppCompatActivity {
     private NeumorphImageView backBtn;
     private NeumorphImageView todoAddBtn;

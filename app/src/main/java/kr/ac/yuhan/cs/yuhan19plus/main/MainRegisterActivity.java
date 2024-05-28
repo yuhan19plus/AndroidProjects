@@ -1,7 +1,5 @@
 package kr.ac.yuhan.cs.yuhan19plus.main;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -28,9 +26,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import kr.ac.yuhan.cs.yuhan19plus.MainActivity;
 import kr.ac.yuhan.cs.yuhan19plus.R;
 
+/** 담당자 : 임성준, 이석재, 이정민
+ * 초기작성 : 이정민
+ * 메인 프로젝트 병합 : 임성준
+ * 회원가입 기능구현 : 이석재 */
 public class MainRegisterActivity extends AppCompatActivity {
     private FirebaseAuth userDBFirebaseAuth;
     private FirebaseUser userDBFirebaseUser;

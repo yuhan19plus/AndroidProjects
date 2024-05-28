@@ -2,8 +2,9 @@ package kr.ac.yuhan.cs.yuhan19plus.admin.data;
 
 import androidx.annotation.NonNull;
 
+/** 담당자 : 임성준 */
 public class TodoData {
-    // Todo Data Filed
+    // 할일 Data Filed
     private int id;
     private String adminId;
     private String todoContent;

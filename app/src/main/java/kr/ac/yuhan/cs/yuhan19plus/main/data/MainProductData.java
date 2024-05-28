@@ -1,5 +1,8 @@
 package kr.ac.yuhan.cs.yuhan19plus.main.data;
 
+/** 담당자 : 임성준, 오자현
+ * 초기 작성 : 임성준
+ * 수정 : 오자현 */
 public class MainProductData {
     private String  productImage;
     private String productName;
@@ -27,4 +30,3 @@ public class MainProductData {
         return productPrice;
     }
 }
-

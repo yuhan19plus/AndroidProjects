@@ -32,7 +32,11 @@ import kr.ac.yuhan.cs.yuhan19plus.MainActivity;
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MainProductPageAdapter;
 import kr.ac.yuhan.cs.yuhan19plus.main.data.MainProductData;
-
+/** 담당자 : 임성준, 오자현, 이정민
+ * 초기 작성 : 임성준
+ * 프론트 기능 : 이정민
+ * 상품기능 : 오자현
+ * */
 public class MainProductActivity extends AppCompatActivity {
 
     private ImageView mainActivityProductSearchbtn;
@@ -140,7 +144,7 @@ public class MainProductActivity extends AppCompatActivity {
 
                             // 이미지 URL이 null이거나 비어있으면 기본 이미지 URL을 사용합니다.
                             if (imageUrl == null || imageUrl.isEmpty()) {
-                                imageUrl = "R.drawable.default_image"; // 기본 이미지 URL 사용
+                                imageUrl = "R.drawable.icon"; // 기본 이미지 URL 사용
                             }
 
                             // 로드된 이미지 URL을 로그에 출력합니다.

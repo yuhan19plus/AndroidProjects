@@ -107,7 +107,7 @@ public class MainProductPageList extends Fragment {
                             int productPrice = document.getLong("productPrice").intValue();
 
                             if (imageUrl == null || imageUrl.isEmpty()) {
-                                imageUrl = "R.drawable.default_image"; // 기본 이미지 URL 사용
+                                imageUrl = "R.drawable.icon"; // 기본 이미지 URL 사용
                             }
 
                             Log.d("MainProductPageList", "불려온 상품정보: " + productName + ", imageUrl: " + imageUrl);

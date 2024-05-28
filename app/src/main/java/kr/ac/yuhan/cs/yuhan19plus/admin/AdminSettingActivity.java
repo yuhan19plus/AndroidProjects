@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -25,6 +24,9 @@ import kr.ac.yuhan.cs.yuhan19plus.admin.util.ChangeMode;
 import soup.neumorphism.NeumorphCardView;
 import soup.neumorphism.NeumorphImageView;
 
+/** 담당자 : 임성준, 이석재
+ * 초기 작성 및 다크모드 적용 : 임성준
+ * 관리자 세션처리 기능구현 : 이석재 */
 public class AdminSettingActivity extends AppCompatActivity {
     private NeumorphImageView backBtn;
     // 관리자 Firebase

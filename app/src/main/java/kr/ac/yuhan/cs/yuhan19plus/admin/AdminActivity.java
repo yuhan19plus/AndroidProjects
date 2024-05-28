@@ -37,7 +37,7 @@ import soup.neumorphism.NeumorphCardView;
 import soup.neumorphism.NeumorphImageView;
 
 /** 담당자 임성준, 이석재
- * 초기 작성 및 관리자 전체 UI담당 및 다크모드 기능, 모달창 구현 임성준.
+ * 초기 작성 및 다크모드 기능, 모달창 구현 임성준.
  * 관리자 관리 기능 구현 이석재
  * */
 public class AdminActivity extends AppCompatActivity {
@@ -132,7 +132,6 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-
         // AdminSearchBtn onClickListener
         adminSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,9 +139,6 @@ public class AdminActivity extends AppCompatActivity {
                 loadAdminFromFireStore();
             }
         });
-
-
-
     }
     // fetchAdminData
     private void fetchAdminData() {
@@ -188,7 +184,6 @@ public class AdminActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
     public static void showErrorDialog(Context context, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -282,5 +277,4 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
-
 }

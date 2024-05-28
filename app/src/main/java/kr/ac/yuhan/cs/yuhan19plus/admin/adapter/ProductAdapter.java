@@ -81,11 +81,11 @@ public class ProductAdapter extends ArrayAdapter<ProductData> {
             if (productData.getProductImage() != null && !productData.getProductImage().isEmpty()) {
                 Glide.with(getContext())
                         .load(productData.getProductImage())
-                        .placeholder(R.drawable.default_image)
+                        .placeholder(R.drawable.icon)
                         .into(holder.imageViewProduct);
             } else {
                 // 이미지 URL이 없으면 기본 이미지를 설정합니다.
-                holder.imageViewProduct.setImageResource(R.drawable.default_image);
+                holder.imageViewProduct.setImageResource(R.drawable.icon);
                 Log.d("ProductAdapter", "No image URL provided for productData at position " + position);
             }
         }

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,10 +18,11 @@ import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.admin.data.ProductData;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainActivityProductScan;
 
-public class MainScanAdpter extends ArrayAdapter<ProductData> {
+/** 담당자 : 오자현
+ * 스캔기능구현 관련 코드 */
+public class MainScanAdapter extends ArrayAdapter<ProductData> {
     private ArrayList<ProductData> products;  // 내부에서 관리하는 상품 리스트
-
-    public MainScanAdpter(Context context, ArrayList<ProductData> products) {
+    public MainScanAdapter(Context context, ArrayList<ProductData> products) {
         super(context, 0, products);
     }
 
@@ -88,11 +88,10 @@ public class MainScanAdpter extends ArrayAdapter<ProductData> {
                     ((MainActivityProductScan) getContext()).updateTotalPrice(); // 총 금액 업데이트
                 } else if (currentStock == 1) {
                     // 재고가 1이면 다이얼로그 표시
-                    showRemoveItemDialog(product, position, MainScanAdpter.this);
+                    showRemoveItemDialog(product, position, MainScanAdapter.this);
                 }
             }
         });
-
         return convertView;
     }
 
@@ -137,7 +136,6 @@ public class MainScanAdpter extends ArrayAdapter<ProductData> {
         }
         return -1;  // 상품이 리스트에 없는 경우 -1 반환
     }
-
 
     // ViewHolder 패턴을 사용하여 뷰 재사용 효율성 향상
     static class ViewHolder {

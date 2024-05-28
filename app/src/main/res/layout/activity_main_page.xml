@@ -192,7 +192,7 @@
                 android:layout_height="60dp"
                 android:background="@drawable/border4"
                 android:contentDescription="@string/main_text"
-                android:src="@drawable/main_yuhan_logo"
+                android:src="@drawable/icon"
                 />
 
             <ImageView
