@@ -3,6 +3,7 @@ package kr.ac.yuhan.cs.yuhan19plus.admin;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -160,9 +161,12 @@ public class AdminScheduleActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             String date = editTextDate.getText().toString();
                             String todo = editTextTodo.getText().toString();
+                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("AdminSession", MODE_PRIVATE);
+                            String adminId = sharedPreferences.getString("admin_id", null);
+
                             // 할일 데이터 추가 코드 호출
                             DatabaseHelper dbHelper = new DatabaseHelper(requireContext());
-                            dbHelper.insertTodo("SeongJun1", todo, date); // 관리자 ID 적용 필요
+                            dbHelper.insertTodo(adminId, todo, date); // 관리자 ID 적용 필요
                         }
                     })
                     .setNegativeButton("취소", new DialogInterface.OnClickListener() {
