@@ -33,9 +33,9 @@ import kr.co.bootpay.android.models.BootUser;
 import kr.co.bootpay.android.models.Payload;
 
 public class MainPaymentActivity extends AppCompatActivity {
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseAuth userDBFirebaseAuth = FirebaseAuth.getInstance();
-    private FirebaseUser userDBFirebaseUser = userDBFirebaseAuth.getCurrentUser();
+    private FirebaseFirestore db;
+    private FirebaseAuth userDBFirebaseAuth;
+    private FirebaseUser userDBFirebaseUser;
 
     private double totalPrice = 0;
     private int usePoint = 0;
@@ -44,6 +44,10 @@ public class MainPaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_payment);
+
+        db = FirebaseFirestore.getInstance();
+        userDBFirebaseAuth = FirebaseAuth.getInstance();
+        userDBFirebaseUser = userDBFirebaseAuth.getCurrentUser();
 
         String uid = userDBFirebaseUser.getUid();
         String email = userDBFirebaseUser.getEmail() != null ? userDBFirebaseUser.getEmail() : "";
@@ -124,7 +128,11 @@ public class MainPaymentActivity extends AppCompatActivity {
                     public void onDone(String data) {
                         Log.d("done", data);
                         savePaymentData(userDBFirebaseUser.getUid(), totalPrice, pointsToUse, products, data, userDBFirebaseUser);
-                        updateUserPoints(userDBFirebaseUser.getUid(), pointsToUse, totalPrice); // 포인트 업데이트 함수 호출
+
+                        if(!userDBFirebaseUser.isAnonymous()){
+                            updateUserPoints(userDBFirebaseUser.getUid(), pointsToUse, totalPrice); // 포인트 업데이트 함수 호출
+                        }
+
                         updateProductStocks(products);
                         Toast.makeText(MainPaymentActivity.this, "결제가 완료되었습니다.", Toast.LENGTH_LONG).show();
 

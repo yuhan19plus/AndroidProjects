@@ -197,7 +197,7 @@ public class MainLoginActivity extends Fragment implements View.OnClickListener{
         userInfo.put("userAddress", "NULL");
         userInfo.put("userDetail_address", "NULL");
         userInfo.put("userJoindate", new Date());
-        userInfo.put("userPoint", 50);
+        userInfo.put("userPoint", 0);
         userInfo.put("isValid", true);
 
         userDBFirestore.collection("users").document(uid).set(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
