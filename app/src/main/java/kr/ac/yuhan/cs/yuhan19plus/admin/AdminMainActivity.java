@@ -551,6 +551,7 @@ public class AdminMainActivity extends AppCompatActivity {
     private void handleAdminListClick() {
         adminListBtnCardView.setShapeType(1);
         postDelayedShapeChange(adminListBtnCardView);
+        if (!isFirstAdmin()) return;
         Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
         intent.putExtra("background_color", backgroundColor);
         intent.putExtra("mode", mode);
@@ -689,6 +690,17 @@ public class AdminMainActivity extends AppCompatActivity {
         String adminId = sharedPreferences.getString("admin_id", null);
         if (adminId == null) {
             Toast.makeText(this, "관리자 로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    // 최초 관리자 여부 확인 메서드 - 이석재 작성
+    private boolean isFirstAdmin() {
+        sharedPreferences = getSharedPreferences("AdminSession", MODE_PRIVATE);
+        String adminId = sharedPreferences.getString("admin_id", null);
+        if (!adminId.equals("jun")) {
+            Toast.makeText(this, "최초 관리자만 접근 가능합니다.", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
