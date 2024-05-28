@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -108,6 +109,7 @@ public class AdminSettingActivity extends AppCompatActivity {
         addAdminCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!isFirstAdmin()) return;
                 // 설정 페이지로 이동하고 메인 페이지 배경 색상 전달
                 Intent intent = new Intent(getApplicationContext(), AdminFormActivity.class);
                 intent.putExtra("background_color", backgroundColor);
@@ -132,5 +134,16 @@ public class AdminSettingActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    // 최초 관리자 여부 확인 메서드 - 이석재 작성
+    private boolean isFirstAdmin() {
+        sharedPreferences = getSharedPreferences("AdminSession", MODE_PRIVATE);
+        String adminId = sharedPreferences.getString("admin_id" , null);
+        if (!adminId.equals("jun")) {
+            Toast.makeText(this, "최초 관리자만 접근 가능합니다.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

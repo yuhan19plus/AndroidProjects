@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,6 +39,8 @@ public class PayMentAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context context;
     FirebaseFirestore paymentDBFireStore;
+    FirebaseAuth userDBFirebaseAuth;
+    FirebaseUser userDBFirebaseUser;
 
     // PaymentAdapter Constructor
     public PayMentAdapter(Context context, ArrayList<PaymentData> paymentList) {
@@ -100,20 +104,24 @@ public class PayMentAdapter extends BaseAdapter {
 
                         paymentDBFireStore = FirebaseFirestore.getInstance();
 
-                        // Update user points
-                        paymentDBFireStore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot document = task.getResult();
-                                    long currentPoints = document.getLong("userPoint");
-                                    long newPoints = currentPoints + usePoint - Math.round(totalPrice * 0.01);
-                                    paymentDBFireStore.collection("users").document(uid).update("userPoint", newPoints);
-                                } else {
-                                    Log.w("Firestore", "Error getting user document", task.getException());
+                        if(paymentData.getEmail() != null){
+                            // Update user points
+                            paymentDBFireStore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        long currentPoints = document.getLong("userPoint");
+                                        long newPoints = currentPoints + usePoint - Math.round(totalPrice * 0.01);
+                                        paymentDBFireStore.collection("users").document(uid).update("userPoint", newPoints);
+                                    } else {
+                                        Log.w("Firestore", "Error getting user document", task.getException());
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
+
+
 
 
                         // Update product stocks

@@ -290,6 +290,11 @@ public class MainActivityProductScan extends AppCompatActivity {
     }
 
     private void usePoints() {
+        userDBFirebaseAuth = FirebaseAuth.getInstance();
+        if(userDBFirebaseAuth.getCurrentUser().isAnonymous()){
+            Toast.makeText(MainActivityProductScan.this, "비회원은 포인트 사용이 불가합니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         EditText pointEditText = findViewById(R.id.editTextFieldPoint);
         String pointInput = pointEditText.getText().toString();
 

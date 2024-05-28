@@ -165,6 +165,12 @@ public class MainActivity extends AppCompatActivity {
      * 관리자 모드 대화 상자를 표시합니다.
      */
     private void showAdminDialog() {
+        userDBFirebaseAuth = FirebaseAuth.getInstance();
+
+        if(userDBFirebaseAuth.getCurrentUser() != null){
+            Toast.makeText(MainActivity.this, "사용자 로그인 상태에서는 관리자 모드 접근이 불가합니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.main_dialog_admin_code, null);
         final EditText editText = view.findViewById(R.id.editText);
