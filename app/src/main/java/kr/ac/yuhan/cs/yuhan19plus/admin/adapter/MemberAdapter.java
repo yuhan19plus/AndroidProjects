@@ -26,8 +26,10 @@ import java.util.Map;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.admin.data.MemberData;
-
-
+/** 담당자 : 임성준, 이석재
+ * 초기 작성 : 임성준
+ * 수정 : 이석재
+ *  */
 public class MemberAdapter extends BaseAdapter {
     private ArrayList<MemberData> memberList;
     private LayoutInflater inflater;
@@ -122,7 +124,6 @@ public class MemberAdapter extends BaseAdapter {
         return convertView;
     }
 
-
     // 회원 탈퇴 처리 함수
     private void deleteFirebaseUser(String uid) {
         // Rest API 호출을 위한 데이터 설정
@@ -168,7 +169,6 @@ public class MemberAdapter extends BaseAdapter {
         }
         notifyDataSetChanged(); // 변경된 데이터셋을 알려 ListView를 갱신
     }
-
 
     public void updateData(ArrayList<MemberData> data) {
         this.memberList = data;

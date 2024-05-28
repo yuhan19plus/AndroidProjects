@@ -3,6 +3,8 @@ package kr.ac.yuhan.cs.yuhan19plus.admin.func;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/** 담당자 : 이석재
+ * 비밀번호 암호화 */
 public class PasswordEncryption {
     // 비밀번호 암호화 메소드
     public String hashPassword(String password) {

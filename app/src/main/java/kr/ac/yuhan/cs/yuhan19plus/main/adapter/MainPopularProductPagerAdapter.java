@@ -18,6 +18,9 @@ import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.main.MainProductDetail;
 import kr.ac.yuhan.cs.yuhan19plus.main.data.MainProductData;
 
+/** 담당자 : 이정민, 오자현
+ * 초기 작성자 : 이정민
+ * 기능구현 : 오자현 */
 public class MainPopularProductPagerAdapter extends RecyclerView.Adapter<MainPopularProductPagerAdapter.ProductViewHolder> {
 
     private List<MainProductData> products; // MainProductData 타입의 제품 목록
@@ -42,14 +45,14 @@ public class MainPopularProductPagerAdapter extends RecyclerView.Adapter<MainPop
         // 제품 데이터 바인딩: 제품 정보를 뷰홀더의 뷰들과 연결
         MainProductData product = products.get(position);
         // 이미지 로드: Glide 라이브러리를 사용하여 네트워크 이미지 또는 기본 이미지를 로드
-        if (!product.getImageResource().equals("R.drawable.default_image")) {
+        if (!product.getImageResource().equals("R.drawable.icon")) {
             Glide.with(context)
                     .load(product.getImageResource()) // 이미지 URL
-                    .placeholder(R.drawable.default_image) // 로딩 중 표시할 기본 이미지
+                    .placeholder(R.drawable.icon) // 로딩 중 표시할 기본 이미지
                     .into(holder.productImage); // 이미지를 표시할 뷰
         } else {
             // URL이 없을 경우 기본 이미지 표시
-            holder.productImage.setImageResource(R.drawable.default_image);
+            holder.productImage.setImageResource(R.drawable.icon);
         }
         holder.productName.setText(product.getName()); // 제품 이름 설정
         holder.productPrice.setText(String.valueOf(product.getPrice()+" 원")); // 제품 가격 설정

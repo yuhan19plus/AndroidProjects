@@ -16,6 +16,10 @@ import java.util.List;
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.main.data.MainProductData;
 
+/** 담당자 : 임성준, 오자현
+ * 초기작성 : 임성준
+ * 기본이미지 설정 : 오자현
+ * */
 public class MainProductCustomAdapter extends BaseAdapter {
     private Context context;
     private List<MainProductData> products;
@@ -56,8 +60,8 @@ public class MainProductCustomAdapter extends BaseAdapter {
         try {
             Glide.with(context)
                     .load(product.getImageResource())
-                    .placeholder(R.drawable.default_image)
-                    .error(R.drawable.default_image) // 기본 이미지 설정
+                    .placeholder(R.drawable.icon)
+                    .error(R.drawable.icon) // 기본 이미지 설정
                     .into(imageView);
         } catch (Exception e) {
             Log.e("MainProductCustomAdapter", "Error loading image: ", e);

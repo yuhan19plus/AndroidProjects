@@ -130,7 +130,6 @@ public class AdminAdapter extends BaseAdapter {
         notifyDataSetChanged(); // 변경된 데이터셋을 알려 ListView를 갱신
     }
 
-
     public void updateData(ArrayList<AdminData> data) {
         this.adminList = data;
         notifyDataSetChanged(); // 변경된 데이터셋을 알려 ListView를 갱신

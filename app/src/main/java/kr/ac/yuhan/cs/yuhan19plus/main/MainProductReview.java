@@ -27,13 +27,17 @@ import java.util.Map;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
 
+/** 담당자 : 임성준, 이석재
+ * 상품리뷰 기능구현 : 임성준
+ * 회원처리 기능구현 : 이석재
+ * */
 public class MainProductReview extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth userDBFirebaseAuth;
     private FirebaseUser userDBFirebaseUser;
     private EditText reviewContentEditText;
     private RatingBar ratingBar;
-    private TextView ratingTextView;
+    private TextView ratingTextView; // test를 위한 변수
     private Button submitReviewButton;
     private ImageView backBtn;
     private int productCode2;
@@ -52,18 +56,18 @@ public class MainProductReview extends AppCompatActivity {
         backBtn = findViewById(R.id.backBtn);
         reviewContentEditText = findViewById(R.id.reviewContentEditText);
         ratingBar = findViewById(R.id.ratingBar);
-//        ratingTextView = findViewById(R.id.ratingTextView);
+        // ratingTextView = findViewById(R.id.ratingTextView);
         submitReviewButton = findViewById(R.id.submitReviewButton);
 
-        // 인텐트에서 제품 코드 가져오기
+        // 제품 코드 가져오기
         Intent intent = getIntent();
         productCode2 = intent.getIntExtra("productCode", 1);
 
-        // 평점 변경 리스너 설정
+        // 평점 변경 리스너 설정 : text 기능으로 추가
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-//                ratingTextView.setText("Rating: " + rating);
+                // ratingTextView.setText("Rating: " + rating);
             }
         });
 
@@ -108,7 +112,7 @@ public class MainProductReview extends AppCompatActivity {
                     currentMemberId = userDBFirebaseUser.getEmail(); // 실제 앱에서는 사용자 ID 사용
 //                    currentMemberId = "MemberId";
                     if (reviewContent.isEmpty() || ratingScore == 0) {
-                        Toast.makeText(MainProductReview.this, "Please provide a rating and review content", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainProductReview.this, "빈 칸이 있습니다.", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     int productCode = productCode2;
@@ -129,10 +133,10 @@ public class MainProductReview extends AppCompatActivity {
                                 Toast.makeText(MainProductReview.this, "리뷰 등록 완료", Toast.LENGTH_SHORT).show();
                                 finish(); // 리뷰 등록이 완료되면 이전 화면으로 돌아감
                             })
-                            .addOnFailureListener(e -> Toast.makeText(MainProductReview.this, "Error adding review: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                            .addOnFailureListener(e -> Toast.makeText(MainProductReview.this, "에러 : " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(MainProductReview.this, "Error fetching document ID: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainProductReview.this, "에러 문서 ID : " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 }

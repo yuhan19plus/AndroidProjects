@@ -29,19 +29,17 @@ import java.util.Map;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
 
+/** 담당자 : 이정민, 이석재
+ * 이정민 : 초기 작성자
+ * 이석재 : 회원 / 비회원 로그인 기능 구현
+ * */
 public class MainLoginActivity extends Fragment implements View.OnClickListener{
     private FirebaseAuth userDBFirebaseAuth;
     private FirebaseFirestore userDBFirestore;
     private EditText input_id;
     private EditText input_pw;
-
-
-
-
-
     public MainLoginActivity() {
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +75,6 @@ public class MainLoginActivity extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         //로그인 시 작동
         if (v.getId() == R.id.login_btn) {
-        //로그인 구현 -> 석재애몸 도와줘요 ->>>>>>>>>>>>>>>이 페이지에서 처리 main_activity_login.xml 참조
             // 인스턴스 가져오기
             userDBFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -125,7 +122,6 @@ public class MainLoginActivity extends Fragment implements View.OnClickListener{
 
         //비회원 로그인 시 작동
         if (v.getId() == R.id.non_login_btn) {
-        //비회원 로그인 구현-> 석재애몸 도와줘요 ->>>>>>>>>>>>>>>이 페이지에서 처리 main_activity_login.xml 참조
             // 인스턴스 가져오기
             userDBFirebaseAuth = FirebaseAuth.getInstance();
             userDBFirebaseAuth.signInAnonymously().addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -225,5 +221,4 @@ public class MainLoginActivity extends Fragment implements View.OnClickListener{
             }
         });
     }
-
 }

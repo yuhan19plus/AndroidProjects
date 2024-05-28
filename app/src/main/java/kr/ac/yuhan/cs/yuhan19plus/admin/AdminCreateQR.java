@@ -26,7 +26,10 @@ import java.util.Objects;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
 
-// made by 오자현
+/** 담당자 : 임성준, 오자현
+ * 초기 작성자 : 임성준
+ * qr생성 기능 구현 : 오자현
+ * */
 public class AdminCreateQR extends AppCompatActivity {
 
     private ImageView iv;
@@ -113,9 +116,6 @@ public class AdminCreateQR extends AppCompatActivity {
             }
         } catch (IOException e) {
             e.printStackTrace(); // 예외가 발생하면 스택 트레이스를 출력합니다.
-
         }
     }
-
-
 }

@@ -3,7 +3,9 @@ package kr.ac.yuhan.cs.yuhan19plus.admin.data;
 import android.widget.Button;
 
 import java.util.Date;
-
+/** 담당자 : 임성준, 이석재
+ * 초기 작성자 : 임성준
+ * 수정 : 이석재 */
 public class MemberData {
     // Member Data Field
     private int number;
@@ -12,9 +14,7 @@ public class MemberData {
     private Date joinDate;
     private String uid;
     private int point;
-
     private Button outButton;
-
 
     // MemberData Constructor
     public MemberData(int number, String memberId, String memberName, Date joinDate, String uid, int point) {

@@ -22,6 +22,9 @@ import soup.neumorphism.NeumorphButton;
 import soup.neumorphism.NeumorphCardView;
 import soup.neumorphism.NeumorphImageView;
 
+/** 담당자 : 임성준, 이석재
+ * 초기 작성 및 다크모드 적용 : 임성준
+ * 관리자 추가 기능 구현 : 이석재 */
 public class AdminFormActivity extends AppCompatActivity {
     private NeumorphImageView backBtn;
 
@@ -56,7 +59,6 @@ public class AdminFormActivity extends AppCompatActivity {
         // AdminForm Page Btn
         backBtn = (NeumorphImageView) findViewById(R.id.backBtn);
 
-
         // 관리자 아이디, 비밀번호, 직책 에디트 텍스트
         EditText input_adminId = (EditText) findViewById(R.id.input_adminId);
         EditText input_adminPw = (EditText) findViewById(R.id.input_adminPW);
@@ -64,7 +66,6 @@ public class AdminFormActivity extends AppCompatActivity {
 
         // Admin Firebase
         adminDBFireStore = FirebaseFirestore.getInstance();
-
 
         if(modeValue == 1) {
             // DarkMode 적용

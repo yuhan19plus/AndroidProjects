@@ -35,7 +35,11 @@ import java.util.Map;
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.main.adapter.ProductReviewAdapter;
 import kr.ac.yuhan.cs.yuhan19plus.main.data.ProductReviewData;
-
+/** 담당자 : 임성준, 이석재, 임성준
+ * 초기작성 및 상품평점계산, 상품평점목록 및 알림창 기능 : 임성준
+ * 해당 상품코드의 상품정보 가져오기 : 오자현
+ * 회원처리기능 : 이석재
+ * */
 public class MainProductDetail extends AppCompatActivity {
     private ProductReviewAdapter adapter; // 리뷰 어댑터
     private ArrayList<ProductReviewData> reviewList; // 리뷰 리스트
@@ -89,8 +93,8 @@ public class MainProductDetail extends AppCompatActivity {
         if (productImage != null) {
             Glide.with(this)
                     .load(productImage)
-                    .placeholder(R.drawable.default_image)
-                    .error(R.drawable.default_image) // 기본 이미지 설정
+                    .placeholder(R.drawable.icon)
+                    .error(R.drawable.icon) // 기본 이미지 설정
                     .into(productImageView);
         }
         if (productName != null) {

@@ -7,10 +7,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import kr.ac.yuhan.cs.yuhan19plus.main.MainProductPageList;
 
+/** 담당자 : 임성준, 오자현, 이정민
+ * 초기작성 : 이정민
+ * 프로젝트 병합 : 임성준
+ * 수정 : 오자현 */
 public class MainProductPageAdapter extends FragmentStateAdapter {
-
     private static final int NUM_PAGES = 3;
-
     public MainProductPageAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }

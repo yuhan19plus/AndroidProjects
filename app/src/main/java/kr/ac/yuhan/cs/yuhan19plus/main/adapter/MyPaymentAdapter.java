@@ -3,27 +3,21 @@
 package kr.ac.yuhan.cs.yuhan19plus.main.adapter;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
-
+/** 담당자 : 임성준
+ * 개인결제내역 기능구현 : 임성준 */
 public class MyPaymentAdapter extends ArrayAdapter<Map<String, Object>> {
     private Context mContext;
 
@@ -129,7 +123,6 @@ public class MyPaymentAdapter extends ArrayAdapter<Map<String, Object>> {
             productNameTextView.setText("상품명 없음");
             Log.w("Debug", "productMap is null or empty");
         }
-
 
         Object amountObject = payment.get("totalPrice");
         String amount = "";

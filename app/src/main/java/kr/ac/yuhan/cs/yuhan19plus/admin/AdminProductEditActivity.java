@@ -37,6 +37,9 @@ import kr.ac.yuhan.cs.yuhan19plus.admin.util.ChangeMode;
 import soup.neumorphism.NeumorphCardView;
 import soup.neumorphism.NeumorphImageView;
 
+/** 담당자 : 임성준, 오자현
+ * 다크모드 적용 및 초기 작성 : 임성준
+ * 상품 등록 기능 구현 : 오자현 */
 public class AdminProductEditActivity extends AppCompatActivity {
     // Firestore 인스턴스와 UI 요소 선언
     private FirebaseFirestore dbFirestore;

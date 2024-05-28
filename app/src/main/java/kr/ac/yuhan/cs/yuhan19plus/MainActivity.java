@@ -46,7 +46,7 @@ import kr.ac.yuhan.cs.yuhan19plus.main.MainStoreLocationActivity;
 import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MainPopularProductPagerAdapter;
 import kr.ac.yuhan.cs.yuhan19plus.main.data.MainProductData;
 
-/**
+/** 담당자 : 이정민, 이석재, 오자현, 임성준
  * 메인 액티비티 클래스로, UI 컴포넌트 초기화 및 상호작용 관리를 담당합니다.
  */
 public class MainActivity extends AppCompatActivity {
@@ -320,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
 
                             // 이미지 URL이 null이거나 비어있으면 기본 이미지 URL을 사용합니다.
                             if (imageUrl == null || imageUrl.isEmpty()) {
-                                imageUrl = "R.drawable.default_image"; // 기본 이미지 URL 사용
+                                imageUrl = "R.drawable.icon"; // 기본 이미지 URL 사용
                             }
 
                             // 로드된 이미지 URL을 로그에 출력합니다.
@@ -379,7 +379,7 @@ public class MainActivity extends AppCompatActivity {
 
                             // 이미지 URL이 null이거나 비어있으면 기본 이미지 URL을 사용합니다.
                             if (imageUrl == null || imageUrl.isEmpty()) {
-                                imageUrl = "R.drawable.default_image"; // 기본 이미지 URL 사용
+                                imageUrl = "R.drawable.icon"; // 기본 이미지 URL 사용
                             }
                             //productImage, String productName, int productPrice, int productCode, String productCategory) {
                             // 제품 데이터 객체를 생성하고 리스트에 추가합니다.
