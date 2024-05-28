@@ -17,7 +17,7 @@ import kr.ac.yuhan.cs.yuhan19plus.admin.data.TodoData;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    // Todo Database Info
+    // 할일 Database Info
     private static final String DATABASE_NAME = "todo_db";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_TODO = "Todo";

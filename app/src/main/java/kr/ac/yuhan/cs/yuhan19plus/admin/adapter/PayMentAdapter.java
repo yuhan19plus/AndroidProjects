@@ -34,6 +34,7 @@ import java.util.Map;
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.admin.data.PaymentData;
 
+/** 담당자 : 이석재 */
 public class PayMentAdapter extends BaseAdapter {
     private ArrayList<PaymentData> paymentList;
     private LayoutInflater inflater;
@@ -120,10 +121,6 @@ public class PayMentAdapter extends BaseAdapter {
                                 }
                             });
                         }
-
-
-
-
                         // Update product stocks
                         for (Map.Entry<String, Number> entry : products.entrySet()) {
                             String productName = entry.getKey();
@@ -144,8 +141,6 @@ public class PayMentAdapter extends BaseAdapter {
                                 }
                             });
                         }
-
-
                         // Update payments isValid
                         paymentDBFireStore.collection("payments").whereEqualTo("receipt_id", receiptId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -159,8 +154,6 @@ public class PayMentAdapter extends BaseAdapter {
                                 }
                             }
                         });
-
-
                     }
                 });
                 builder.setNegativeButton("취소", null);
@@ -204,11 +197,6 @@ public class PayMentAdapter extends BaseAdapter {
                     }
                 });
     }
-
-
-
-
-
     // Delete PaymentData => Need to Update PaymentData
     public void removePayment(int position){
         // 리스트에서 해당하는 결제 데이터 ㅅ가제

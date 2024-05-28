@@ -33,8 +33,13 @@ import java.util.Objects;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.admin.data.ProductData;
-import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MainScanAdpter;
+import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MainScanAdapter;
 
+/** 담당자 : 이석재, 오자현, 이정민
+ * 회원처리기능 및 포인트 기능 구현 : 이석재
+ * 초기 작성 및 상품 스캔 기능 및 결제목록 상품데이터 추가 기능 구현 : 오자현
+ * 모달창 : 이정민
+ * */
 public class MainActivityProductScan extends AppCompatActivity {
     private DecoratedBarcodeView barcodeScannerView;
     private CaptureManager capture;
@@ -117,9 +122,9 @@ public class MainActivityProductScan extends AppCompatActivity {
                     @Override
                     public void onCallback(ArrayList<ProductData> products) {
                         ListView listView = findViewById(R.id.scannedlist);
-                        MainScanAdpter adapter = (MainScanAdpter) listView.getAdapter();
+                        MainScanAdapter adapter = (MainScanAdapter) listView.getAdapter();
                         if (adapter == null) {
-                            adapter = new MainScanAdpter(MainActivityProductScan.this, new ArrayList<>());
+                            adapter = new MainScanAdapter(MainActivityProductScan.this, new ArrayList<>());
                             listView.setAdapter(adapter);
                         }
 
@@ -145,12 +150,9 @@ public class MainActivityProductScan extends AppCompatActivity {
                                 }
                             }
                         }
-
                         adapter.notifyDataSetChanged();  // 데이터 변경 알림
                         updateTotalPrice();  // 총 금액 업데이트
                     }
-
-
                 });
             } else {
                 Log.d("ScanQR", "Scanned data format is incorrect"); // 데이터 형식 오류 로그
@@ -221,7 +223,7 @@ public class MainActivityProductScan extends AppCompatActivity {
 
     public void updateTotalPrice() {
         ListView listView = findViewById(R.id.scannedlist);
-        MainScanAdpter adapter = (MainScanAdpter) listView.getAdapter();
+        MainScanAdapter adapter = (MainScanAdapter) listView.getAdapter();
         if (adapter == null) {
             return; // 어댑터가 없으면 종료
         }
@@ -242,7 +244,7 @@ public class MainActivityProductScan extends AppCompatActivity {
     private void processPayment() {
         ListView listView = findViewById(R.id.scannedlist);
         EditText usePoint = findViewById(R.id.editTextFieldPoint);
-        MainScanAdpter adapter = (MainScanAdpter) listView.getAdapter();
+        MainScanAdapter adapter = (MainScanAdapter) listView.getAdapter();
         if (adapter == null) return;
 
         ArrayList<ProductData> products = new ArrayList<>();
@@ -340,7 +342,6 @@ public class MainActivityProductScan extends AppCompatActivity {
         updateTotalPrice(); // 총 금액 업데이트
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -358,7 +359,6 @@ public class MainActivityProductScan extends AppCompatActivity {
         super.onDestroy();
         capture.onDestroy();
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

@@ -36,6 +36,11 @@ import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.main.adapter.MyPaymentAdapter;
 import kr.ac.yuhan.cs.yuhan19plus.main.util.DateUtil;
 
+/** 담당자 : 임성준, 이석재, 이정민
+ * 초기 작성자 : 이정민
+ * 프로젝트 병합 및 결제내역 보기 기능 : 임성준
+ * 회원정보 기능구현 : 이석재 */
+
 public class MainMyPageActivity extends AppCompatActivity {
     private FirebaseAuth userDBFirebaseAuth;
     private FirebaseUser userDBFirebaseUser;
@@ -75,16 +80,6 @@ public class MainMyPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//
-//        ImageView reviewBtn = findViewById(R.id.reviewBtn);
-//        reviewBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // 리뷰 버튼을 클릭하면 ReviewActivity로 이동합니다.
-//                Intent intent = new Intent(MainMyPageActivity.this, MainProductReview.class);
-//                startActivity(intent);
-//            }
-//        });
 
         // 사용자 정보 로드
         loadUserInfo();
@@ -157,6 +152,7 @@ public class MainMyPageActivity extends AppCompatActivity {
         userDay.setText(birthday[2]);
     }
 
+    // 개인 결제내역 조회 - 임성준 작성
     private void loadPaymentsFromFirestore(String uid) {
         userDBFireStore = FirebaseFirestore.getInstance();
         userDBFireStore.collection("payments").whereEqualTo("uid", uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

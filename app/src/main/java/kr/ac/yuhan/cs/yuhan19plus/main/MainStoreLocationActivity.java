@@ -28,6 +28,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
 
+/** 담당자 : 임성준
+ * 매장위치 기능구현 : 임성준 */
 public class MainStoreLocationActivity extends AppCompatActivity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private WebView web;

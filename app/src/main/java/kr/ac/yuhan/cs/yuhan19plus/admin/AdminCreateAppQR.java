@@ -26,7 +26,8 @@ import java.util.Objects;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
 
-// made by 오자현
+/** 담당자 : 오자현
+ * AppQr 생성 긴능 구현 */
 public class AdminCreateAppQR extends AppCompatActivity {
 
     private ImageView iv;
@@ -93,6 +94,4 @@ public class AdminCreateAppQR extends AppCompatActivity {
 
         }
     }
-
-
 }

@@ -5,6 +5,7 @@ import android.widget.Button;
 import java.util.Date;
 import java.util.Map;
 
+/** 담당자 : 이석재 */
 public class PaymentData {
     // Payment Data Field
     private int number;
@@ -16,7 +17,6 @@ public class PaymentData {
     private int totalPrice;
     private int usePoint;
     private Date payDay;
-
 
     private Button outButton;
 
@@ -56,10 +56,6 @@ public class PaymentData {
     public int getTotalPrice() { return totalPrice; }
 
     public Date getPayDay() { return payDay; }
-
-
-
-
 
     // 나가기 버튼 속성을 설정하는 메서드
     public void setOutButton(Button outButton) {

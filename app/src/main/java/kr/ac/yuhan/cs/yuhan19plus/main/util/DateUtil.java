@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/** 담당자 : 임성준
+ * Date 포멧팅 : 임성준
+ * */
 public class DateUtil {
     public static String formatDate(Date date) {
         if (date == null) {

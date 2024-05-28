@@ -1,6 +1,5 @@
 package kr.ac.yuhan.cs.yuhan19plus.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,13 +22,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import kr.ac.yuhan.cs.yuhan19plus.MainActivity;
 import kr.ac.yuhan.cs.yuhan19plus.R;
 
+/** 담당자 : 이석재, 이정민
+ * 초기 작성 : 이정민
+ * 회원정보수정 기능구현 : 이석재 */
 public class MainRetouchInfoActivity extends AppCompatActivity {
-    //석재애몽 도와줘요-->>>>>>>>>>>>>>> 회원정보 수정 페이지 main_activity_my_info.xml 참조
-
     private FirebaseAuth userDBFirebaseAuth;
     private FirebaseUser userDBFirebaseUser;
     private FirebaseFirestore userDBFireStore;
@@ -47,7 +45,6 @@ public class MainRetouchInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_my_info);
 
-        
         // 인스턴스 가져오기
         userDBFirebaseAuth = FirebaseAuth.getInstance();
         userDBFireStore = FirebaseFirestore.getInstance();
@@ -56,7 +53,6 @@ public class MainRetouchInfoActivity extends AppCompatActivity {
         closeButton = findViewById(R.id.Close_info_Btn);
 
         isAnonymousUser = userDBFirebaseUser.isAnonymous();
-
 
         // TextView
         email = findViewById(R.id.User_ID);
@@ -87,7 +83,6 @@ public class MainRetouchInfoActivity extends AppCompatActivity {
             input_pw.setVisibility(View.GONE);
             pwCk_label.setVisibility(View.GONE);
             input_pwCk.setVisibility(View.GONE);
-
         }
 
         loadUserInfo();
@@ -125,9 +120,6 @@ public class MainRetouchInfoActivity extends AppCompatActivity {
         });
     }
 
-
-
-
     private void updateUI(Map<String, Object> userInfo) {
         email.setText(userDBFirebaseUser.getEmail());
 
@@ -147,7 +139,6 @@ public class MainRetouchInfoActivity extends AppCompatActivity {
         input_address.setText(userInfo.get("userAddress").toString());
         input_detail_address.setText(userInfo.get("userDetail_address").toString());
     }
-
 
     private void saveUserInfo() {
         String uid = userDBFirebaseAuth.getUid();
@@ -257,8 +248,6 @@ public class MainRetouchInfoActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private boolean isInputPhoneValid() {
@@ -310,8 +299,4 @@ public class MainRetouchInfoActivity extends AppCompatActivity {
             return false;
         }
     }
-
-
-
-
 }

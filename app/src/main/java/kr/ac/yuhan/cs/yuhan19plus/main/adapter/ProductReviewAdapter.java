@@ -15,6 +15,8 @@ import java.util.List;
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.main.data.ProductReviewData;
 
+/** 담당자 : 임성준
+ * 상품리뷰기능구현 관련 코드 */
 public class ProductReviewAdapter extends ArrayAdapter<ProductReviewData> {
     private Activity context;
     private List<ProductReviewData> reviewList;

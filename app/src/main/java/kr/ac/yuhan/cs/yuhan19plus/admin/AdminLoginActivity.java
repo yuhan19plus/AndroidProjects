@@ -24,6 +24,9 @@ import soup.neumorphism.NeumorphButton;
 import soup.neumorphism.NeumorphCardView;
 import soup.neumorphism.NeumorphImageView;
 
+/** 담당자 : 임성준, 이석재
+ * 초기 작성 및 다크모드 적용 : 임성준
+ * 로그인 처리 기능 구현 : 이석재 */
 public class AdminLoginActivity extends AppCompatActivity {
     private NeumorphButton loginBtn;
     private NeumorphImageView backBtn;

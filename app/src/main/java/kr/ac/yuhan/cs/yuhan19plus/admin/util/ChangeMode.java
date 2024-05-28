@@ -14,7 +14,8 @@ import android.widget.TextView;
 import soup.neumorphism.NeumorphButton;
 import soup.neumorphism.NeumorphCardView;
 import soup.neumorphism.NeumorphImageView;
-
+/** 담당자 : 임성준
+ * 다크모드 적용 코드 */
 public class ChangeMode {
     public static void applyMainTheme(View rootView, int mode) {
         int textColor;

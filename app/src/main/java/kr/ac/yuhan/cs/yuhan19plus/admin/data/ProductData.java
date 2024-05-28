@@ -7,7 +7,9 @@ import androidx.annotation.NonNull;
 
 import com.google.firebase.firestore.PropertyName;
 
-// 여기서 카테고리는 준비완료
+/** 담당자 : 임성준, 오자현, 이석재
+ * 초기 작성자 : 임성준
+ * 수정 : 이석재, 오자현 */
 public class ProductData implements Parcelable {
     private int productCode;
     private String productName;
@@ -43,7 +45,6 @@ public class ProductData implements Parcelable {
     public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
-
 
     public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
@@ -103,7 +104,6 @@ public class ProductData implements Parcelable {
             return new ProductData[size];
         }
     };
-
 
     @Override
     public int describeContents() {

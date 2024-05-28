@@ -32,6 +32,10 @@ import kr.co.bootpay.android.models.BootExtra;
 import kr.co.bootpay.android.models.BootUser;
 import kr.co.bootpay.android.models.Payload;
 
+/** 담당자 : 임성준, 이석재
+ * 초기작성 : 임성준
+ * 결제기능구현 : 이석재
+ * */
 public class MainPaymentActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth userDBFirebaseAuth;
