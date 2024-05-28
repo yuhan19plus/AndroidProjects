@@ -20,6 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -27,6 +30,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import kr.ac.yuhan.cs.yuhan19plus.R;
 import kr.ac.yuhan.cs.yuhan19plus.main.adapter.ProductReviewAdapter;
@@ -38,6 +42,8 @@ public class MainProductDetail extends AppCompatActivity {
     private TextView productAverage; // 평균 평점 텍스트뷰
     private String currentMemberId; // 현재 사용자 ID
     private FirebaseFirestore db; // Firestore 인스턴스
+    private FirebaseAuth userDBFirebaseAuth;
+    private FirebaseUser userDBFirebaseUser;
     private int productCode; // 상품 코드
 
     @Override
@@ -100,10 +106,48 @@ public class MainProductDetail extends AppCompatActivity {
         productReviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainProductDetail.this, MainProductReview.class);
-                intent.putExtra("productCode", productCode);
-                Log.d("pro", productCode+"");
-                startActivity(intent);
+                userDBFirebaseAuth = FirebaseAuth.getInstance();
+                userDBFirebaseUser = userDBFirebaseAuth.getCurrentUser();
+                if(userDBFirebaseUser == null){
+                    Toast.makeText(MainProductDetail.this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(userDBFirebaseUser.isAnonymous()) {
+                    Toast.makeText(MainProductDetail.this, "비회원은 리뷰 작성이 불가합니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String uid = userDBFirebaseUser.getUid();
+                db.collection("payments").whereEqualTo("uid", uid).get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        boolean productFound = false;
+                        for(QueryDocumentSnapshot document : task.getResult()){
+                            Map<String, Number> products = (Map<String, Number>) document.get("products");
+
+                            if(products != null){
+                                for(String key : products.keySet()){
+                                    if (key.equals(productName)){
+                                        productFound = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if(productFound){
+                                break;
+                            }
+                        }
+                        if(!productFound){
+                            Toast.makeText(MainProductDetail.this, "상품 구매 이력이 없어 리뷰 작성이 불가합니다.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Intent intent = new Intent(MainProductDetail.this, MainProductReview.class);
+                        intent.putExtra("productCode", productCode);
+                        Log.d("pro", productCode+"");
+                        startActivity(intent);
+                    }
+                    else{
+                        Log.w(TAG, "Error getting documents.", task.getException());
+                    }
+                });
             }
         });
 
@@ -205,7 +249,8 @@ public class MainProductDetail extends AppCompatActivity {
 
         builder.setMessage(Html.fromHtml(message, Html.FROM_HTML_MODE_LEGACY));
 
-        currentMemberId = "exampleMemberId"; // 예시, 실제로는 현재 로그인된 사용자 ID를 가져와야 함
+        userDBFirebaseAuth = FirebaseAuth.getInstance();
+        currentMemberId = userDBFirebaseAuth.getCurrentUser().getEmail(); // 예시, 실제로는 현재 로그인된 사용자 ID를 가져와야 함
 //        currentMemberId = "MemberId"; // 예시, 실제로는 현재 로그인된 사용자 ID를 가져와야 함
 
         // 현재 사용자가 작성한 리뷰일 경우 삭제 버튼 추가

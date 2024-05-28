@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -27,6 +29,8 @@ import kr.ac.yuhan.cs.yuhan19plus.R;
 
 public class MainProductReview extends AppCompatActivity {
     private FirebaseFirestore db;
+    private FirebaseAuth userDBFirebaseAuth;
+    private FirebaseUser userDBFirebaseUser;
     private EditText reviewContentEditText;
     private RatingBar ratingBar;
     private TextView ratingTextView;
@@ -99,7 +103,9 @@ public class MainProductReview extends AppCompatActivity {
                     // 새로운 리뷰 데이터 생성
                     String reviewContent = reviewContentEditText.getText().toString().trim();
                     float ratingScore = ratingBar.getRating();
-                    currentMemberId = "exampleMemberId"; // 실제 앱에서는 사용자 ID 사용
+                    userDBFirebaseAuth = FirebaseAuth.getInstance();
+                    userDBFirebaseUser = userDBFirebaseAuth.getCurrentUser();
+                    currentMemberId = userDBFirebaseUser.getEmail(); // 실제 앱에서는 사용자 ID 사용
 //                    currentMemberId = "MemberId";
                     if (reviewContent.isEmpty() || ratingScore == 0) {
                         Toast.makeText(MainProductReview.this, "Please provide a rating and review content", Toast.LENGTH_SHORT).show();
