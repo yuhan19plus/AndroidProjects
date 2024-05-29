@@ -1142,6 +1142,39 @@ public class AdminMainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 회원 테스트 데이터 생성 관련 코드(테스트용 코드) 임성준 작성
+     */
+    /*
+    // Create Fake Data
+    ArrayList<MemberData> fakeDataList = createFakeData();
+
+    // MemberAdapter Setting
+    MemberAdapter adapter = new MemberAdapter(this, fakeDataList);
+    memberListView.setAdapter(adapter);
+
+    // Member ListView Item onClickListener 임성준 작성
+    memberListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // Get Information of Clicked Member Item
+            MemberData selectedItem = fakeDataList.get(position);
+            showMemberInfoDialog(selectedItem);
+        }
+    });
+
+    // Create Fake Data 임성준 작성
+    private ArrayList<MemberData> createFakeData() {
+        ArrayList<MemberData> dataList = new ArrayList<>();
+        for (int i = 1; i <= 20; i++) {
+            // Create Fake Data & Add Lis
+            MemberData memberData = new MemberData(i, "Member" + i, new Date(), i * 100);
+            dataList.add(memberData);
+        }
+        return dataList;
+    }
+    */
+
     // 결제 데이터를 가져오는 메서드  - 이석재 작성.
     private void fetchPaymentData() {
         paymentDBFireStore = FirebaseFirestore.getInstance();

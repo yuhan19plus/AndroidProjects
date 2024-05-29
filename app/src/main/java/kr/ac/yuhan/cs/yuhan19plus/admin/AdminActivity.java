@@ -140,7 +140,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
-    // fetchAdminData
+    // 관리자 데이터를 가져오는 메서드  - 이석재 작성.
     private void fetchAdminData() {
         // 현재 로그인한 관리자 ID 가져오기
         sharedPreferences = getSharedPreferences("AdminSession", MODE_PRIVATE);
@@ -185,6 +185,40 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * 관리자 테스트 데이터 생성 관련 코드(테스트용 코드) 임성준 작성
+     */
+    /*
+    // Create Fake Data
+    ArrayList<AdminData> fakeDataList = createFakeData();
+
+    // Setting Adapter
+    AdminAdapter adapter = new AdminAdapter(this, fakeDataList);
+    listView.setAdapter(adapter);
+
+    // listView onItemClickListener
+    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // Get information about the clicked item
+            AdminData selectedItem = fakeDataList.get(position);
+            showAdminInfoDialog(selectedItem);
+        }
+    });
+
+    // Create Fake Data
+    ArrayList<AdminData> createFakeData() {
+        ArrayList<AdminData> dataList = new ArrayList<>();
+        for (int i = 1; i <= 20; i++) {
+            // Create Fake Data & Add AdminList
+            AdminData adminData = new AdminData(i, "Admin" + i, "1234", "position" + i);
+            dataList.add(adminData);
+        }
+        return dataList;
+    }
+    */
+
     public static void showErrorDialog(Context context, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("오류 발생")
