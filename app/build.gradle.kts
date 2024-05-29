@@ -37,8 +37,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation ("io.github.bootpay:android:+") //최신 버전 추천
-    implementation ("io.github.bootpay:android-bio:+")//생체인증 결제 사용시 추가
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -48,6 +46,10 @@ dependencies {
     implementation("com.google.firebase:firebase-storage:21.0.0")
     implementation("com.google.firebase:firebase-auth:23.0.0")
     implementation("com.google.firebase:firebase-functions:21.0.0")
+
+    // 이석재
+    implementation ("io.github.bootpay:android:+") // 부트페이 API
+    implementation ("io.github.bootpay:android-bio:+") // 부트페이 생체인증 API
 
     // 임성준
     implementation("com.github.fornewid:neumorphism:0.3.2") // 뉴모피즘 추가
