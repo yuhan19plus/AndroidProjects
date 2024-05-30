@@ -3,6 +3,7 @@ package kr.ac.yuhan.cs.yuhan19plus.admin.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +28,9 @@ public class TodoListAdapter extends ArrayAdapter<TodoData> {
     private final Context mContext;
     private final List<TodoData> todoList;
 
+
     // 관리자 TestID
-    String adminId = "SeongJun1";
+    //String adminId = "SeongJun1";
 
     // TodoListAdapter Constructor
     public TodoListAdapter(Context context, ArrayList<TodoData> list) {
@@ -61,6 +63,9 @@ public class TodoListAdapter extends ArrayAdapter<TodoData> {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // get AdminId
+                SharedPreferences sharedPreferences = mContext.getSharedPreferences("AdminSession", Context.MODE_PRIVATE);
+                String adminId = sharedPreferences.getString("admin_id", null);
                 // delete TodoData
                 deleteItem(adminId, currentItem);
             }
