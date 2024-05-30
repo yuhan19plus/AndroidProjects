@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="270dp"
     android:orientation="vertical"
-    android:background="@drawable/border"
+    android:background="@drawable/border1"
     tools:context=".main.MainLoginActivity">
 
     <TextView
