@@ -23,7 +23,7 @@
         android:layout_height="600dp"
         android:orientation="vertical"
         android:padding="30dp"
-        android:background="@drawable/border4">
+        android:background="@drawable/border2">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
