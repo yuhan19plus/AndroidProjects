@@ -2,6 +2,7 @@ package kr.ac.yuhan.cs.yuhan19plus;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<MainProductData> productDataList = new ArrayList<>(); // 상품 정보를 담을 리스트
     private FirebaseAuth userDBFirebaseAuth;
     private FirebaseUser userDBFirebaseUser;
+    private SharedPreferences sharedPreferences;
 
 
     /**
@@ -87,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
             // No user is signed in
             login_text.setText("로그인");
         }
+
+        // 관리자 모드 코드 설정
+        sharedPreferences = getSharedPreferences("admin_Code",MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putString("admin_Code", "201907012");
+        edit.apply();
     }
 
     /**
@@ -181,7 +189,9 @@ public class MainActivity extends AppCompatActivity {
                 .setView(view)
                 .setPositiveButton("접속", (dialog, which) -> {
                     String enteredValue = editText.getText().toString();
-                    if ("201907012".equals(enteredValue)) {
+                    sharedPreferences = getSharedPreferences("admin_Code",MODE_PRIVATE);
+                    String adminMode_code = sharedPreferences.getString("admin_Code", null);
+                    if (adminMode_code.equals(enteredValue)) {
                         launchActivity(AdminMainActivity.class);
                     } else {
                         Toast.makeText(MainActivity.this, "코드가 일치 하지 않습니다.", Toast.LENGTH_SHORT).show();
