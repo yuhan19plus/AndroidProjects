@@ -19,10 +19,9 @@ var infowindow = new kakao.maps.InfoWindow({zIndex: 1}); // 인포윈도우를 �
 // 장소 검색을 수행하는 함수
 function searchPlaces() {
     var keyword = document.getElementById('keyword').value; // 검색어를 가져옴
-    var daiso = "다이소"; // 기본 검색어
 
-    if (!keyword.replace(/^\s+|\s+$/g, '') || keyword === daiso) { // 검색어가 없거나 "다이소"일 경우
-        keyword = daiso; // 기본 검색어로 설정
+    if (!keyword.replace(/^\s+|\s+$/g, '') || keyword === "다이소") { // 검색어가 없거나 "다이소"일 경우
+        keyword = "다이소"; // 기본 검색어로 설정
         // 현재 위치 기반 검색
         var options = {
             location: new kakao.maps.LatLng(userLat, userLng),
@@ -31,7 +30,7 @@ function searchPlaces() {
         ps.keywordSearch(keyword, placesSearchCB, options);
     } else {
         // 키워드 기반 검색
-        ps.keywordSearch(keyword, placesSearchCB);
+        ps.keywordSearch(keyword + "다이소", placesSearchCB);
     }
 }
 
