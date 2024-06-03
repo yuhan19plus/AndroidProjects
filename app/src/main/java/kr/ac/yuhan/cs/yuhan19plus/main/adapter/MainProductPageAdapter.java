@@ -24,9 +24,9 @@ public class MainProductPageAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return MainProductPageList.newInstance("문구류");
-            case 1:
                 return MainProductPageList.newInstance("생필품");
+            case 1:
+                return MainProductPageList.newInstance("문구류");
             case 2:
                 return MainProductPageList.newInstance("주방 도구");
             default:
