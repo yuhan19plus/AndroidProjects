@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/border5_gray"
+    android:background="@drawable/border3_gray"
     android:orientation="horizontal"
     android:padding="10dp">
 
@@ -13,7 +13,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/product_image"
-        android:background="@drawable/border4"/>
+        android:background="@drawable/border2"/>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

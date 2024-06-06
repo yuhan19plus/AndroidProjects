@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/main_background"
+    android:background="@drawable/main_background1"
     android:contentDescription="@string/app_name"
     app:layout_constraintLeft_toRightOf="parent"
     app:layout_constraintRight_toLeftOf="parent"
@@ -18,7 +18,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/border5"
+        android:background="@drawable/border3"
         android:orientation="horizontal">
         <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                 android:fontFamily="@font/font"
                 android:onClick="handleTextViewClick"
                 android:text="@string/login"
-                android:background="@drawable/border5_gray"/>
+                android:background="@drawable/border3_gray"/>
         </com.google.android.flexbox.FlexboxLayout>
     </LinearLayout>
 
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:background="@drawable/border5"
+            android:background="@drawable/border3"
             app:justifyContent="space_between">
             <EditText
                 android:id="@+id/mainEditTextFieldSearchProductName"
@@ -79,7 +79,7 @@
                 android:textColorHint="@color/darkgray"
                 android:layout_marginEnd="5dp"
                 android:padding="5dp"
-                android:background="@drawable/border4"
+                android:background="@drawable/border2"
                 android:hint="@string/main_serch" />
             <ImageView
                 android:id="@+id/mainProductSearchBtn"
@@ -88,7 +88,7 @@
                 android:layout_height="50dp"
                 android:padding="5dp"
                 android:src="@drawable/pngwing"
-                android:background="@drawable/border4"
+                android:background="@drawable/border2"
                 />
         </com.google.android.flexbox.FlexboxLayout>
         <FrameLayout
@@ -100,7 +100,7 @@
             <com.google.android.flexbox.FlexboxLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/border5"
+                android:background="@drawable/border3"
                 android:padding="10dp"
                 app:alignItems="center"
                 app:justifyContent="space_between"
@@ -134,14 +134,14 @@
             android:textStyle="bold"
             android:padding="5dp"
             android:textColor="@color/yuhan"
-            android:background="@drawable/border6"
+            android:background="@drawable/border4"
             android:text="@string/new_product"/>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="2.5dp"
             android:layout_gravity="center"
-            android:background="@drawable/border6">
+            android:background="@drawable/border4">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/Product_viewPager"
@@ -159,7 +159,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:padding="5dp"
-        android:background="@drawable/border6"
+        android:background="@drawable/border4"
         android:layout_gravity="bottom"
         >
         <com.google.android.flexbox.FlexboxLayout
@@ -174,7 +174,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:contentDescription="@string/store_location_Btn"
-                android:background="@drawable/border4"
+                android:background="@drawable/border2"
                 android:src="@drawable/main_store_location"
                 />
 
@@ -182,7 +182,7 @@
                 android:id="@+id/product_Btn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/border4"
+                android:background="@drawable/border2"
                 android:contentDescription="@string/product_Btn"
                 android:src="@drawable/main_item"
                 />
@@ -190,7 +190,7 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/border4"
+                android:background="@drawable/border2"
                 android:contentDescription="@string/main_text"
                 android:src="@drawable/icon"
                 />
@@ -201,7 +201,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/main_payment"
-                android:background="@drawable/border4"
+                android:background="@drawable/border2"
                 />
 
             <ImageView
@@ -209,7 +209,7 @@
                 android:id="@+id/mypage_Btn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/border4"
+                android:background="@drawable/border2"
                 android:src="@drawable/main_mypage"/>
         </com.google.android.flexbox.FlexboxLayout>
 

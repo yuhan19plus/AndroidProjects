@@ -86,7 +86,7 @@ public class MainProductActivity extends AppCompatActivity {
                             spannableString = new SpannableString("문구류");
                             break;
                         case 2:
-                            spannableString = new SpannableString("주방용품");
+                            spannableString = new SpannableString("주방 도구");
                             break;
                         default:
                             spannableString = new SpannableString("");  // 기본값 설정
